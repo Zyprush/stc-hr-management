@@ -1,6 +1,7 @@
 <?php
 include('../includes/header.php');
 include('../config/authentication.php');
+include('../config/department_count.php');
 ?>
 
 <div id="global-loader">
@@ -97,7 +98,7 @@ include('../config/authentication.php');
         <div class="content">
             <div class="row">
                 <div class="col-lg-4 col-sm-3 col-12 d-flex">
-                    <div class="dash-count">
+                    <div class="dash-count das1">
                         <div class="dash-counts">
                             <h4>100</h4>
                             <h5>Part-time Worker</h5>
@@ -110,7 +111,13 @@ include('../config/authentication.php');
                 <div class="col-lg-4 col-sm-3 col-12 d-flex">
                     <div class="dash-count das1">
                         <div class="dash-counts">
-                            <h4>100</h4>
+                            <?php
+                            if ($departmentCount > 0) {
+                                echo "<h4>Total: $departmentCount</h4>";
+                            } else {
+                                echo "<h4>No data</h4>";
+                            }
+                            ?>
                             <h5>Departments</h5>
                         </div>
                         <div class="dash-imgs">
@@ -119,7 +126,7 @@ include('../config/authentication.php');
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-3 col-12 d-flex">
-                    <div class="dash-count das2">
+                    <div class="dash-count das1">
                         <div class="dash-counts">
                             <h4>100</h4>
                             <h5>Full time</h5>

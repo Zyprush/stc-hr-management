@@ -32,6 +32,8 @@
 <script src="assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
 <script src="assets/plugins/sweetalert/sweetalerts.min.js"></script>
 
+<script src="../assets/js/bootstrap.min.js"></script>
+
 <script src="assets/js/script.js"></script>
 </body>
 

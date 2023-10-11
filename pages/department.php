@@ -21,7 +21,6 @@ include('../config/authentication.php');
             <a id="toggle_btn" href="javascript:void(0);">
             </a>
         </div>
-
         <a id="mobile_btn" class="mobile_btn" href="#sidebar">
             <span class="bar-icon">
                 <span></span>
@@ -29,7 +28,6 @@ include('../config/authentication.php');
                 <span></span>
             </span>
         </a>
-
         <ul class="nav user-menu">
             <li class="nav-item dropdown has-arrow main-drop">
                 <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
@@ -55,8 +53,6 @@ include('../config/authentication.php');
                 </div>
             </li>
         </ul>
-
-
         <div class="dropdown mobile-user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
@@ -65,10 +61,7 @@ include('../config/authentication.php');
                 <a class="dropdown-item" href="../config/logout.php">Logout</a>
             </div>
         </div>
-
     </div>
-
-
     <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
@@ -101,36 +94,15 @@ include('../config/authentication.php');
                     <h6>Manage Departments</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="#" class="btn btn-added" data-toggle="modal" data-target="#addDepartmentModal">
+                    <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
                         <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Department
                     </a>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="table-top">
-                        <div class="search-set">
-                            <div class="search-input">
-                                <a class="btn btn-searchset"><img src="../assets/img/icons/search-white.svg" alt="img"></a>
-                            </div>
-                        </div>
-                        <div class="wordset">
-                            <ul>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="../assets/img/icons/pdf.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="../assets/img/icons/excel.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="../assets/img/icons/printer.svg" alt="img"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
                     <div class="table-responsive">
-                        <table class="table  datanew">
+                        <table id="department_table" class="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -144,27 +116,56 @@ include('../config/authentication.php');
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="addDepartmentModal" tabindex="-1" role="dialog" aria-labelledby="addDepartmentModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+
+
+            <!-- Add -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addDepartmentModalLabel">Add Department</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Add Department</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="../config/add_department" method="post">
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="departmentName">Department:</label>
-                                    <input type="text" class="form-control" id="departmentName" name="departmentName" required>
+                        <div class="modal-body">
+                            <form action="../config/add_department.php" method="post">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="departmentName">Department:</label>
+                                        <input type="text" class="form-control" id="departmentName" name="departmentName" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit -->
+            <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog" aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editDepartmentModalLabel">Edit Department</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editDepartmentForm" action="../config/edit_department.php" method="post">
+                                <input type="hidden" name="edit_department_id" id="edit_department_id">
+                                <div class="form-group">
+                                    <label for="edit_department_name">Department Name:</label>
+                                    <input type="text" class="form-control" id="edit_department_name" name="edit_department_name">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,5 +176,73 @@ include('../config/authentication.php');
 
 <?php
 include('../includes/footer.php');
-
 ?>
+
+<script>
+    $(document).ready(function() {
+        var table = $('#department_table').DataTable({
+            "ajax": {
+                "url": "../config/fetch_departments.php",
+                "type": "POST",
+                "dataSrc": ""
+            },
+            "columns": [{
+                    "data": "ID"
+                },
+                {
+                    "data": "Department"
+                },
+                {
+                    "data": null,
+                    "render": function(data, type, row) {
+                        // Add a data-attribute to store the record ID
+                        return `
+                                    <a class="me-3" href="#" data-toggle="modal" data-target="#editDepartmentModal" data-record-id="${row.ID}" data-record-name="${row.Department}">
+                                        <img src="../assets/img/icons/edit.svg" alt="Edit">
+                                    </a>
+                                    <a class="delete-button" data-record-id="${row.ID}" href="#">
+                                        <img src="../assets/img/icons/delete.svg" alt="Delete">
+                                    </a>
+                                `;
+                    }
+                }
+            ]
+        });
+
+        // Handle delete button click
+        $('#department_table tbody').on('click', '.delete-button', function() {
+            var button = this;
+            var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
+
+            var confirmDelete = confirm('Are you sure you want to delete this record?');
+
+            if (confirmDelete) {
+                $.ajax({
+                    type: 'POST',
+                    url: '../config/delete_department.php',
+                    data: {
+                        record_id: recordId // Pass the record_id as a parameter
+                    },
+                    success: function(response) {
+                        alert(response);
+                        table.ajax.reload(); // Refresh the DataTable
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error: ' + status + ' ' + error);
+                    }
+                });
+            }
+        });
+
+        // Handle Edit button click
+        $('#department_table tbody').on('click', '[data-toggle="modal"][data-target="#editDepartmentModal"]', function() {
+            var button = this;
+            var recordId = $(button).data('record-id');
+            var recordName = $(button).data('record-name');
+
+            // Set the record details in the modal form fields
+            $('#edit_department_id').val(recordId);
+            $('#edit_department_name').val(recordName);
+        });
+    });
+</script>

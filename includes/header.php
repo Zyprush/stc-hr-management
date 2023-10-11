@@ -8,9 +8,9 @@
     <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern,  html5, responsive">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>Dreams Pos admin template</title>
+    <title>HR Management</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.jpg">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/icons.jpg">
 
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 
@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="../assets/plugins/fontawesome/css/all.min.css">
 
     <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!-- jQuery -->
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
