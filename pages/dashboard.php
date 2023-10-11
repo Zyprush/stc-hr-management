@@ -98,63 +98,70 @@ include('../config/fetch_events_dashboard.php');
     <div class="page-wrapper">
         <div class="content">
             <div class="row">
-                <div class="col-lg-4 col-sm-3 col-12 d-flex">
-                    <div class="dash-count das1">
-                        <div class="dash-counts">
-                            <h4>100</h4>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card shadow">
+                        <div class="card-header text-white" style="background-color: #6859f3;">
                             <h5>Part-time Worker</h5>
                         </div>
-                        <div class="dash-imgs">
-                            <i data-feather="user"></i>
+                        <div class="card-body d-flex justify-content-between align-items-center pt-5">
+                            <h3> </h3>
+                            <a href="#" class="d-block p-2 rounded-3 pointer" style="background-color: #6859f3;">
+                                <i class="fa fa-plus text-white"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-3 col-12 d-flex">
-                    <div class="dash-count das1">
-                        <div class="dash-counts">
-                            <?php
-                            if ($departmentCount > 0) {
-                                echo "<h4>Total: $departmentCount</h4>";
-                            } else {
-                                echo "<h4>No data</h4>";
-                            }
-                            ?>
-                            <h5>Departments</h5>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card shadow">
+                        <div class="card-header text-white" style="background-color: #377ede;">
+                            <h5>Department</h5>
                         </div>
-                        <div class="dash-imgs">
-                            <i data-feather="file-text"></i>
+                        <div class="card-body d-flex justify-content-between align-items-center pt-5">
+                            <h3> </h3>
+                            <a href="#" class="d-block p-2 rounded-3 pointer" style="background-color: #377ede;">
+                                <i class="fa fa-plus text-white"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-3 col-12 d-flex">
-                    <div class="dash-count das1">
-                        <div class="dash-counts">
-                            <h4>100</h4>
-                            <h5>Full time</h5>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card shadow">
+                        <div class="card-header text-white" style="background-color: #e95c41;">
+                            <h5>Full-Time Worker</h5>
                         </div>
-                        <div class="dash-imgs">
-                            <i data-feather="user-check"></i>
+                        <div class="card-body d-flex justify-content-between align-items-center pt-5">
+                            <h3> </h3>
+                            <a href="#" class="d-block p-2 rounded-3 pointer" style="background-color: #e95c41;">
+                                <i class="fa fa-plus text-white"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
 
+
             <div class="row">
                 <div class="col-lg-7 col-sm-12 col-12 d-flex">
-                    <div class="card flex-fill">
+                    <div class="card shadow flex-fill">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">Total Employee</h5>
+                            <h5 class="card-title mb-0">Total Employees</h5>
                             <a href="employee.php"><i class="fa fa-plus"></i></a>
                         </div>
                         <div class="card-body">
-                            <div class="chartjs-wrapper-demo">
-                                <canvas id="chartDonut" class="h-300"></canvas>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <canvas id="doughnutChart"></canvas>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5 col-sm-12 col-12 d-flex">
-                    <div class="card flex-fill">
+                    <div class="card shadow flex-fill">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h4 class="card-title mb-0">Events</h4>
                             <a href="event.php"><i class="fa fa-plus"></i></a>
@@ -162,14 +169,18 @@ include('../config/fetch_events_dashboard.php');
                         <div class="card-body">
                             <div class="row">
                                 <?php
-                                // You should fetch events data from the database using the fetch_events.php script
-                                // and store it in an array called $events
-                                // Example: $events = ["Event 1 at 10:00 AM", "Event 2 at 2:30 PM", ...]
+                                $colors = ['#20455a', '#fc6c74', '#f4cb8c']; // Define your colors here
+                                $colorIndex = 0; // Initialize the color index
 
                                 foreach ($events as $eventInfo) {
+                                    // Get the current color from the array
+                                    $color = $colors[$colorIndex];
+
+                                    // Increment the color index, and wrap around if necessary
+                                    $colorIndex = ($colorIndex + 1) % count($colors);
                                 ?>
-                                    <div class="card col-12 mb-2 p-1 bg-success">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="card col-12 mb-2 p-1" style="border-left: 10px solid <?php echo $color; ?>;">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center border-0">
                                             <?php echo $eventInfo; ?> <i class="fa fa-ellipsis-v"></i>
                                         </li>
                                     </div>
@@ -188,5 +199,22 @@ include('../config/fetch_events_dashboard.php');
 
 <?php
 include('../includes/footer.php');
-
 ?>
+
+<script>
+    var ctxD = document.getElementById("doughnutChart").getContext('2d');
+    var myDoughnutChart = new Chart(ctxD, {
+        type: 'doughnut',
+        data: {
+            labels: ["Male", "Female"],
+            datasets: [{
+                data: [200, 300],
+                backgroundColor: ["#6672fb", "#ff3d55"],
+                hoverBackgroundColor: ["#3348db", "#d42644"]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
