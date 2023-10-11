@@ -2,6 +2,7 @@
 include('../includes/header.php');
 include('../config/authentication.php');
 include('../config/department_count.php');
+include('../config/fetch_events_dashboard.php');
 ?>
 
 <div id="global-loader">
@@ -143,19 +144,7 @@ include('../config/department_count.php');
                     <div class="card flex-fill">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h5 class="card-title mb-0">Total Employee</h5>
-                            <div class="dropdown">
-                                <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a href="event.php" class="dropdown-item">Event List</a>
-                                    </li>
-                                    <li>
-                                        <a href="add_event.php" class="dropdown-item">Add Event</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <a href="employee.php"><i class="fa fa-plus"></i></a>
                         </div>
                         <div class="card-body">
                             <div class="chartjs-wrapper-demo">
@@ -168,52 +157,25 @@ include('../config/department_count.php');
                     <div class="card flex-fill">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h4 class="card-title mb-0">Events</h4>
-                            <div class="dropdown">
-                                <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a href="event.php" class="dropdown-item">Event List</a>
-                                    </li>
-                                    <li>
-                                        <a href="add_event.php" class="dropdown-item">Add Event</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <a href="event.php"><i class="fa fa-plus"></i></a>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="card col-12 mb-2 p-1 bg-primary">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Event 1 <i class="fa fa-ellipsis-v"></i>
-                                    </li>
-                                </div>
-                                <div class="card col-12 mb-2 p-1 bg-secondary">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Event 1 <i class="fa fa-ellipsis-v"></i>
-                                    </li>
-                                </div>
-                                <div class="card col-12 mb-2 p-1 bg-warning">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Event 1 <i class="fa fa-ellipsis-v"></i>
-                                    </li>
-                                </div>
-                                <div class="card col-12 mb-2 p-1 bg-danger">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Event 1 <i class="fa fa-ellipsis-v"></i>
-                                    </li>
-                                </div>
-                                <div class="card col-12 mb-2 p-1 bg-primary">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Event 1 <i class="fa fa-ellipsis-v"></i>
-                                    </li>
-                                </div>
-                                <div class="card col-12 mb-2 p-1 bg-success ">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Event 1 <i class="fa fa-ellipsis-v"></i>
-                                    </li>
-                                </div>
+                                <?php
+                                // You should fetch events data from the database using the fetch_events.php script
+                                // and store it in an array called $events
+                                // Example: $events = ["Event 1 at 10:00 AM", "Event 2 at 2:30 PM", ...]
+
+                                foreach ($events as $eventInfo) {
+                                ?>
+                                    <div class="card col-12 mb-2 p-1 bg-success">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <?php echo $eventInfo; ?> <i class="fa fa-ellipsis-v"></i>
+                                        </li>
+                                    </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
