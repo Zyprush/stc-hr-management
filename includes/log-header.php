@@ -7,6 +7,7 @@
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../assets/css/log.css" />
     <title>Sign in & Sign up Form</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/icons.jpg">
 </head>
 
 <body>
