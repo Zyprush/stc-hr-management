@@ -105,7 +105,7 @@ include('../config/fetch_events_dashboard.php');
                         </div>
                         <div class="card-body d-flex justify-content-between align-items-center pt-5">
                             <h3> </h3>
-                            <a href="#" class="d-block p-2 rounded-3 pointer" style="background-color: #6859f3;">
+                            <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #6859f3;">
                                 <i class="fa fa-plus text-white"></i>
                             </a>
                         </div>
@@ -119,7 +119,7 @@ include('../config/fetch_events_dashboard.php');
                         </div>
                         <div class="card-body d-flex justify-content-between align-items-center pt-5">
                             <h3> </h3>
-                            <a href="#" class="d-block p-2 rounded-3 pointer" style="background-color: #377ede;">
+                            <a href="department.php" class="d-block p-2 rounded-3 pointer" style="background-color: #377ede;">
                                 <i class="fa fa-plus text-white"></i>
                             </a>
                         </div>
@@ -133,7 +133,7 @@ include('../config/fetch_events_dashboard.php');
                         </div>
                         <div class="card-body d-flex justify-content-between align-items-center pt-5">
                             <h3> </h3>
-                            <a href="#" class="d-block p-2 rounded-3 pointer" style="background-color: #e95c41;">
+                            <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #e95c41;">
                                 <i class="fa fa-plus text-white"></i>
                             </a>
                         </div>
