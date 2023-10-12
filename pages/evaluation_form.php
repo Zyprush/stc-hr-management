@@ -14,7 +14,7 @@ include('../config/authentication.php');
 <div class="container mt-5">
     <div class="card">
         <div class="card-header">
-            <div class="container border border-3 border-dark">
+            <div class="container border border-2 border-dark p-2">
                 <h4 class="text-center "><strong>OFFICE PERFORMANCE CONTRACT AND REVIEW (OPCR) </strong></h4>
                 <p>
                     I, <input type="text" />, head of the <input type="text" /> of the Local Government Unit
@@ -29,10 +29,20 @@ include('../config/authentication.php');
                 </div>
 
             </div>
-            <div class="container border border-top-0 border-3 border-dark">
+            <div class="container border border-top-0 border-2 border-dark p-2">
                 <p>
-                    asdasd
+                    Approved by: <input type="text" /> <br>
                 </p>
+            </div>
+            <div class="container border border-top-0 border-2 border-dark p-2">
+                <div class="row">
+                    <div class="col">
+                        <p>Date: <input type="text" /></p>
+                    </div>
+                    <div class="col">
+                        <p>Date: <input type="text" /></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
