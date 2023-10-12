@@ -192,6 +192,7 @@ include('../config/fetch_events_dashboard.php');
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

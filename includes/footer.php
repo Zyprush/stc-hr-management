@@ -27,6 +27,9 @@
 
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 
+<script src="../assets/plugins/toastr/toastr.min.js"></script>
+<script src="../assets/plugins/toastr/toastr.js"></script>
+
 <script src="assets/plugins/select2/js/select2.min.js"></script>
 
 <script src="assets/plugins/sweetalert/sweetalert2.all.min.js"></script>

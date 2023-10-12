@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" href="../assets/css/animate.css">
 
+    <link rel="stylesheet" href="../assets/plugins/toastr/toatr.css">
+
     <link rel="stylesheet" href="../assets/css/dataTables.bootstrap4.min.css">
 
     <link rel="stylesheet" href="../assets/plugins/fontawesome/css/fontawesome.min.css">

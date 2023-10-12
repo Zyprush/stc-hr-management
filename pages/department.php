@@ -101,6 +101,7 @@ include('../config/authentication.php');
             </div>
             <div class="card">
                 <div class="card-body">
+
                     <div class="table-responsive">
                         <table id="department_table" class="table">
                             <thead>
