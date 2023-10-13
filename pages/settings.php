@@ -85,7 +85,7 @@ include('../config/authentication.php');
                         <a href="employee.php"><i data-feather="user"></i>
                             <span> Employee</span> </a>
                     </li>
-                    <li class="active">
+                    <li class="menu">
                         <a href="report.php"><i data-feather="bar-chart-2"></i>
                             <span> Evaluation</span> </a>
                     </li>
@@ -101,7 +101,7 @@ include('../config/authentication.php');
                         <a href="benefits.php"><i data-feather="award"></i>
                             <span> Benefits</span> </a>
                     </li>
-                    <li class="menu">
+                    <li class="active">
                         <a href="settings.php"><i data-feather="settings"></i>
                             <span> Settings</span> </a>
                     </li>
@@ -113,7 +113,7 @@ include('../config/authentication.php');
     <div class="page-wrapper">
         <div class="content">
             <div class="row">
-                <h1>this is Report</h1>
+                <h1>this is Settings</h1>
             </div>
         </div>
     </div>

@@ -67,19 +67,36 @@ include('../config/authentication.php');
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
                     <li class="menu">
-                        <a href="dashboard.php"><img src="../assets/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
+                        <a href="dashboard.php"><i data-feather="home"></i>
+                            <span> Dashboard</span> </a>
                     </li>
                     <li class="active">
-                        <a href="department.php"><img src="../assets/img/icons/places.svg" alt="img"><span> Department</span> </a>
+                        <a href="department.php"><i data-feather="users"></i>
+                            <span> Department</span> </a>
                     </li>
                     <li class="menu">
-                        <a href="employee.php"><img src="../assets/img/icons/users1.svg" alt="img"><span> Employee</span> </a>
+                        <a href="employee.php"><i data-feather="user"></i>
+                            <span> Employee</span> </a>
                     </li>
                     <li class="menu">
-                        <a href="report.php"><img src="../assets/img/icons/time.svg" alt="img"><span> Report</span> </a>
+                        <a href="report.php"><i data-feather="bar-chart-2"></i>
+                            <span> Evaluation</span> </a>
                     </li>
                     <li class="menu">
-                        <a href="event.php"><img src="../assets/img/icons/purchase1.svg" alt="img"><span> Event</span> </a>
+                        <a href="event.php"><i data-feather="calendar"></i>
+                            <span> Event</span> </a>
+                    </li>
+                    <li class="menu">
+                        <a href="activities.php"><i data-feather="activity"></i>
+                            <span> Activities</span> </a>
+                    </li>
+                    <li class="menu">
+                        <a href="benefits.php"><i data-feather="award"></i>
+                            <span> Benefits</span> </a>
+                    </li>
+                    <li class="menu">
+                        <a href="settings.php"><i data-feather="settings"></i>
+                            <span> Settings</span> </a>
                     </li>
                 </ul>
             </div>
@@ -108,7 +125,7 @@ include('../config/authentication.php');
                                 <tr>
                                     <th>ID</th>
                                     <th>Department</th>
-                                    <th>Action</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
