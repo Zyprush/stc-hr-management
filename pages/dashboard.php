@@ -115,27 +115,14 @@ include('../config/fetch_events_dashboard.php');
     <div class="page-wrapper">
         <div class="content">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card shadow">
-                        <div class="card-header text-white" style="background-color: #6859f3;">
-                            <h5>Part-time Worker</h5>
-                        </div>
-                        <div class="card-body d-flex justify-content-between align-items-center pt-5">
-                            <h3> </h3>
-                            <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #6859f3;">
-                                <i class="fa fa-plus text-white"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card shadow">
                         <div class="card-header text-white" style="background-color: #377ede;">
-                            <h5>Department</h5>
+                            <h5>Departments</h5>
                         </div>
-                        <div class="card-body d-flex justify-content-between align-items-center pt-5">
-                            <h3> </h3>
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <h1 class="text-center" style="margin: auto;"><?php echo $departmentCount; ?></h1>
                             <a href="department.php" class="d-block p-2 rounded-3 pointer" style="background-color: #377ede;">
                                 <i class="fa fa-plus text-white"></i>
                             </a>
@@ -145,11 +132,25 @@ include('../config/fetch_events_dashboard.php');
 
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="card shadow">
-                        <div class="card-header text-white" style="background-color: #e95c41;">
-                            <h5>Full-Time Worker</h5>
+                        <div class="card-header text-white" style="background-color: #6859f3;">
+                            <h5>Job Order</h5>
                         </div>
-                        <div class="card-body d-flex justify-content-between align-items-center pt-5">
-                            <h3> </h3>
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <h1 class="text-center" style="margin: auto;">10</h1>
+                            <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #6859f3;">
+                                <i class="fa fa-plus text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card shadow">
+                        <div class="card-header text-white" style="background-color: #e95c41;">
+                            <h5>Permanent</h5>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <h1 class="text-center" style="margin: auto;">10</h1>
                             <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #e95c41;">
                                 <i class="fa fa-plus text-white"></i>
                             </a>
