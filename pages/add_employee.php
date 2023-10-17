@@ -644,24 +644,24 @@ require('../config/countries.php');
                                 <div class="eligibility-template form-group">
                                     <div class="row">
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" placeholder="CSE/RA 1080 etc.">
+                                            <input type="text" class="form-control" placeholder="CSE/RA 1080 etc." name="eligibility[]" id="eligibility">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" placeholder="Rating">
+                                            <input type="text" class="form-control" placeholder="Rating" name="rating[]" id="rating">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" placeholder="Date of Examination">
+                                            <input type="text" class="form-control" placeholder="Date of Examination" name="exam_date[]" id="exam_date">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" placeholder="Place of examination">
+                                            <input type="text" class="form-control" placeholder="Place of examination" name="exam_place[]" id="exam_place">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" placeholder="License Number">
+                                            <input type="text" class="form-control" placeholder="License Number" name="license_number[]" id="license_number">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" placeholder="Date of Validity">
+                                            <input type="text" class="form-control" placeholder="Date of Validity" name="validity_date[]" id="validity_date">
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-danger delete-eligibility" style="display: none;">Delete</button>
@@ -672,6 +672,48 @@ require('../config/countries.php');
 
                                 <!-- Container to hold the dynamically added sections -->
                                 <div class="eligibility-container">
+                                </div>
+
+                                <h3 class="text-center mb-2 mt-2">V. WORK EXPERIENCE</h3>
+
+                                <!-- Template for a work experience section -->
+                                <div class="work-experience-template form-group">
+                                    <div class="row">
+                                        <div class="col-sm-3 mb-1">
+                                            <input type="text" class="form-control" placeholder="Position Title" name="position_title[]" id="position_title">
+                                        </div>
+                                        <div class="col-sm-3 mb-1">
+                                            <input type="text" class="form-control" placeholder="Department" name="department[]" id="department">
+                                        </div>
+                                        <div class="col-sm-3 mb-1">
+                                            <input type="text" class="form-control" placeholder="Monthly Salary" name="monthly_salary[]" id="monthly_salary">
+                                        </div>
+                                        <div class="col-sm-3 mb-1">
+                                            <input type="text" class="form-control" placeholder="salary/job/pay" name="salary_type[]" id="salary_type">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3 mb-1">
+                                            <input type="text" class="form-control" placeholder="status of appointment" name="appointment_status[]" id="appointment_status">
+                                        </div>
+                                        <div class="col-sm-3 mb-1">
+                                            <input type="date" class="form-control" placeholder="From" name="work_from_date[]" id="work_from_date">
+                                        </div>
+                                        <div class="col-sm-3 mb-1">
+                                            <input type="date" class="form-control" placeholder="To" name="work_to_date[]" id="work_to_date">
+                                        </div>
+                                        <div class="col-sm-3 mb-1">
+                                            <input type="text" class="form-control" placeholder="Gov't Service? Y/N" name="govt_service[]" id="govt_service">
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger delete-work-experience" style="display: none;">Delete</button>
+                                </div>
+
+                                <!-- Button to add a new work experience section -->
+                                <button type="button" class="btn btn-primary add-work-experience">Add Work Experience</button>
+
+                                <!-- Container to hold the dynamically added sections -->
+                                <div class="work-experience-container">
                                 </div>
 
                                 <button type="button" class="btn btn-primary next float-end m-2">Next
@@ -903,6 +945,13 @@ require('../config/countries.php');
             clone.remove(); // Delete the section when the "Delete" button is clicked
         });
 
+        // Generate unique IDs for the new input fields
+        const inputs = clone.querySelectorAll('input');
+        inputs.forEach((input) => {
+            const currentId = input.id;
+            input.id = currentId + Date.now(); // Append a unique timestamp
+        });
+
         const container = document.querySelector('.eligibility-container');
         container.appendChild(clone);
     }
@@ -910,6 +959,36 @@ require('../config/countries.php');
     // Event listener for the "Add Eligibility" button
     const addEligibilityButton = document.querySelector('.add-eligibility');
     addEligibilityButton.addEventListener('click', addEligibilitySection);
+
+
+    function addWorkExperienceSection() {
+        const template = document.querySelector('.work-experience-template');
+        const clone = template.cloneNode(true);
+        clone.classList.remove('work-experience-template');
+
+        // Show the "Delete" button for the new section
+        const deleteButton = clone.querySelector('.delete-work-experience');
+        deleteButton.style.display = 'inline-block';
+
+        // Attach a click event to the "Delete" button of the new section
+        deleteButton.addEventListener('click', function() {
+            clone.remove(); // Delete the section when the "Delete" button is clicked
+        });
+
+        // Generate unique IDs for the new input fields
+        const inputs = clone.querySelectorAll('input');
+        inputs.forEach((input) => {
+            const currentId = input.id;
+            input.id = currentId + Date.now(); // Append a unique timestamp
+        });
+
+        const container = document.querySelector('.work-experience-container');
+        container.appendChild(clone);
+    }
+
+    // Event listener for the "Add Work Experience" button
+    const addWorkExperienceButton = document.querySelector('.add-work-experience');
+    addWorkExperienceButton.addEventListener('click', addWorkExperienceSection);
 </script>
 
 
