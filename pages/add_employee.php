@@ -123,7 +123,7 @@ require('../config/countries.php');
                     </div>
                     <div class="page-btn">
                         <!--
-
+                            
                             <a href="#" class="btn btn-added">
                                 <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Save
                             </a>
@@ -205,6 +205,7 @@ require('../config/countries.php');
                             </div>
 
                             <!-- Page 2 (Hidden by default) -->
+                            <!-- Your Page 2 content -->
                             <div class="page" id="page2" style="display: none;">
                                 <h3 class="text-center mb-2">I. Personal Information</h3>
                                 <div class="form-group">
@@ -626,9 +627,7 @@ require('../config/countries.php');
                                     </div>
                                 </div>
 
-                                <!-- Your Page 2 content -->
 
-                                <!-- ... (Your inputs for Page 2) ... -->
 
                                 <button type="button" class="btn btn-secondary prev">Previous</button>
                                 <button type="button" class="btn btn-primary next">Next</button>
@@ -637,8 +636,41 @@ require('../config/countries.php');
                             <!-- Page 3 (Hidden by default) -->
                             <div class="page" id="page3" style="display: none;">
                                 <!-- Your Page 3 content -->
+                                <h3 class="text-center mb-2 mt-2">IV. CIVIL SERVICE ELIGIBILITY</h3>
 
-                                <!-- ... (Your inputs for Page 3) ... -->
+                                <!-- Template for an eligibility section -->
+                                <div class="eligibility-template form-group">
+                                    <div class="row">
+                                        <div class="col-sm-4 mb-1">
+                                            <input type="text" class="form-control" placeholder="CSE/RA 1080 etc.">
+                                        </div>
+                                        <div class="col-sm-4 mb-1">
+                                            <input type="text" class="form-control" placeholder="Rating">
+                                        </div>
+                                        <div class="col-sm-4 mb-1">
+                                            <input type="text" class="form-control" placeholder="Date of Examination">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 mb-1">
+                                            <input type="text" class="form-control" placeholder="Place of examination">
+                                        </div>
+                                        <div class="col-sm-4 mb-1">
+                                            <input type="text" class="form-control" placeholder="License Number">
+                                        </div>
+                                        <div class="col-sm-4 mb-1">
+                                            <input type="text" class="form-control" placeholder="Date of Validity">
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger delete-eligibility" style="display: none;">Delete</button>
+                                </div>
+
+                                <!-- Button to add a new eligibility section -->
+                                <button type="button" class="btn btn-primary add-eligibility">Add Eligibility</button>
+
+                                <!-- Container to hold the dynamically added sections -->
+                                <div class="eligibility-container">
+                                </div>
 
                                 <button type="button" class="btn btn-secondary prev">Previous</button>
                                 <button type="button" class="btn btn-primary next">Next</button>
@@ -682,6 +714,8 @@ require('../config/countries.php');
 
             var isValid = true;
 
+            /*
+            
             //firstName
             var firstName = $("#firstName").val().trim();
             if (firstName === "") {
@@ -744,6 +778,7 @@ require('../config/countries.php');
             } else {
                 $("#endDate").removeClass("border-2 border-danger");
             }
+            */
 
             return isValid;
         }
@@ -845,6 +880,28 @@ require('../config/countries.php');
         // Initialize Feather Icons
         feather.replace();
     }
+
+    function addEligibilitySection() {
+        const template = document.querySelector('.eligibility-template');
+        const clone = template.cloneNode(true);
+        clone.classList.remove('eligibility-template');
+
+        // Show the "Delete" button for the new section
+        const deleteButton = clone.querySelector('.delete-eligibility');
+        deleteButton.style.display = 'inline-block';
+
+        // Attach a click event to the "Delete" button of the new section
+        deleteButton.addEventListener('click', function() {
+            clone.remove(); // Delete the section when the "Delete" button is clicked
+        });
+
+        const container = document.querySelector('.eligibility-container');
+        container.appendChild(clone);
+    }
+
+    // Event listener for the "Add Eligibility" button
+    const addEligibilityButton = document.querySelector('.add-eligibility');
+    addEligibilityButton.addEventListener('click', addEligibilitySection);
 </script>
 
 
