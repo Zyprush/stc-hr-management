@@ -198,7 +198,7 @@ require('../config/countries.php');
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary next float-end">Next
+                                <button type="button" class="btn btn-primary next float-end m-2">Next
                                     <i data-feather="arrow-right"></i>
                                 </button>
 
@@ -629,8 +629,10 @@ require('../config/countries.php');
 
 
 
-                                <button type="button" class="btn btn-secondary prev">Previous</button>
-                                <button type="button" class="btn btn-primary next">Next</button>
+                                <button type="button" class="btn btn-primary next float-end m-2">Next
+                                    <i data-feather="arrow-right"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary prev float-end m-2">Previous</button>
                             </div>
 
                             <!-- Page 3 (Hidden by default) -->
@@ -672,8 +674,10 @@ require('../config/countries.php');
                                 <div class="eligibility-container">
                                 </div>
 
-                                <button type="button" class="btn btn-secondary prev">Previous</button>
-                                <button type="button" class="btn btn-primary next">Next</button>
+                                <button type="button" class="btn btn-primary next float-end m-2">Next
+                                    <i data-feather="arrow-right"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary prev float-end m-2">Previous</button>
                             </div>
 
                             <!-- Page 4 (Hidden by default) -->
@@ -682,8 +686,10 @@ require('../config/countries.php');
 
                                 <!-- ... (Your inputs for Page 4) ... -->
 
-                                <button type="button" class="btn btn-secondary prev">Previous</button>
-                                <button type="button" class="btn btn-primary next">Next</button>
+                                <button type="button" class="btn btn-primary next float-end m-2">Next
+                                    <i data-feather="arrow-right"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary prev float-end m-2">Previous</button>
                             </div>
 
                             <!-- Page 5 (Hidden by default) -->
@@ -692,8 +698,10 @@ require('../config/countries.php');
 
                                 <!-- ... (Your inputs for Page 5) ... -->
 
-                                <button type="button" class="btn btn-secondary prev">Previous</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="button" class="btn btn-primary next float-end m-2">Next
+                                    <i data-feather="arrow-right"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary prev float-end m-2">Previous</button>
                             </div>
                         </form>
                     </div>
