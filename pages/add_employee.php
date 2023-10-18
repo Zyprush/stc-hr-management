@@ -754,11 +754,14 @@ require('../config/countries.php');
                                 </div>
 
                                 <!-- Button to add a new voluntary work section -->
-                                <button type="button" class="btn btn-primary add-voluntary-work">Add Voluntary Work</button>
+                                <button type="button" class="btn btn-primary add-voluntary-work mb-2">Add Voluntary Work</button>
 
                                 <!-- Container to hold the dynamically added sections -->
                                 <div class="voluntary-work-container">
                                 </div>
+
+                                <h3 class="text-center mb-2 mt-2">VII. LEARNING AND DEVELOPMENT (L&D) INTERVENTIONS/TRAINING PROGRAMS ATTENDED</h3>
+
 
                                 <button type="button" class="btn btn-primary next float-end m-2">Next
                                     <i data-feather="arrow-right"></i>
