@@ -727,28 +727,37 @@ require('../config/countries.php');
                                 <!-- Your Page 4 content -->
                                 <h3 class="text-center mb-2 mt-2">VI. VOLUNTARY WORK OR INVOLVEMENT IN CIVIC / NON-GOVERNMENT / PEOPLE / VOLUNTARY ORGANIZATION/S</h3>
 
-                                <div class="form-group">
+                                <!-- Template for a voluntary work section -->
+                                <div class="voluntary-work-template form-group">
                                     <div class="row">
-                                        <div class="col-sm-6 mb-1">
-                                            <input type="text" class="form-control" id="" name="" placeholder="Name & Address of Organization">
+                                        <div class="col-sm-4 mb-1">
+                                            <input type="text" class="form-control" placeholder="Name & Address of Organization" name="organization_name[]">
                                         </div>
-                                        <div class="col-sm-6 mb-1">
-                                            <input type="text" class="form-control" id="" name="" placeholder="Position/Nature of Work">
+                                        <div class="col-sm-4 mb-1">
+                                            <input type="text" class="form-control" placeholder="Position/Nature of Work" name="work_position[]">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" placeholder="Number of Hours" name="hours_worked[]">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" placeholder="From" name="work_from_date[]">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" placeholder="To" name="work_to_date[]">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <button type="button" class="btn btn-danger delete-voluntary-work" style="display: none;">Delete</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="" name="" placeholder="From">
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="" name="" placeholder="To">
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="" name="" placeholder="">
-                                        </div>
-                                    </div>
+
+                                <!-- Button to add a new voluntary work section -->
+                                <button type="button" class="btn btn-primary add-voluntary-work">Add Voluntary Work</button>
+
+                                <!-- Container to hold the dynamically added sections -->
+                                <div class="voluntary-work-container">
                                 </div>
 
                                 <button type="button" class="btn btn-primary next float-end m-2">Next
@@ -1012,6 +1021,35 @@ require('../config/countries.php');
     // Event listener for the "Add Work Experience" button
     const addWorkExperienceButton = document.querySelector('.add-work-experience');
     addWorkExperienceButton.addEventListener('click', addWorkExperienceSection);
+
+    function addVoluntaryWorkSection() {
+        const template = document.querySelector('.voluntary-work-template');
+        const clone = template.cloneNode(true);
+        clone.classList.remove('voluntary-work-template');
+
+        // Show the "Delete" button for the new section
+        const deleteButton = clone.querySelector('.delete-voluntary-work');
+        deleteButton.style.display = 'inline-block';
+
+        // Attach a click event to the "Delete" button of the new section
+        deleteButton.addEventListener('click', function() {
+            clone.remove(); // Delete the section when the "Delete" button is clicked
+        });
+
+        // Generate unique IDs for the new input fields
+        const inputs = clone.querySelectorAll('input');
+        inputs.forEach((input) => {
+            const currentName = input.name;
+            input.name = currentName + '[]'; // Use array notation for input names
+        });
+
+        const container = document.querySelector('.voluntary-work-container');
+        container.appendChild(clone);
+    }
+
+    // Event listener for the "Add Voluntary Work" button
+    const addVoluntaryWorkButton = document.querySelector('.add-voluntary-work');
+    addVoluntaryWorkButton.addEventListener('click', addVoluntaryWorkSection);
 </script>
 
 
