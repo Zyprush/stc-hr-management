@@ -668,7 +668,7 @@ require('../config/countries.php');
                                 </div>
 
                                 <!-- Button to add a new eligibility section -->
-                                <button type="button" class="btn btn-primary add-eligibility">Add Eligibility</button>
+                                <button type="button" class="btn btn-primary add-eligibility mb-2">Add Eligibility</button>
 
                                 <!-- Container to hold the dynamically added sections -->
                                 <div class="eligibility-container">
@@ -710,7 +710,7 @@ require('../config/countries.php');
                                 </div>
 
                                 <!-- Button to add a new work experience section -->
-                                <button type="button" class="btn btn-primary add-work-experience">Add Work Experience</button>
+                                <button type="button" class="btn btn-primary add-work-experience mb-2">Add Work Experience</button>
 
                                 <!-- Container to hold the dynamically added sections -->
                                 <div class="work-experience-container">
@@ -725,8 +725,31 @@ require('../config/countries.php');
                             <!-- Page 4 (Hidden by default) -->
                             <div class="page" id="page4" style="display: none;">
                                 <!-- Your Page 4 content -->
+                                <h3 class="text-center mb-2 mt-2">VI. VOLUNTARY WORK OR INVOLVEMENT IN CIVIC / NON-GOVERNMENT / PEOPLE / VOLUNTARY ORGANIZATION/S</h3>
 
-                                <!-- ... (Your inputs for Page 4) ... -->
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 mb-1">
+                                            <input type="text" class="form-control" id="" name="" placeholder="Name & Address of Organization">
+                                        </div>
+                                        <div class="col-sm-6 mb-1">
+                                            <input type="text" class="form-control" id="" name="" placeholder="Position/Nature of Work">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="" name="" placeholder="From">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="" name="" placeholder="To">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="" name="" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <button type="button" class="btn btn-primary next float-end m-2">Next
                                     <i data-feather="arrow-right"></i>
