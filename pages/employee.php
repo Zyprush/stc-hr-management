@@ -49,13 +49,15 @@ include('../config/fetch_departments_options.php');
                         <a class="dropdown-item" href="#"> <i class="me-2" data-feather="user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
+                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+                    class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">My Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
@@ -112,9 +114,13 @@ include('../config/fetch_departments_options.php');
                     <h6>Manage Employee</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
-                        <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Employee
-                    </a>
+                    <!--
+                        <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
+                            <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Employee
+                        </a>
+                    -->
+                    <a href="add_employee.php" class="btn btn-added"> <img src="../assets/img/icons/plus.svg" alt="img"
+                            class="me-1">Add Employee</a>
                 </div>
             </div>
             <div class="card">
@@ -125,13 +131,16 @@ include('../config/fetch_departments_options.php');
                         <div class="wordset">
                             <ul>
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="../assets/img/icons/pdf.svg" alt="img"></a>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                            src="../assets/img/icons/pdf.svg" alt="img"></a>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="../assets/img/icons/excel.svg" alt="img"></a>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
+                                            src="../assets/img/icons/excel.svg" alt="img"></a>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="../assets/img/icons/printer.svg" alt="img"></a>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
+                                            src="../assets/img/icons/printer.svg" alt="img"></a>
                                 </li>
                             </ul>
                         </div>
@@ -158,7 +167,8 @@ include('../config/fetch_departments_options.php');
             </div>
 
             <!-- Add -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -172,7 +182,8 @@ include('../config/fetch_departments_options.php');
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="firstName">First Name:</label>
-                                        <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                        <input type="text" class="form-control" id="firstName" name="firstName"
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="middleName">Middle Name:</label>
@@ -188,7 +199,8 @@ include('../config/fetch_departments_options.php');
                                     </div>
                                     <div class="form-group">
                                         <label for="startDate">Start Date:</label>
-                                        <input type="date" class="form-control" id="startDate" name="startDate" required>
+                                        <input type="date" class="form-control" id="startDate" name="startDate"
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="type">Type:</label>
@@ -228,7 +240,8 @@ include('../config/fetch_departments_options.php');
             </div>
 
             <!-- Edit Employee Modal -->
-            <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog"
+                aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -246,7 +259,8 @@ include('../config/fetch_departments_options.php');
                                 </div>
                                 <div class="form-group">
                                     <label for="edit_middle_name">Middle Name:</label>
-                                    <input type="text" class="form-control" id="edit_middle_name" name="edit_middle_name">
+                                    <input type="text" class="form-control" id="edit_middle_name"
+                                        name="edit_middle_name">
                                 </div>
                                 <div class="form-group">
                                     <label for="edit_last_name">Last Name:</label>
@@ -262,15 +276,18 @@ include('../config/fetch_departments_options.php');
                                 </div>
                                 <div class="form-group">
                                     <label for="edit_employee_type">Type:</label>
-                                    <input type="text" class="form-control" id="edit_employee_type" name="edit_employee_type">
+                                    <input type="text" class="form-control" id="edit_employee_type"
+                                        name="edit_employee_type">
                                 </div>
                                 <div class="form-group">
                                     <label for="edit_employee_department">Department:</label>
-                                    <input type="text" class="form-control" id="edit_employee_department" name="edit_employee_department">
+                                    <input type="text" class="form-control" id="edit_employee_department"
+                                        name="edit_employee_department">
                                 </div>
                                 <div class="form-group">
                                     <label for="edit_employee_position">Position:</label>
-                                    <input type="text" class="form-control" id="edit_employee_position" name="edit_employee_position">
+                                    <input type="text" class="form-control" id="edit_employee_position"
+                                        name="edit_employee_position">
                                 </div>
                                 <div class="form-group">
                                     <label for="edit_end_date">End Date:</label>
@@ -292,39 +309,39 @@ include('../includes/footer.php');
 ?>
 
 <script>
-    $(document).ready(function() {
-        var table = $('#event_table').DataTable({
-            "ajax": {
-                "url": "../config/fetch_employees.php",
-                "type": "POST",
-                "dataSrc": ""
+$(document).ready(function() {
+    var table = $('#event_table').DataTable({
+        "ajax": {
+            "url": "../config/fetch_employees.php",
+            "type": "POST",
+            "dataSrc": ""
+        },
+        "columns": [{
+                "data": "ID"
             },
-            "columns": [{
-                    "data": "ID"
-                },
-                {
-                    "data": "FullName"
-                },
-                {
-                    "data": "StartDate"
-                },
-                {
-                    "data": "Type"
-                },
-                {
-                    "data": "Department"
-                },
-                {
-                    "data": "Position"
-                },
-                {
-                    "data": "EndDate"
-                },
-                {
-                    "data": null,
-                    "render": function(data, type, row) {
-                        // Add action buttons here for edit, delete, etc.
-                        return `
+            {
+                "data": "FullName"
+            },
+            {
+                "data": "StartDate"
+            },
+            {
+                "data": "Type"
+            },
+            {
+                "data": "Department"
+            },
+            {
+                "data": "Position"
+            },
+            {
+                "data": "EndDate"
+            },
+            {
+                "data": null,
+                "render": function(data, type, row) {
+                    // Add action buttons here for edit, delete, etc.
+                    return `
                     <a class="me-3" href="#" data-toggle="modal" data-target="#editEmployeeModal" data-record-id="${row.ID}">
                         <img src="../assets/img/icons/edit.svg" alt="Edit">
                     </a>
@@ -332,68 +349,68 @@ include('../includes/footer.php');
                         <img src="../assets/img/icons/delete.svg" alt="Delete">
                     </a>
                 `;
-                    }
                 }
-            ]
-        });
-
-
-        // Handle delete button click
-        $('#event_table tbody').on('click', '.delete-button', function() {
-            var button = this;
-            var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
-
-            var confirmDelete = confirm('Are you sure you want to delete this record?');
-
-            if (confirmDelete) {
-                $.ajax({
-                    type: 'POST',
-                    url: '../config/delete_employee.php',
-                    data: {
-                        record_id: recordId // Pass the record_id as a parameter
-                    },
-                    success: function(response) {
-                        alert(response);
-                        table.ajax.reload(); // Refresh the DataTable
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('AJAX Error: ' + status + ' ' + error);
-                    }
-                });
             }
-        });
+        ]
+    });
 
-        // Handle Edit button click
-        $('#event_table tbody').on('click', '[data-toggle="modal"][data-target="#editEmployeeModal"]', function() {
-            var button = this;
-            var recordId = $(button).data('record-id');
 
-            // Fetch employee details by ID using AJAX
+    // Handle delete button click
+    $('#event_table tbody').on('click', '.delete-button', function() {
+        var button = this;
+        var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
+
+        var confirmDelete = confirm('Are you sure you want to delete this record?');
+
+        if (confirmDelete) {
             $.ajax({
                 type: 'POST',
-                url: '../config/fetch_employee.php',
+                url: '../config/delete_employee.php',
                 data: {
-                    employee_id: recordId
+                    record_id: recordId // Pass the record_id as a parameter
                 },
                 success: function(response) {
-                    var employee = JSON.parse(response);
-
-                    // Set the fetched employee details in the modal form fields
-                    $('#edit_employee_id').val(employee.ID);
-                    $('#edit_first_name').val(employee.FirstName);
-                    $('#edit_middle_name').val(employee.MiddleName);
-                    $('#edit_last_name').val(employee.LastName);
-                    $('#edit_extension').val(employee.Extension);
-                    $('#edit_start_date').val(employee.StartDate);
-                    $('#edit_employee_type').val(employee.Type);
-                    $('#edit_employee_department').val(employee.Department);
-                    $('#edit_employee_position').val(employee.Position);
-                    $('#edit_end_date').val(employee.EndDate);
+                    alert(response);
+                    table.ajax.reload(); // Refresh the DataTable
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error: ' + status + ' ' + error);
                 }
             });
+        }
+    });
+
+    // Handle Edit button click
+    $('#event_table tbody').on('click', '[data-toggle="modal"][data-target="#editEmployeeModal"]', function() {
+        var button = this;
+        var recordId = $(button).data('record-id');
+
+        // Fetch employee details by ID using AJAX
+        $.ajax({
+            type: 'POST',
+            url: '../config/fetch_employee.php',
+            data: {
+                employee_id: recordId
+            },
+            success: function(response) {
+                var employee = JSON.parse(response);
+
+                // Set the fetched employee details in the modal form fields
+                $('#edit_employee_id').val(employee.ID);
+                $('#edit_first_name').val(employee.FirstName);
+                $('#edit_middle_name').val(employee.MiddleName);
+                $('#edit_last_name').val(employee.LastName);
+                $('#edit_extension').val(employee.Extension);
+                $('#edit_start_date').val(employee.StartDate);
+                $('#edit_employee_type').val(employee.Type);
+                $('#edit_employee_department').val(employee.Department);
+                $('#edit_employee_position').val(employee.Position);
+                $('#edit_end_date').val(employee.EndDate);
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error: ' + status + ' ' + error);
+            }
         });
     });
+});
 </script>

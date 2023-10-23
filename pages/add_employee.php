@@ -5,10 +5,12 @@ include('../config/fetch_departments_options.php');
 require('../config/countries.php');
 ?>
 
-
-<div id="global-loader">
+<!--
+   <div id="global-loader">
     <div class="whirly-loader"> </div>
-</div>
+</div> 
+-->
+
 
 <div class="main-wrapper">
 
@@ -134,7 +136,7 @@ require('../config/countries.php');
                 </div>
                 <div class="container">
                     <div class="card shadow p-4">
-                        <form id="multiPageForm" method="POST" action="process_form.php">
+                        <form id="multiPageForm" method="POST" action="../config/add_employee_pds.php">
                             <!-- Page 1 -->
                             <div class="page" id="page1">
                                 <h3 class="text-center mb-2">Basic Info</h3>
@@ -210,8 +212,7 @@ require('../config/countries.php');
 
                             </div>
 
-                            <!-- Page 2 (Hidden by default) -->
-                            <!-- Your Page 2 content -->
+                            <!-- Page 2 content -->
                             <div class="page" id="page2" style="display: none;">
                                 <h3 class="text-center mb-2">I. Personal Information</h3>
                                 <div class="form-group">
@@ -346,7 +347,7 @@ require('../config/countries.php');
                                                 placeholder="Province">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" id="zipcode" name="zipcode"
+                                            <input type="number" class="form-control" id="zipcode" name="zipcode"
                                                 placeholder="ZIP Code">
                                         </div>
                                     </div>
@@ -356,35 +357,35 @@ require('../config/countries.php');
                                     <label for="permanentAddress">Permanent Address:</label>
                                     <div class="row">
                                         <div class="col-sm-6 mb-1">
-                                            <input type="text" class="form-control" id="lotNoP" name="lotNoP"
+                                            <input type="text" class="form-control" id="lotNo_permanent" name="lotNo_permanent"
                                                 placeholder="House/Block/Lot No.">
                                         </div>
                                         <div class="col-sm-6 mb-1">
-                                            <input type="text" class="form-control" id="streetP" name="streetP"
+                                            <input type="text" class="form-control" id="street_permanent" name="street_permanent"
                                                 placeholder="Street">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6 mb-1">
-                                            <input type="text" class="form-control" id="barangayP" name="barangayP"
+                                            <input type="text" class="form-control" id="barangay_permanent" name="barangay_permanent"
                                                 placeholder="Barangay">
                                         </div>
                                         <div class="col-sm-6 mb-1">
-                                            <input type="text" class="form-control" id="subdivisionP"
-                                                name="subdivisionP" placeholder="Subdivision/Village">
+                                            <input type="text" class="form-control" id="subdivision_permanent"
+                                                name="subdivision_permanent" placeholder="Subdivision/Village">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" id="cityP" name="cityP"
+                                            <input type="text" class="form-control" id="city_permanent" name="city_permanent"
                                                 placeholder="City/Municipality">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" id="provinceP" name="provinceP"
+                                            <input type="text" class="form-control" id="province_permanent" name="province_permanent"
                                                 placeholder="Province">
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="zipcodeP" name="zipcodeP"
+                                            <input type="text" class="form-control" id="zipcode_permanent" name="zipcode_permanent"
                                                 placeholder="ZIP Code">
                                         </div>
                                     </div>
@@ -394,11 +395,11 @@ require('../config/countries.php');
                                     <div class="row">
                                         <label for="contacts">Contacts:</label>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="tel" class="form-control" id="tel" name="tel"
+                                            <input type="tel" class="form-control" id="telephone" name="telephone"
                                                 placeholder="Telephone">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="tel" class="form-control" id="number" name="number"
+                                            <input type="tel" class="form-control" id="mobile" name="mobile"
                                                 placeholder="Phone/Mobile">
                                         </div>
                                         <div class="col-sm-4 mb-1">
@@ -1286,7 +1287,7 @@ require('../config/countries.php');
                                     </div>
                                 </div>
 
-                                <button type="button" class="btn btn-primary next float-end m-2">Next <i
+                                <button type="submit" class="btn btn-primary next float-end m-2">Submit <i
                                         data-feather="arrow-right"></i></button>
                                 <button type="button" class="btn btn-secondary prev float-end m-2">Previous</button>
                             </div>
