@@ -248,6 +248,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+    // Check if the 'eligibility' table exists, and create it if not
+$checkEligibilityTableQuery = "SHOW TABLES LIKE 'eligibility'";
+$eligibilityTableResult = mysqli_query($conn, $checkEligibilityTableQuery);
+
+if (!$eligibilityTableResult) {
+    echo 'Error checking "eligibility" table existence: ' . mysqli_error($conn);
+    exit;
+}
+
+if (mysqli_num_rows($eligibilityTableResult) == 0) {
+    // The 'eligibility' table doesn't exist, create it
+    $createEligibilityTableQuery = "CREATE TABLE eligibility (
+        ID INT AUTO_INCREMENT PRIMARY KEY,
+        EmployeeID INT,
+        EligibilityName VARCHAR(255) NOT NULL,
+        Rating VARCHAR(50),
+        DateOfExamination VARCHAR(50),
+        PlaceOfExamination VARCHAR(255),
+        LicenseNumber VARCHAR(50),
+        DateOfValidity VARCHAR(50)
+    )";
+
+    if (mysqli_query($conn, $createEligibilityTableQuery)) {
+        echo 'Table "eligibility" created successfully.';
+    } else {
+        echo 'Error creating "eligibility" table: ' . mysqli_error($conn);
+        exit;
+    }
+}
+
+
     // Now, perform the database insertion for the employee
     $insertEmployeeQuery = "INSERT INTO employees (
         FirstName, MiddleName, LastName, Extension, StartDate, Type, Department, Position, EndDate,
@@ -302,6 +333,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         }
+        // Handle eligibility information
+    if (isset($_POST['eligibility'])) {
+        $eligibilityNames = $_POST['eligibility'];
+        $ratings = $_POST['rating'];
+        $examDates = $_POST['exam_date'];
+        $examPlaces = $_POST['exam_place'];
+        $licenseNumbers = $_POST['license_number'];
+        $validityDates = $_POST['validity_date'];
+
+        // Loop through the eligibility arrays and insert them into the 'eligibility' table
+        foreach ($eligibilityNames as $key => $eligibilityName) {
+            $eligibilityName = mysqli_real_escape_string($conn, $eligibilityName); // Sanitize the input
+            $rating = mysqli_real_escape_string($conn, $ratings[$key]); // Sanitize the input
+            $examDate = mysqli_real_escape_string($conn, $examDates[$key]); // Sanitize the input
+            $examPlace = mysqli_real_escape_string($conn, $examPlaces[$key]); // Sanitize the input
+            $licenseNumber = mysqli_real_escape_string($conn, $licenseNumbers[$key]); // Sanitize the input
+            $validityDate = mysqli_real_escape_string($conn, $validityDates[$key]); // Sanitize the input
+
+            // Perform the database insertion for eligibility data
+            $eligibilityInsertQuery = "INSERT INTO eligibility (EmployeeID, EligibilityName, Rating, DateOfExamination, PlaceOfExamination, LicenseNumber, DateOfValidity) 
+            VALUES ('$employeeID', '$eligibilityName', '$rating', '$examDate', '$examPlace', '$licenseNumber', '$validityDate')";
+
+            if (mysqli_query($conn, $eligibilityInsertQuery)) {
+                // Eligibility added successfully
+            } else {
+                echo 'Error inserting eligibility data: ' . mysqli_error($conn);
+                // Handle the error as needed
+            }
+        }
+    }
 
         // Set a session value to indicate success
         session_start();

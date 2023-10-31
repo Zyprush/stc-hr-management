@@ -1481,6 +1481,13 @@ function addEligibilitySection() {
     const template = document.querySelector('.eligibility-template');
     const clone = template.cloneNode(true);
     clone.classList.remove('eligibility-template');
+    clone.style.display = 'block';
+
+    // Clear the input fields in the cloned section
+    const inputs = clone.querySelectorAll('input');
+    inputs.forEach((input) => {
+        input.value = ''; // Clear the input value
+    });
 
     // Show the "Delete" button for the new section
     const deleteButton = clone.querySelector('.delete-eligibility');
@@ -1491,13 +1498,6 @@ function addEligibilitySection() {
         clone.remove(); // Delete the section when the "Delete" button is clicked
     });
 
-    // Generate unique IDs for the new input fields
-    const inputs = clone.querySelectorAll('input');
-    inputs.forEach((input) => {
-        const currentId = input.id;
-        input.id = currentId + Date.now(); // Append a unique timestamp
-    });
-
     const container = document.querySelector('.eligibility-container');
     container.appendChild(clone);
 }
@@ -1505,6 +1505,7 @@ function addEligibilitySection() {
 // Event listener for the "Add Eligibility" button
 const addEligibilityButton = document.querySelector('.add-eligibility');
 addEligibilityButton.addEventListener('click', addEligibilitySection);
+
 
 
 function addWorkExperienceSection() {
