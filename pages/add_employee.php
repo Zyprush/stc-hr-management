@@ -357,18 +357,18 @@ require('../config/countries.php');
                                     <label for="permanentAddress">Permanent Address:</label>
                                     <div class="row">
                                         <div class="col-sm-6 mb-1">
-                                            <input type="text" class="form-control" id="lotNo_permanent" name="lotNo_permanent"
-                                                placeholder="House/Block/Lot No.">
+                                            <input type="text" class="form-control" id="lotNo_permanent"
+                                                name="lotNo_permanent" placeholder="House/Block/Lot No.">
                                         </div>
                                         <div class="col-sm-6 mb-1">
-                                            <input type="text" class="form-control" id="street_permanent" name="street_permanent"
-                                                placeholder="Street">
+                                            <input type="text" class="form-control" id="street_permanent"
+                                                name="street_permanent" placeholder="Street">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6 mb-1">
-                                            <input type="text" class="form-control" id="barangay_permanent" name="barangay_permanent"
-                                                placeholder="Barangay">
+                                            <input type="text" class="form-control" id="barangay_permanent"
+                                                name="barangay_permanent" placeholder="Barangay">
                                         </div>
                                         <div class="col-sm-6 mb-1">
                                             <input type="text" class="form-control" id="subdivision_permanent"
@@ -377,16 +377,16 @@ require('../config/countries.php');
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" id="city_permanent" name="city_permanent"
-                                                placeholder="City/Municipality">
+                                            <input type="text" class="form-control" id="city_permanent"
+                                                name="city_permanent" placeholder="City/Municipality">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" id="province_permanent" name="province_permanent"
-                                                placeholder="Province">
+                                            <input type="text" class="form-control" id="province_permanent"
+                                                name="province_permanent" placeholder="Province">
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="zipcode_permanent" name="zipcode_permanent"
-                                                placeholder="ZIP Code">
+                                            <input type="text" class="form-control" id="zipcode_permanent"
+                                                name="zipcode_permanent" placeholder="ZIP Code">
                                         </div>
                                     </div>
                                 </div>
@@ -1249,11 +1249,11 @@ require('../config/countries.php');
                                                 placeholder="Full Name">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" name="ref_name_1"
+                                            <input type="text" class="form-control" name="ref_address_1"
                                                 placeholder="Address">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" name="ref_name_1"
+                                            <input type="text" class="form-control" name="ref_number_1"
                                                 placeholder="Tel/Mobile No.">
                                         </div>
                                     </div>
@@ -1263,11 +1263,11 @@ require('../config/countries.php');
                                                 placeholder="Full Name">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" name="ref_name_2"
+                                            <input type="text" class="form-control" name="ref_address_2"
                                                 placeholder="Address">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" name="ref_name_2"
+                                            <input type="text" class="form-control" name="ref_number_2"
                                                 placeholder="Tel/Mobile No.">
                                         </div>
                                     </div>
@@ -1277,11 +1277,11 @@ require('../config/countries.php');
                                                 placeholder="Full Name">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" name="ref_name_3"
+                                            <input type="text" class="form-control" name="ref_address_3"
                                                 placeholder="Address">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" name="ref_name_3"
+                                            <input type="text" class="form-control" name="ref_number_3"
                                                 placeholder="Tel/Mobile No.">
                                         </div>
                                     </div>
@@ -1506,12 +1506,16 @@ function addEligibilitySection() {
 const addEligibilityButton = document.querySelector('.add-eligibility');
 addEligibilityButton.addEventListener('click', addEligibilitySection);
 
-
-
 function addWorkExperienceSection() {
     const template = document.querySelector('.work-experience-template');
     const clone = template.cloneNode(true);
     clone.classList.remove('work-experience-template');
+
+    // Clear the input fields in the cloned section
+    const inputs = clone.querySelectorAll('input');
+    inputs.forEach((input) => {
+        input.value = ''; // Clear the input value
+    });
 
     // Show the "Delete" button for the new section
     const deleteButton = clone.querySelector('.delete-work-experience');
@@ -1520,13 +1524,6 @@ function addWorkExperienceSection() {
     // Attach a click event to the "Delete" button of the new section
     deleteButton.addEventListener('click', function() {
         clone.remove(); // Delete the section when the "Delete" button is clicked
-    });
-
-    // Generate unique IDs for the new input fields
-    const inputs = clone.querySelectorAll('input');
-    inputs.forEach((input) => {
-        const currentId = input.id;
-        input.id = currentId + Date.now(); // Append a unique timestamp
     });
 
     const container = document.querySelector('.work-experience-container');
@@ -1542,6 +1539,12 @@ function addVoluntaryWorkSection() {
     const clone = template.cloneNode(true);
     clone.classList.remove('voluntary-work-template');
 
+    // Clear the input fields in the cloned section
+    const inputs = clone.querySelectorAll('input');
+    inputs.forEach((input) => {
+        input.value = ''; // Clear the input value
+    });
+
     // Show the "Delete" button for the new section
     const deleteButton = clone.querySelector('.delete-voluntary-work');
     deleteButton.style.display = 'inline-block';
@@ -1549,13 +1552,6 @@ function addVoluntaryWorkSection() {
     // Attach a click event to the "Delete" button of the new section
     deleteButton.addEventListener('click', function() {
         clone.remove(); // Delete the section when the "Delete" button is clicked
-    });
-
-    // Generate unique IDs for the new input fields
-    const inputs = clone.querySelectorAll('input');
-    inputs.forEach((input) => {
-        const currentName = input.name;
-        input.name = currentName + '[]'; // Use array notation for input names
     });
 
     const container = document.querySelector('.voluntary-work-container');
@@ -1571,6 +1567,12 @@ function addLDSection() {
     const clone = template.cloneNode(true);
     clone.classList.remove('ld-template');
 
+    // Clear the input fields in the cloned section
+    const inputs = clone.querySelectorAll('input');
+    inputs.forEach((input) => {
+        input.value = ''; // Clear the input value
+    });
+
     // Show the "Delete" button for the new section
     const deleteButton = clone.querySelector('.delete-ld');
     deleteButton.style.display = 'inline-block';
@@ -1578,13 +1580,6 @@ function addLDSection() {
     // Attach a click event to the "Delete" button of the new section
     deleteButton.addEventListener('click', function() {
         clone.remove(); // Delete the section when the "Delete" button is clicked
-    });
-
-    // Generate unique IDs for the new input fields
-    const inputs = clone.querySelectorAll('input');
-    inputs.forEach((input) => {
-        const currentName = input.name;
-        input.name = currentName + '[]'; // Use array notation for input names
     });
 
     const container = document.querySelector('.ld-container');
@@ -1595,39 +1590,86 @@ function addLDSection() {
 const addLDButton = document.querySelector('.add-ld');
 addLDButton.addEventListener('click', addLDSection);
 
-function addSection(templateSelector, addBtnSelector, containerSelector, deleteClass) {
-    const template = document.querySelector(templateSelector);
-    const addBtn = document.querySelector(addBtnSelector);
-    const container = document.querySelector(containerSelector);
+function addSkillSection() {
+    const template = document.querySelector('.skills-template');
+    const clone = template.cloneNode(true);
+    clone.classList.remove('skills-template');
 
-    function addSectionItem() {
-        const clone = template.cloneNode(true);
+    // Clear the input fields in the cloned section
+    const input = clone.querySelector('input');
+    input.value = ''; // Clear the input value
 
-        // Generate unique IDs for the new input fields
-        const input = clone.querySelector('input');
-        input.name = input.name + '[]'; // Use array notation for input names
+    // Show the "Delete" button for the new section
+    const deleteButton = clone.querySelector('.delete-skill');
+    deleteButton.style.display = 'inline-block';
 
-        container.appendChild(clone);
-
-        // Show the "Delete" button for the new section
-        const deleteButton = clone.querySelector('.' + deleteClass);
-        deleteButton.style.display = 'inline-block';
-
-        // Attach a click event to the "Delete" button of the new section
-        deleteButton.addEventListener('click', function() {
-            clone.remove(); // Delete the section when the "Delete" button is clicked
-        });
-    }
-
-    addBtn.addEventListener('click', function() {
-        addSectionItem();
+    // Attach a click event to the "Delete" button of the new section
+    deleteButton.addEventListener('click', function() {
+        clone.remove(); // Delete the section when the "Delete" button is clicked
     });
+
+    const container = document.querySelector('.skills-container');
+    container.appendChild(clone);
 }
 
-// Initialize and add sections for "Special Skills and Hobbies," "Non-Academic Distinctions/Recognition," and "Membership in Association/Organization"
-addSection('.skills-template', '.add-skill', '.skills-container', 'delete-skill');
-addSection('.distinctions-template', '.add-distinction', '.distinctions-container', 'delete-distinction');
-addSection('.membership-template', '.add-membership', '.membership-container', 'delete-membership');
+// Event listener for the "Add Special Skill/Hobby" button
+const addSkillButton = document.querySelector('.add-skill');
+addSkillButton.addEventListener('click', addSkillSection);
+
+
+function addDistinctionSection() {
+    const template = document.querySelector('.distinctions-template');
+    const clone = template.cloneNode(true);
+    clone.classList.remove('distinctions-template');
+
+    // Clear the input fields in the cloned section
+    const input = clone.querySelector('input');
+    input.value = ''; // Clear the input value
+
+    // Show the "Delete" button for the new section
+    const deleteButton = clone.querySelector('.delete-distinction');
+    deleteButton.style.display = 'inline-block';
+
+    // Attach a click event to the "Delete" button of the new section
+    deleteButton.addEventListener('click', function() {
+        clone.remove(); // Delete the section when the "Delete" button is clicked
+    });
+
+    const container = document.querySelector('.distinctions-container');
+    container.appendChild(clone);
+}
+
+// Event listener for the "Add Distinction/Recognition" button
+const addDistinctionButton = document.querySelector('.add-distinction');
+addDistinctionButton.addEventListener('click', addDistinctionSection);
+
+
+function addMembershipSection() {
+    const template = document.querySelector('.membership-template');
+    const clone = template.cloneNode(true);
+    clone.classList.remove('membership-template');
+
+    // Clear the input fields in the cloned section
+    const input = clone.querySelector('input');
+    input.value = ''; // Clear the input value
+
+    // Show the "Delete" button for the new section
+    const deleteButton = clone.querySelector('.delete-membership');
+    deleteButton.style.display = 'inline-block';
+
+    // Attach a click event to the "Delete" button of the new section
+    deleteButton.addEventListener('click', function() {
+        clone.remove(); // Delete the section when the "Delete" button is clicked
+    });
+
+    const container = document.querySelector('.membership-container');
+    container.appendChild(clone);
+}
+
+// Event listener for the "Add Membership" button
+const addMembershipButton = document.querySelector('.add-membership');
+addMembershipButton.addEventListener('click', addMembershipSection);
+
 </script>
 
 
