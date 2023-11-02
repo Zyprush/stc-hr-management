@@ -18,12 +18,16 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 
-    function formatData($value) {
-        // Convert to uppercase
-        $formattedValue = strtoupper($value);
-    
-        // Replace empty values with 'N/A'
-        $formattedValue = !empty($formattedValue) ? $formattedValue : 'N/A';
+    function formatData($value, $type = '') {
+        if ($type === 'date') {
+            // Convert date format from 'yyyy-mm-dd' to 'mm-dd-yyyy'
+            $formattedValue = DateTime::createFromFormat('Y-m-d', $value)->format('m-d-Y');
+        } else {
+            // Convert to uppercase
+            $formattedValue = strtoupper($value);
+            // Replace empty values with 'N/A'
+            $formattedValue = !empty($formattedValue) ? $formattedValue : 'N/A';
+        }
     
         return $formattedValue;
     }
@@ -33,7 +37,49 @@ if ($result->num_rows > 0) {
     $firstName = formatData($row['FirstName']);
     $middleName = formatData($row['MiddleName']);
     $extensionName = formatData($row['Extension']);
-    $birthdate = formatData($row['Birthdate']);
+    $birthdate = formatData($row['Birthdate'], 'date');
+
+    // $ = formatData($row['']); x113
+    $placeOfBirth = formatData($row['PlaceOfBirth']);
+    $sex = formatData($row['Sex']);
+    $civilStatus = formatData($row['CivilStatus']);
+    $height = formatData($row['Height']);
+    $weight = formatData($row['Weight']);
+    $bloodtype = formatData($row['BloodType']);
+    $gsis = formatData($row['GSIS']);
+    $pagibig = formatData($row['PagIbig']);
+    $sss = formatData($row['SSS']);
+    $tin = formatData($row['TIN']);
+    $agency = formatData($row['Agency']);
+    $citizenship = formatData($row['Citizenship']);
+    $dualCitizenship = formatData($row['DualCitizenship']);
+    $lotNo = formatData($row['LotNo']);
+    $street = formatData($row['Street']);
+    $barangay = formatData($row['Barangay']);
+    $subdivision = formatData($row['Subdivision']);
+    $city = formatData($row['City']);
+    $province = formatData($row['Province']);
+    $zipcode = formatData($row['Zipcode']);
+    $lotNopermanent = formatData($row['LotNoPermanent']);
+    $streetpermanent = formatData($row['StreetPermanent']);
+    $barangaypermanent = formatData($row['BarangayPermanent']);
+    $subdivisionpermanent = formatData($row['SubdivisionPermanent']);
+    $citypermanent = formatData($row['CityPermanent']);
+    $provincepermanent = formatData($row['ProvincePermanent']);
+    $zipcodepermanent = formatData($row['ZipcodePermanent']);
+    $telephone = formatData($row['Telephone']);
+    $mobile = formatData($row['Mobile']);
+    $email = formatData($row['Email']);
+    $spouseSurname = formatData($row['SpouseSurname']);
+    $spouseFirstname = formatData($row['SpouseFirstname']);
+    $spouseMiddlename = formatData($row['SpouseMiddlename']);
+    $spouseExtensionname = formatData($row['SpouseExtensionname']);
+    $spouseOccupation = formatData($row['SpouseOccupation']);
+    $spouseEmployer = formatData($row['SpouseEmployer']);
+    $spouseBusinessAddress = formatData($row['SpouseBusinessAddress']);
+    $spouseTelephone = formatData($row['SpouseTelephone']);
+
+
 
 // File path to the PDF file you want to modify
 $filePath = __DIR__ . '/../assets/pds/pds.pdf'; // Absolute path to the input PDF
@@ -42,6 +88,17 @@ $filePath = __DIR__ . '/../assets/pds/pds.pdf'; // Absolute path to the input PD
 $outputFileName = $firstName . ' ' . $lastName . ' PDS.pdf';
 $outputPath = __DIR__ . "/../assets/pds/{$outputFileName}";
 
+if ($civilStatus === "SINGLE") {
+    $civilCoordinates = ['x' => 48, 'y' => 83.5];
+} elseif ($civilStatus === "MARRIED") {
+    $civilCoordinates = ['x' => 66.5, 'y' => 83.5];
+} elseif ($civilStatus === "WIDOWED") {
+    $civilCoordinates = ['x' => 48, 'y' => 87.5];
+} elseif ($civilStatus === "SEPARATED") {
+    $civilCoordinates = ['x' => 66.5, 'y' => 87.5];
+} else {
+    $civilCoordinates = ['x' => 48, 'y' => 92];
+}
 // Content for each section of every page
 $pageContent = [
     [
@@ -51,6 +108,9 @@ $pageContent = [
             $middleName => ['x' => 48, 'y' => 56.5],
             $extensionName => ['x' => 195, 'y' => 49.5],
             $birthdate => ['x' => 48, 'y' => 65],
+            $placeOfBirth => ['x' => 48, 'y' => 74],
+            '•' => ['x' => $sex === 'MALE' ? 48 : 66.5, 'y' => 77],
+            '• ' => $civilCoordinates,
         ],
     ],
     [
@@ -91,6 +151,13 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
     foreach ($pageContent[$pageNo - 1] as $sectionName => $sectionContent) {
         foreach ($sectionContent as $text => $coordinates) {
             $pdf->SetXY($coordinates['x'], $coordinates['y']);
+
+            if (strpos($text, '•') !== false) {
+                $pdf->SetFont('helvetica', '', 30); // Set the font size to 30 for the dot character
+            } else {
+                $pdf->SetFont('helvetica', '', 10); // Set the font size to 10 for other text
+            }
+
             $pdf->Write(0, $text);
         }
     }

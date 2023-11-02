@@ -224,7 +224,7 @@ require('../config/countries.php');
                                         <div class="col-sm-3">
                                             <label for="placeOfBirth">Place of Birth:</label>
                                             <input type="text" class="form-control" id="placeOfBirth"
-                                                name="placeOfBirth">
+                                                name="placeOfBirth" placeholder="15 characters" maxlength="15" pattern="[\w\s!@#$%^&*()-]+" title="Please enter up to 15 characters including special characters">
                                         </div>
                                         <div class="col-sm-3">
                                             <label for="sex">Sex:</label>
