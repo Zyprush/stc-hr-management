@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $createTableQuery = "CREATE TABLE employees (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             FirstName TEXT NOT NULL,
-            MiddleName TEXT NOT NULL,
+            MiddleName TEXT,
             LastName TEXT NOT NULL,
             Extension TEXT,
             StartDate DATE,

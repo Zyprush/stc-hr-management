@@ -1,8 +1,8 @@
 {
-    "name": "vender/a",
+    "name": "vendor/a",
     "autoload": {
         "psr-4": {
-            "Vender\\A\\": "src/"
+            "Vendor\\A\\": "src/"
         }
     },
     "authors": [
@@ -12,6 +12,7 @@
         }
     ],
     "require": {
-        "phpoffice/phpspreadsheet": "^1.29"
+        "mpdf/mpdf": "^8.2",
+        "tecnickcom/tcpdf": "^6.6"
     }
 }
