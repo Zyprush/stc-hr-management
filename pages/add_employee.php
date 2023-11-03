@@ -249,19 +249,23 @@ require('../config/countries.php');
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label for="height">Height:</label>
                                             <input type="text" class="form-control" id="height" name="height"
                                                 placeholder="(m)">
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label for="weight">weight:</label>
                                             <input type="text" class="form-control" id="weight" name="weight"
                                                 placeholder="(kg)">
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label for="bloodtype">Blood Type:</label>
                                             <input type="text" class="form-control" id="bloodtype" name="bloodtype">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="philhealth">Philhealth ID No:</label>
+                                            <input type="text" class="form-control" id="philhealth" name="philhealth">
                                         </div>
                                     </div>
                                 </div>

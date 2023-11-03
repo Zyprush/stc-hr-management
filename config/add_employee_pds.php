@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $height = $_POST['height'];
     $weight = $_POST['weight'];
     $bloodtype = $_POST['bloodtype'];
+    $philhealth = $_POST['philhealth'];
     $gsis = $_POST['gsis'];
     $pagibig = $_POST['pagibig'];
     $sss = $_POST['sss'];
@@ -183,6 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             Height FLOAT,
             Weight FLOAT,
             BloodType TEXT,
+            PhilHealth TEXT,
             GSIS TEXT,
             PagIbig TEXT,
             SSS TEXT,
@@ -529,7 +531,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Now, perform the database insertion for the employee
     $insertEmployeeQuery = "INSERT INTO employees (
         FirstName, MiddleName, LastName, Extension, StartDate, Type, Department, Position, EndDate,
-        Birthdate, PlaceOfBirth, Sex, CivilStatus, Height, Weight, BloodType, GSIS, PagIbig, SSS, TIN,
+        Birthdate, PlaceOfBirth, Sex, CivilStatus, Height, Weight, BloodType, PhilHealth, GSIS, PagIbig, SSS, TIN,
         Agency, Citizenship, DualCitizenship, LotNo, Street, Barangay, Subdivision, City, Province, Zipcode,
         LotNoPermanent, StreetPermanent, BarangayPermanent, SubdivisionPermanent, CityPermanent, ProvincePermanent,
         ZipcodePermanent, Telephone, Mobile, Email, SpouseSurname, SpouseFirstname, SpouseMiddlename,
@@ -548,7 +550,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ref_name_1, ref_name_2, ref_name_3, ref_address_1, ref_address_2, ref_address_3, ref_number_1, ref_number_2, ref_number_3
     ) VALUES (
         '$firstName', '$middleName', '$lastName', '$extension', '$startDate', '$type', '$department', '$position', '$endDate',
-        '$birthdate', '$placeOfBirth', '$sex', '$civilStatus', $height, $weight, '$bloodtype', '$gsis', '$pagibig', '$sss', '$tin',
+        '$birthdate', '$placeOfBirth', '$sex', '$civilStatus', $height, $weight, '$bloodtype', '$philhealth', '$gsis', '$pagibig', '$sss', '$tin',
         '$agency', '$citizenship', '$dualCitizenship', '$lotNo', '$street', '$barangay', '$subdivision', '$city', '$province', '$zipcode',
         '$lotNo_permanent', '$street_permanent', '$barangay_permanent', '$subdivision_permanent', '$city_permanent', '$province_permanent', '$zipcode_permanent',
         '$telephone', '$mobile', '$email', '$spouse_surname', '$spouse_firstname', '$spouse_middlename', '$spouse_extensionname',

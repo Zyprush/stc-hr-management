@@ -18,19 +18,27 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 
+    // Initialize the 'N/A' counter variable
+    $naCounter = 0;
+
+    // Function to format data
     function formatData($value, $type = '') {
+        global $naCounter; // Access the global counter variable
+
         if ($type === 'date') {
             // Convert date format from 'yyyy-mm-dd' to 'mm-dd-yyyy'
             $formattedValue = DateTime::createFromFormat('Y-m-d', $value)->format('m-d-Y');
         } else {
             // Convert to uppercase
             $formattedValue = strtoupper($value);
-            // Replace empty values with 'N/A'
-            $formattedValue = !empty($formattedValue) ? $formattedValue : 'N/A';
+
+            // Replace empty values with distinct 'N/A' values for array keys
+            $formattedValue = !empty($formattedValue) ? $formattedValue : 'N/A' . str_repeat(' ', $naCounter++);        
         }
-    
+
         return $formattedValue;
     }
+
     
     // Fetching data from the database
     $lastName = formatData($row['LastName']);
@@ -39,13 +47,14 @@ if ($result->num_rows > 0) {
     $extensionName = formatData($row['Extension']);
     $birthdate = formatData($row['Birthdate'], 'date');
 
-    // $ = formatData($row['']); x113
+    //personal
     $placeOfBirth = formatData($row['PlaceOfBirth']);
     $sex = formatData($row['Sex']);
     $civilStatus = formatData($row['CivilStatus']);
     $height = formatData($row['Height']);
     $weight = formatData($row['Weight']);
     $bloodtype = formatData($row['BloodType']);
+    $philhealth = formatData($row['PhilHealth']);
     $gsis = formatData($row['GSIS']);
     $pagibig = formatData($row['PagIbig']);
     $sss = formatData($row['SSS']);
@@ -60,16 +69,18 @@ if ($result->num_rows > 0) {
     $city = formatData($row['City']);
     $province = formatData($row['Province']);
     $zipcode = formatData($row['Zipcode']);
-    $lotNopermanent = formatData($row['LotNoPermanent']);
-    $streetpermanent = formatData($row['StreetPermanent']);
-    $barangaypermanent = formatData($row['BarangayPermanent']);
-    $subdivisionpermanent = formatData($row['SubdivisionPermanent']);
-    $citypermanent = formatData($row['CityPermanent']);
-    $provincepermanent = formatData($row['ProvincePermanent']);
-    $zipcodepermanent = formatData($row['ZipcodePermanent']);
+    $lotNopermanent = formatData($row['LotNoPermanent']) . ' ';
+    $streetpermanent = formatData($row['StreetPermanent']) . ' ';
+    $barangaypermanent = formatData($row['BarangayPermanent']) . ' ';
+    $subdivisionpermanent = formatData($row['SubdivisionPermanent']) . ' ';
+    $citypermanent = formatData($row['CityPermanent']) . ' ';
+    $provincepermanent = formatData($row['ProvincePermanent']) . ' ';
+    $zipcodepermanent = formatData($row['ZipcodePermanent']) . ' ';
     $telephone = formatData($row['Telephone']);
     $mobile = formatData($row['Mobile']);
     $email = formatData($row['Email']);
+
+    //family
     $spouseSurname = formatData($row['SpouseSurname']);
     $spouseFirstname = formatData($row['SpouseFirstname']);
     $spouseMiddlename = formatData($row['SpouseMiddlename']);
@@ -78,6 +89,55 @@ if ($result->num_rows > 0) {
     $spouseEmployer = formatData($row['SpouseEmployer']);
     $spouseBusinessAddress = formatData($row['SpouseBusinessAddress']);
     $spouseTelephone = formatData($row['SpouseTelephone']);
+
+    $fatherSurname = formatData($row['FatherSurname']);
+    $fatherFirstname = formatData($row['FatherFirstname']);
+    $fatherMiddlename = formatData($row['FatherMiddlename']);
+    $fatherExtension = formatData($row['FatherExtension']);
+    $motherSurname = formatData($row['MotherSurname']);
+    $motherFirstname = formatData($row['MotherFirstname']);
+    $motherMiddlename = formatData($row['MotherMiddlename']);
+
+    $elemNameOfSchool = formatData($row['ElemNameOfSchool']);
+    $elemDegree = formatData($row['ElemDegree']);
+    $elemFrom = formatData($row['ElemFrom']);
+    $elemTo = formatData($row['ElemTo']);
+    $elemHigh = formatData($row['ElemHigh']);
+    $elemGrad = formatData($row['ElemGrad']);
+    $elemHonor = formatData($row['ElemHonor']);
+
+    $secNameOfSchool = formatData($row['SecNameOfSchool']);
+    $secDegree = formatData($row['SecDegree']);
+    $secFrom = formatData($row['SecFrom']);
+    $secTo = formatData($row['SecTo']);
+    $secHigh = formatData($row['SecHigh']);
+    $secGrad = formatData($row['SecGrad']);
+    $secHonor = formatData($row['SecHonor']);
+
+    $vocNameOfSchool = formatData($row['VocNameOfSchool']);
+    $vocDegree = formatData($row['VocDegree']);
+    $vocFrom = formatData($row['VocFrom']);
+    $vocTo = formatData($row['VocTo']);
+    $vocHigh = formatData($row['VocHigh']);
+    $vocGrad = formatData($row['VocGrad']);
+    $vocHonor = formatData($row['VocHonor']);
+
+    $collegeNameOfSchool = formatData($row['CollegeNameOfSchool']);
+    $collegeDegree = formatData($row['CollegeDegree']);
+    $collegeFrom = formatData($row['CollegeFrom']);
+    $collegeTo = formatData($row['CollegeTo']);
+    $collegeHigh = formatData($row['CollegeHigh']);
+    $collegeGrad = formatData($row['CollegeGrad']);
+    $collegeHonor = formatData($row['CollegeHonor']);
+
+    $gradNameOfSchool = formatData($row['GradNameOfSchool']);
+    $gradDegree = formatData($row['GradDegree']);
+    $gradFrom = formatData($row['GradFrom']);
+    $gradTo = formatData($row['GradTo']);
+    $gradHigh = formatData($row['GradHigh']);
+    $gradGrad = formatData($row['GradGrad']);
+    $gradHonor = formatData($row['GradHonor']);
+
 
 
 
@@ -88,6 +148,7 @@ $filePath = __DIR__ . '/../assets/pds/pds.pdf'; // Absolute path to the input PD
 $outputFileName = $firstName . ' ' . $lastName . ' PDS.pdf';
 $outputPath = __DIR__ . "/../assets/pds/{$outputFileName}";
 
+//condition for civil status
 if ($civilStatus === "SINGLE") {
     $civilCoordinates = ['x' => 48, 'y' => 83.5];
 } elseif ($civilStatus === "MARRIED") {
@@ -98,6 +159,21 @@ if ($civilStatus === "SINGLE") {
     $civilCoordinates = ['x' => 66.5, 'y' => 87.5];
 } else {
     $civilCoordinates = ['x' => 48, 'y' => 92];
+}
+
+$citizenshipCoordinates1 = ['x' => -5, 'y' => -5]; // Default empty values
+$citizenshipCoordinates2 = ['x' => -5, 'y' => -5]; // Default empty values
+//condition for citizenship
+if ($citizenship === "FILIPINO") {
+    $citizenshipCoordinates = ['x' => 134.5, 'y' => 60]; //filipino
+} elseif ($citizenship === "DUAL CITIZENSHIP - BY BIRTH") {
+    $citizenshipCoordinates = ['x' => 134.5, 'y' => 60]; //filipino
+    $citizenshipCoordinates1 = ['x' => 160.5, 'y' => 60]; //DUAL
+    $citizenshipCoordinates2 = ['x' => 165, 'y' => 64.5]; //BY BIRTH
+} elseif ($citizenship ===  "DUAL CITIZENSHIP - BY NATURALIZATION") {
+    $citizenshipCoordinates = ['x' => 134.5, 'y' => 60]; //filipino
+    $citizenshipCoordinates1 = ['x' => 160.5, 'y' => 60]; //DUAL
+    $citizenshipCoordinates2 = ['x' => 179, 'y' => 64.5]; //by naturalization
 }
 // Content for each section of every page
 $pageContent = [
@@ -111,6 +187,52 @@ $pageContent = [
             $placeOfBirth => ['x' => 48, 'y' => 74],
             '•' => ['x' => $sex === 'MALE' ? 48 : 66.5, 'y' => 77],
             '• ' => $civilCoordinates,
+            '•  ' => $citizenshipCoordinates,
+            '•   ' => $citizenshipCoordinates1,
+            '•    ' => $citizenshipCoordinates2,
+            $dualCitizenship => ['x' => 134.5, 'y' => 81.5], //second citizenship
+            $height => ['x' => 48, 'y' => 104],
+            $weight => ['x' => 48, 'y' => 110],
+            $bloodtype => ['x' => 48, 'y' => 116.5],
+            $gsis => ['x' => 48, 'y' => 124.5],
+            $pagibig => ['x' => 48, 'y' => 132],
+            $philhealth => ['x' => 48, 'y' => 138.5],
+            $sss => ['x' => 48, 'y' => 144.5],
+            $tin => ['x' => 48, 'y' => 150.5],
+            $agency => ['x' => 48, 'y' => 156.5],
+            $lotNo => ['x' => 133, 'y' => 87.5],
+            $street => ['x' => 175, 'y' => 87.5],
+            $subdivision => ['x' => 133, 'y' => 95],
+            $barangay => ['x' => 175, 'y' => 95],
+            $city => ['x' => 130, 'y' => 102.5],
+            $province => ['x' => 163, 'y' => 102.5],
+            $zipcode => ['x' => 120, 'y' => 110],
+            $lotNopermanent => ['x' => 133, 'y' => 114.5],
+            $streetpermanent => ['x' => 175, 'y' => 114.5],
+            $subdivisionpermanent => ['x' => 133, 'y' => 122.5],
+            $barangaypermanent => ['x' => 175, 'y' => 122.5],
+            $citypermanent => ['x' => 133, 'y' => 130.5], 
+            $provincepermanent => ['x' => 163, 'y' => 130.5],
+            $zipcodepermanent => ['x' => 120, 'y' => 138.5],
+            $telephone => ['x' => 120, 'y' => 144.5],
+            $mobile => ['x' => 120, 'y' => 150.5],
+            $email => ['x' => 120, 'y' => 156.5],
+
+            $spouseSurname => ['x' => 48, 'y' => 168],
+            $spouseFirstname => ['x' => 48, 'y' => 174],
+            $spouseExtensionname => ['x' => 110, 'y' => 174],
+            $spouseMiddlename => ['x' => 48, 'y' => 180.5],
+            $spouseOccupation => ['x' => 48, 'y' => 187],
+            $spouseEmployer => ['x' => 48, 'y' => 193],
+            $spouseBusinessAddress => ['x' => 48, 'y' => 199.5],
+            $spouseTelephone => ['x' => 48, 'y' => 206],
+
+            'CHILD1' => ['x' => 120, 'y' => 174], // Y is +6.5 PER CHILD
+            'MM/DD/YYYY' => ['x' => 181, 'y' => 174], // Y is +6.5 PER CHILD
+            'CHILD2' => ['x' => 120, 'y' => 180.5], // Y is +6.5 PER CHILD
+            'MM/DD/YYY0' => ['x' => 181, 'y' => 180.5], // Y is +6.5 PER CHILD
+            'CHILD3' => ['x' => 120, 'y' => 187], // Y is +6.5 PER CHILD
+            'MM/DD/YY00' => ['x' => 181, 'y' => 187], // Y is +6.5 PER CHILD
         ],
     ],
     [
