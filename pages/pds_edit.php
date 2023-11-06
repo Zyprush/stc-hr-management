@@ -267,8 +267,8 @@ if ($work_experienceResult->num_rows > 0) {
         ${'experienceSalary' . $counter} = formatData($experienceRow['MonthlySalary']);
         ${'experienceST' . $counter} = formatData($experienceRow['SalaryType']);
         ${'experienceAS' . $counter} = formatData($experienceRow['AppointmentStatus']);
-        ${'experienceWFD' . $counter} = formatData($experienceRow['WorkFromDate']);
-        ${'experienceWTD' . $counter} = formatData($experienceRow['WorkToDate']);
+        ${'experienceWFD' . $counter} = formatData($experienceRow['WorkFromDate'], 'date');
+        ${'experienceWTD' . $counter} = formatData($experienceRow['WorkToDate'], 'date');
         ${'experienceGov' . $counter} = formatData($experienceRow['GovtService']);
         $counter++;
     }
@@ -556,7 +556,10 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
                 || $text === $eligiblePOE1
                     || $text === $eligibleNumber1
                         || $text === $eligibleDOV1
-            || $text === $experienceWFD1 || $text === $experienceWTD1 || $text === $experienceWFD2 || $text === $experienceWTD2
+            || $text === $experienceWFD1 
+                || $text === $experienceWTD1 
+                    || $text === $experienceWFD2 
+                        || $text === $experienceWTD2
             ) {
                 $pdf->SetFont('helvetica', '', 6); // Set the font size to 7 for the specified variables
                 //$pdf->Write(0, chunk_split($text, 32, "\n"));
