@@ -244,6 +244,43 @@ if ($eligibilityResult->num_rows > 0) {
     echo "No eligibility found for the given EmployeeID.";
 }
 
+// Query to fetch work_experience of the employee
+$work_experienceQuery = "SELECT * FROM work_experience WHERE `EmployeeID` = ?";
+$work_experienceStmt = $conn->prepare($work_experienceQuery);
+
+if (!$work_experienceStmt) {
+    die("Error in work_experience SQL query: " . $conn->error);
+}
+
+$work_experienceStmt->bind_param("i", $id);
+$work_experienceStmt->execute();
+$work_experienceResult = $work_experienceStmt->get_result();
+
+if ($work_experienceResult->num_rows > 0) {
+    $work_experienceData = $work_experienceResult->fetch_all(MYSQLI_ASSOC);
+
+    $counter = 1;
+
+    foreach ($work_experienceData as $experienceRow) {
+        ${'experience' . $counter} = formatData($experienceRow['PositionTitle']);
+        ${'experienceDepartment' . $counter} = formatData($experienceRow['Department']);
+        ${'experienceSalary' . $counter} = formatData($experienceRow['MonthlySalary']);
+        ${'experienceST' . $counter} = formatData($experienceRow['SalaryType']);
+        ${'experienceAS' . $counter} = formatData($experienceRow['AppointmentStatus']);
+        ${'experienceWFD' . $counter} = formatData($experienceRow['WorkFromDate']);
+        ${'experienceWTD' . $counter} = formatData($experienceRow['WorkToDate']);
+        ${'experienceGov' . $counter} = formatData($experienceRow['GovtService']);
+        $counter++;
+    }
+
+    for ($i = 1; $i < $counter; $i++) {
+        echo "$experience1 $experienceDepartment1 $experienceSalary1 $experienceST1 $experienceAS1 $experienceWFD1
+                $experienceWTD1 $experienceGov1 ";
+    }
+} else {
+    echo "No work_experience found for the given EmployeeID.";
+}
+
 
 
 // Content for each section of every page
@@ -377,25 +414,72 @@ $pageContent = [
     [
         'Second page' => [
             $eligible1 => ['x' => 7, 'y' => 31], //x is the same but y is +7
-            $eligibleRating1 => ['x' => 81, 'y' => 31],
-            $eligibleDOE1 => ['x' => 99, 'y' => 31],
-            $eligiblePOE1 => ['x' => 121, 'y' => 31],
-            $eligibleNumber1 => ['x' => 180.5, 'y' => 31],
-            $eligibleDOV => ['x' => 196, 'y' => 31],
+            $eligibleRating1 => ['x' => 71, 'y' => 31],
+            $eligibleDOE1 => ['x' => 89, 'y' => 31],
+            $eligiblePOE1 => ['x' => 109, 'y' => 31],
+            $eligibleNumber1 => ['x' => 169, 'y' => 31],
+            $eligibleDOV1 => ['x' => 194, 'y' => 31],
 
-            'Eligibility2' => ['x' => 7, 'y' => 38],
-            'Rating2' => ['x' => 81, 'y' => 38],
-            'Date2' => ['x' => 99, 'y' => 38],
-            'POE2' => ['x' => 121, 'y' => 38],
-            'Number2' => ['x' => 180.5, 'y' => 38],
-            'Valid ' => ['x' => 196, 'y' => 38],
+            $eligible2 => ['x' => 7, 'y' => 38], //x is the same but y is +7
+            $eligibleRating2 => ['x' => 71, 'y' => 38],
+            $eligibleDOE2 => ['x' => 89, 'y' => 38],
+            $eligiblePOE2 => ['x' => 109, 'y' => 38],
+            $eligibleNumber2 => ['x' => 169, 'y' => 38],
+            $eligibleDOV2 => ['x' => 194, 'y' => 38],
 
-            'Eligibility3' => ['x' => 7, 'y' => 45],
-            'Rating3' => ['x' => 81, 'y' => 45],
-            'Date3' => ['x' => 99, 'y' => 45],
-            'POE3' => ['x' => 121, 'y' => 45],
-            'Number3' => ['x' => 180.5, 'y' => 45],
-            'Valid  ' => ['x' => 196, 'y' => 45],
+            $eligible3 => ['x' => 7, 'y' => 45], //x is the same but y is +7
+            $eligibleRating3 => ['x' => 71, 'y' => 45],
+            $eligibleDOE3 => ['x' => 89, 'y' => 45],
+            $eligiblePOE3 => ['x' => 109, 'y' => 45],
+            $eligibleNumber3 => ['x' => 169, 'y' => 45],
+            $eligibleDOV3 => ['x' => 194, 'y' => 45],
+
+            $eligible4 => ['x' => 7, 'y' => 52], //x is the same but y is +7
+            $eligibleRating4 => ['x' => 71, 'y' => 52],
+            $eligibleDOE4 => ['x' => 89, 'y' => 52],
+            $eligiblePOE4 => ['x' => 109, 'y' => 52],
+            $eligibleNumber4 => ['x' => 169, 'y' => 52],
+            $eligibleDOV4 => ['x' => 194, 'y' => 52],
+
+            $eligible5 => ['x' => 7, 'y' => 59], //x is the same but y is +7
+            $eligibleRating5 => ['x' => 71, 'y' => 59],
+            $eligibleDOE5 => ['x' => 89, 'y' => 59],
+            $eligiblePOE5 => ['x' => 109, 'y' => 59],
+            $eligibleNumber5 => ['x' => 169, 'y' => 59],
+            $eligibleDOV5 => ['x' => 194, 'y' => 59],
+
+            $eligible6 => ['x' => 7, 'y' => 66], //x is the same but y is +7
+            $eligibleRating6 => ['x' => 71, 'y' => 66],
+            $eligibleDOE6 => ['x' => 89, 'y' => 66],
+            $eligiblePOE6 => ['x' => 109, 'y' => 66],
+            $eligibleNumber6 => ['x' => 169, 'y' => 66],
+            $eligibleDOV6 => ['x' => 194, 'y' => 66],
+
+            $eligible7 => ['x' => 7, 'y' => 73], //x is the same but y is +7
+            $eligibleRating7 => ['x' => 71, 'y' => 73],
+            $eligibleDOE7 => ['x' => 89, 'y' => 73],
+            $eligiblePOE7 => ['x' => 109, 'y' => 73],
+            $eligibleNumber7 => ['x' => 169, 'y' => 73],
+            $eligibleDOV7 => ['x' => 194, 'y' => 73],
+
+
+            $experience1 => ['x' => 38, 'y' => 110.5],
+            $experienceDepartment1 => ['x' => 89, 'y' => 110.5],
+            $experienceSalary1 => ['x' => 137, 'y' => 110.5],
+            $experienceST1 => ['x' => 152, 'y' => 110.5],
+            $experienceAS1 => ['x' => 167.5, 'y' => 110.5],
+            $experienceWFD1 => ['x' => 6.5, 'y' => 111.5],
+            $experienceWTD1 => ['x' => 23.5, 'y' => 111.5],
+            $experienceGov1 => ['x' => 200.5, 'y' => 110.5],
+
+            $experience2 . ' '  => ['x' => 38, 'y' => 118],
+            $experienceDepartment2 . ' ' => ['x' => 89, 'y' => 118],
+            $experienceSalary2 . ' ' => ['x' => 137, 'y' => 118],
+            $experienceST2 . ' ' => ['x' => 152, 'y' => 118],
+            $experienceAS2 . ' ' => ['x' => 167.5, 'y' => 118],
+            $experienceWFD2 . ' ' => ['x' => 6.5, 'y' => 119],
+            $experienceWTD2 . ' ' => ['x' => 23.5, 'y' => 119],
+            $experienceGov2 . ' ' => ['x' => 200.5, 'y' => 118],
         ],
     ],
     [
@@ -468,6 +552,11 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
                             || $text === $gradHigh
                                 || $text === $gradGrad
                                     || $text === $gradHonor
+            || $text === $eligibleRating1
+                || $text === $eligiblePOE1
+                    || $text === $eligibleNumber1
+                        || $text === $eligibleDOV1
+            || $text === $experienceWFD1 || $text === $experienceWTD1 || $text === $experienceWFD2 || $text === $experienceWTD2
             ) {
                 $pdf->SetFont('helvetica', '', 6); // Set the font size to 7 for the specified variables
                 //$pdf->Write(0, chunk_split($text, 32, "\n"));

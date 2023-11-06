@@ -378,7 +378,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             EmployeeID INT,
             PositionTitle VARCHAR(255) NOT NULL,
             Department VARCHAR(255),
-            MonthlySalary DECIMAL(10, 2),
+            MonthlySalary INT,
             SalaryType VARCHAR(50),
             AppointmentStatus VARCHAR(100),
             WorkFromDate DATE,

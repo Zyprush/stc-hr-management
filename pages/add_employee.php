@@ -742,7 +742,7 @@ require('../config/countries.php');
                                                 id="rating">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" placeholder="Date of Examination"
+                                            <input type="text" class="form-control" placeholder="Year of Examination"
                                                 name="exam_date[]" id="exam_date">
                                         </div>
                                     </div>
@@ -756,7 +756,7 @@ require('../config/countries.php');
                                                 name="license_number[]" id="license_number">
                                         </div>
                                         <div class="col-sm-4 mb-1">
-                                            <input type="text" class="form-control" placeholder="Date of Validity"
+                                            <input type="text" class="form-control" placeholder="Year of Validity"
                                                 name="validity_date[]" id="validity_date">
                                         </div>
                                     </div>
