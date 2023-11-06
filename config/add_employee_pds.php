@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $father_firstname = $_POST['father_firstname'];
     $father_middlename = $_POST['father_middlename'];
     $father_extension = $_POST['father_extension'];
+    $mother_maiden = $_POST['mother_maiden'];
     $mother_surname = $_POST['mother_surname'];
     $mother_firstname = $_POST['mother_firstname'];
     $mother_middlename = $_POST['mother_middlename'];
@@ -221,6 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             FatherFirstname TEXT,
             FatherMiddlename TEXT,
             FatherExtension TEXT,
+            MotherMaiden TEXT,
             MotherSurname TEXT,
             MotherFirstname TEXT,
             MotherMiddlename TEXT,
@@ -536,7 +538,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         LotNoPermanent, StreetPermanent, BarangayPermanent, SubdivisionPermanent, CityPermanent, ProvincePermanent,
         ZipcodePermanent, Telephone, Mobile, Email, SpouseSurname, SpouseFirstname, SpouseMiddlename,
         SpouseExtensionname, SpouseOccupation, SpouseEmployer, SpouseBusinessAddress, SpouseTelephone, FatherSurname, FatherFirstname, FatherMiddlename, FatherExtension,
-        MotherSurname, MotherFirstname, MotherMiddlename,
+        MotherMaiden, MotherSurname, MotherFirstname, MotherMiddlename,
         ElemNameOfSchool, ElemDegree, ElemFrom, ElemTo, ElemHigh, ElemGrad, ElemHonor,
         SecNameOfSchool, SecDegree, SecFrom, SecTo, SecHigh, SecGrad, SecHonor,
         VocNameOfSchool, VocDegree, VocFrom, VocTo, VocHigh, VocGrad, VocHonor,
@@ -555,7 +557,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         '$lotNo_permanent', '$street_permanent', '$barangay_permanent', '$subdivision_permanent', '$city_permanent', '$province_permanent', '$zipcode_permanent',
         '$telephone', '$mobile', '$email', '$spouse_surname', '$spouse_firstname', '$spouse_middlename', '$spouse_extensionname',
         '$spouse_occupation', '$spouse_employer', '$spouse_business_address', '$spouse_telephone', '$father_surname', '$father_firstname', '$father_middlename', '$father_extension',
-        '$mother_surname', '$mother_firstname', '$mother_middlename',
+        '$mother_maiden', '$mother_surname', '$mother_firstname', '$mother_middlename',
         '$elem_nameOfSchool', '$elem_degree', '$elem_from', '$elem_to', '$elem_high', '$elem_grad', '$elem_honor',
         '$sec_nameOfSchool', '$sec_degree', '$sec_from', '$sec_to', '$sec_high', '$sec_grad', '$sec_honor',
         '$voc_nameOfSchool', '$voc_degree', '$voc_from', '$voc_to', '$voc_high', '$voc_grad', '$voc_honor',

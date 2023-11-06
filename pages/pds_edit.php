@@ -40,6 +40,9 @@ if ($result->num_rows > 0) {
     }
 
     
+
+
+    
     // Fetching data from the database
     $lastName = formatData($row['LastName']);
     $firstName = formatData($row['FirstName']);
@@ -81,62 +84,63 @@ if ($result->num_rows > 0) {
     $email = formatData($row['Email']);
 
     //family
-    $spouseSurname = formatData($row['SpouseSurname']);
-    $spouseFirstname = formatData($row['SpouseFirstname']);
-    $spouseMiddlename = formatData($row['SpouseMiddlename']);
-    $spouseExtensionname = formatData($row['SpouseExtensionname']);
-    $spouseOccupation = formatData($row['SpouseOccupation']);
-    $spouseEmployer = formatData($row['SpouseEmployer']);
-    $spouseBusinessAddress = formatData($row['SpouseBusinessAddress']);
-    $spouseTelephone = formatData($row['SpouseTelephone']);
+    $spouseSurname = formatData($row['SpouseSurname']). ' ';
+    $spouseFirstname = formatData($row['SpouseFirstname']). ' ';
+    $spouseMiddlename = formatData($row['SpouseMiddlename']). ' ';
+    $spouseExtensionname = formatData($row['SpouseExtensionname']). ' ';
+    $spouseOccupation = formatData($row['SpouseOccupation']). ' ';
+    $spouseEmployer = formatData($row['SpouseEmployer']). ' ';
+    $spouseBusinessAddress = formatData($row['SpouseBusinessAddress']). ' ';
+    $spouseTelephone = formatData($row['SpouseTelephone']). ' ';
 
-    $fatherSurname = formatData($row['FatherSurname']);
-    $fatherFirstname = formatData($row['FatherFirstname']);
-    $fatherMiddlename = formatData($row['FatherMiddlename']);
-    $fatherExtension = formatData($row['FatherExtension']);
-    $motherSurname = formatData($row['MotherSurname']);
-    $motherFirstname = formatData($row['MotherFirstname']);
-    $motherMiddlename = formatData($row['MotherMiddlename']);
+    $fatherSurname = formatData($row['FatherSurname']). ' ';
+    $fatherFirstname = formatData($row['FatherFirstname']). ' ';
+    $fatherMiddlename = formatData($row['FatherMiddlename']). ' ';
+    $fatherExtension = formatData($row['FatherExtension']). ' ';
+    $motherMaiden = formatData($row['MotherMaiden']). '    ';
+    $motherSurname = formatData($row['MotherSurname']). '  ';
+    $motherFirstname = formatData($row['MotherFirstname']). ' ';
+    $motherMiddlename = formatData($row['MotherMiddlename']). ' ';
 
-    $elemNameOfSchool = formatData($row['ElemNameOfSchool']);
-    $elemDegree = formatData($row['ElemDegree']);
-    $elemFrom = formatData($row['ElemFrom']);
-    $elemTo = formatData($row['ElemTo']);
-    $elemHigh = formatData($row['ElemHigh']);
-    $elemGrad = formatData($row['ElemGrad']);
-    $elemHonor = formatData($row['ElemHonor']);
+    $elemNameOfSchool = formatData($row['ElemNameOfSchool']). ' ';
+    $elemDegree = formatData($row['ElemDegree']). ' ';
+    $elemFrom = formatData($row['ElemFrom']). '  ';
+    $elemTo = formatData($row['ElemTo']). '             ';
+    $elemHigh = formatData($row['ElemHigh']). '';
+    $elemGrad = formatData($row['ElemGrad']). ' ';
+    $elemHonor = formatData($row['ElemHonor']). ' ';
 
-    $secNameOfSchool = formatData($row['SecNameOfSchool']);
-    $secDegree = formatData($row['SecDegree']);
-    $secFrom = formatData($row['SecFrom']);
-    $secTo = formatData($row['SecTo']);
-    $secHigh = formatData($row['SecHigh']);
-    $secGrad = formatData($row['SecGrad']);
-    $secHonor = formatData($row['SecHonor']);
+    $secNameOfSchool = formatData($row['SecNameOfSchool']). '  ';
+    $secDegree = formatData($row['SecDegree']). '  ';
+    $secFrom = formatData($row['SecFrom']). '   ';
+    $secTo = formatData($row['SecTo']). '    ';
+    $secHigh = formatData($row['SecHigh']). '  ';
+    $secGrad = formatData($row['SecGrad']). '  ';
+    $secHonor = formatData($row['SecHonor']). '  ';
 
-    $vocNameOfSchool = formatData($row['VocNameOfSchool']);
-    $vocDegree = formatData($row['VocDegree']);
-    $vocFrom = formatData($row['VocFrom']);
-    $vocTo = formatData($row['VocTo']);
-    $vocHigh = formatData($row['VocHigh']);
-    $vocGrad = formatData($row['VocGrad']);
-    $vocHonor = formatData($row['VocHonor']);
+    $vocNameOfSchool = formatData($row['VocNameOfSchool']). '   ';
+    $vocDegree = formatData($row['VocDegree']). '   ';
+    $vocFrom = formatData($row['VocFrom']). '     ';
+    $vocTo = formatData($row['VocTo']). '     ';
+    $vocHigh = formatData($row['VocHigh']). '   ';
+    $vocGrad = formatData($row['VocGrad']). '   ';
+    $vocHonor = formatData($row['VocHonor']). '   ';
 
-    $collegeNameOfSchool = formatData($row['CollegeNameOfSchool']);
-    $collegeDegree = formatData($row['CollegeDegree']);
-    $collegeFrom = formatData($row['CollegeFrom']);
-    $collegeTo = formatData($row['CollegeTo']);
-    $collegeHigh = formatData($row['CollegeHigh']);
-    $collegeGrad = formatData($row['CollegeGrad']);
-    $collegeHonor = formatData($row['CollegeHonor']);
+    $collegeNameOfSchool = formatData($row['CollegeNameOfSchool']). ' ';
+    $collegeDegree = formatData($row['CollegeDegree']). ' ';
+    $collegeFrom = formatData($row['CollegeFrom']). '     ';
+    $collegeTo = formatData($row['CollegeTo']). '       ';
+    $collegeHigh = formatData($row['CollegeHigh']). ' ';
+    $collegeGrad = formatData($row['CollegeGrad']). ' ';
+    $collegeHonor = formatData($row['CollegeHonor']). ' ';
 
-    $gradNameOfSchool = formatData($row['GradNameOfSchool']);
-    $gradDegree = formatData($row['GradDegree']);
-    $gradFrom = formatData($row['GradFrom']);
-    $gradTo = formatData($row['GradTo']);
-    $gradHigh = formatData($row['GradHigh']);
-    $gradGrad = formatData($row['GradGrad']);
-    $gradHonor = formatData($row['GradHonor']);
+    $gradNameOfSchool = formatData($row['GradNameOfSchool']). '      ';
+    $gradDegree = formatData($row['GradDegree']). '      ';
+    $gradFrom = formatData($row['GradFrom']). '      ';
+    $gradTo = formatData($row['GradTo']). '       ';
+    $gradHigh = formatData($row['GradHigh']). '      ';
+    $gradGrad = formatData($row['GradGrad']). '      ';
+    $gradHonor = formatData($row['GradHonor']). '      ';
 
 
 
@@ -150,94 +154,248 @@ $outputPath = __DIR__ . "/../assets/pds/{$outputFileName}";
 
 //condition for civil status
 if ($civilStatus === "SINGLE") {
-    $civilCoordinates = ['x' => 48, 'y' => 83.5];
+    $civilCoordinates = ['x' => 38.3, 'y' => 83.5];
 } elseif ($civilStatus === "MARRIED") {
-    $civilCoordinates = ['x' => 66.5, 'y' => 83.5];
+    $civilCoordinates = ['x' => 56.7, 'y' => 83.5];
 } elseif ($civilStatus === "WIDOWED") {
-    $civilCoordinates = ['x' => 48, 'y' => 87.5];
+    $civilCoordinates = ['x' => 38.3, 'y' => 87.5];
 } elseif ($civilStatus === "SEPARATED") {
-    $civilCoordinates = ['x' => 66.5, 'y' => 87.5];
+    $civilCoordinates = ['x' => 56.7, 'y' => 87.5];
 } else {
-    $civilCoordinates = ['x' => 48, 'y' => 92];
+    $civilCoordinates = ['x' => 38.3, 'y' => 92];
 }
 
 $citizenshipCoordinates1 = ['x' => -5, 'y' => -5]; // Default empty values
 $citizenshipCoordinates2 = ['x' => -5, 'y' => -5]; // Default empty values
 //condition for citizenship
 if ($citizenship === "FILIPINO") {
-    $citizenshipCoordinates = ['x' => 134.5, 'y' => 60]; //filipino
+    $citizenshipCoordinates = ['x' => 136.8, 'y' => 60]; //filipino
 } elseif ($citizenship === "DUAL CITIZENSHIP - BY BIRTH") {
-    $citizenshipCoordinates = ['x' => 134.5, 'y' => 60]; //filipino
-    $citizenshipCoordinates1 = ['x' => 160.5, 'y' => 60]; //DUAL
-    $citizenshipCoordinates2 = ['x' => 165, 'y' => 64.5]; //BY BIRTH
+    $citizenshipCoordinates = ['x' => 136.8, 'y' => 60]; //filipino
+    $citizenshipCoordinates1 = ['x' => 162.5, 'y' => 60]; //DUAL
+    $citizenshipCoordinates2 = ['x' => 167, 'y' => 64.5]; //BY BIRTH
 } elseif ($citizenship ===  "DUAL CITIZENSHIP - BY NATURALIZATION") {
-    $citizenshipCoordinates = ['x' => 134.5, 'y' => 60]; //filipino
-    $citizenshipCoordinates1 = ['x' => 160.5, 'y' => 60]; //DUAL
-    $citizenshipCoordinates2 = ['x' => 179, 'y' => 64.5]; //by naturalization
+    $citizenshipCoordinates = ['x' => 136.8, 'y' => 60]; //filipino
+    $citizenshipCoordinates1 = ['x' => 162.5, 'y' => 60]; //DUAL
+    $citizenshipCoordinates2 = ['x' => 181, 'y' => 64.5]; //by naturalization
 }
+
+// Query to fetch children of the employee
+$childrenQuery = "SELECT * FROM children WHERE `EmployeeID` = ?";
+$childrenStmt = $conn->prepare($childrenQuery);
+
+if (!$childrenStmt) {
+    die("Error in children SQL query: " . $conn->error);
+}
+
+$childrenStmt->bind_param("i", $id);
+$childrenStmt->execute();
+$childrenResult = $childrenStmt->get_result();
+
+if ($childrenResult->num_rows > 0) {
+    $childrenData = $childrenResult->fetch_all(MYSQLI_ASSOC);
+
+    $counter = 1;
+
+    foreach ($childrenData as $childRow) {
+        ${'child' . $counter} = formatData($childRow['ChildName']);
+        ${'childDOB' . $counter} = formatData($childRow['ChildDOB'], 'date');
+        $counter++;
+    }
+
+    for ($i = 1; $i < $counter; $i++) {
+        echo "$child1 $childDOB1";
+    }
+} else {
+    echo "No children found for the given EmployeeID.";
+}
+
+// Query to fetch eligibility of the employee
+$eligibilityQuery = "SELECT * FROM eligibility WHERE `EmployeeID` = ?";
+$eligibilityStmt = $conn->prepare($eligibilityQuery);
+
+if (!$eligibilityStmt) {
+    die("Error in eligibility SQL query: " . $conn->error);
+}
+
+$eligibilityStmt->bind_param("i", $id);
+$eligibilityStmt->execute();
+$eligibilityResult = $eligibilityStmt->get_result();
+
+if ($eligibilityResult->num_rows > 0) {
+    $eligibilityData = $eligibilityResult->fetch_all(MYSQLI_ASSOC);
+
+    $counter = 1;
+
+    foreach ($eligibilityData as $eligibleRow) {
+        ${'eligible' . $counter} = formatData($eligibleRow['EligibilityName']);
+        ${'eligibleRating' . $counter} = formatData($eligibleRow['Rating']);
+        ${'eligibleDOE' . $counter} = formatData($eligibleRow['DateOfExamination']);
+        ${'eligiblePOE' . $counter} = formatData($eligibleRow['PlaceOfExamination']);
+        ${'eligibleNumber' . $counter} = formatData($eligibleRow['LicenseNumber']);
+        ${'eligibleDOV' . $counter} = formatData($eligibleRow['DateOfValidity']);
+        $counter++;
+    }
+
+    for ($i = 1; $i < $counter; $i++) {
+        echo "$eligible1 $eligibleRating1 $eligibleDOE1 $eligiblePOE1 $eligibleNumber1 $eligibleDOV1";
+    }
+} else {
+    echo "No eligibility found for the given EmployeeID.";
+}
+
+
+
 // Content for each section of every page
 $pageContent = [
     [
         'First page' => [
-            $lastName => ['x' => 48, 'y' => 43],
-            $firstName => ['x' => 48, 'y' => 49.5],
-            $middleName => ['x' => 48, 'y' => 56.5],
+            $lastName => ['x' => 38, 'y' => 43],
+            $firstName => ['x' => 38, 'y' => 49.5],
+            $middleName => ['x' => 38, 'y' => 56.5],
             $extensionName => ['x' => 195, 'y' => 49.5],
-            $birthdate => ['x' => 48, 'y' => 65],
-            $placeOfBirth => ['x' => 48, 'y' => 74],
-            '•' => ['x' => $sex === 'MALE' ? 48 : 66.5, 'y' => 77],
+            $birthdate => ['x' => 38, 'y' => 65],
+            $placeOfBirth => ['x' => 38, 'y' => 74],
+            '•' => ['x' => $sex === 'MALE' ? 38.3 : 56.7, 'y' => 76.9],
             '• ' => $civilCoordinates,
             '•  ' => $citizenshipCoordinates,
             '•   ' => $citizenshipCoordinates1,
             '•    ' => $citizenshipCoordinates2,
             $dualCitizenship => ['x' => 134.5, 'y' => 81.5], //second citizenship
-            $height => ['x' => 48, 'y' => 104],
-            $weight => ['x' => 48, 'y' => 110],
-            $bloodtype => ['x' => 48, 'y' => 116.5],
-            $gsis => ['x' => 48, 'y' => 124.5],
-            $pagibig => ['x' => 48, 'y' => 132],
-            $philhealth => ['x' => 48, 'y' => 138.5],
-            $sss => ['x' => 48, 'y' => 144.5],
-            $tin => ['x' => 48, 'y' => 150.5],
-            $agency => ['x' => 48, 'y' => 156.5],
+            $height => ['x' => 38, 'y' => 104],
+            $weight => ['x' => 38, 'y' => 110],
+            $bloodtype => ['x' => 38, 'y' => 116.5],
+            $gsis => ['x' => 38, 'y' => 124.5],
+            $pagibig => ['x' => 38, 'y' => 132],
+            $philhealth => ['x' => 38, 'y' => 138.5],
+            $sss => ['x' => 38, 'y' => 144.5],
+            $tin => ['x' => 38, 'y' => 150.5],
+            $agency => ['x' => 38, 'y' => 156.5],
             $lotNo => ['x' => 133, 'y' => 87.5],
             $street => ['x' => 175, 'y' => 87.5],
             $subdivision => ['x' => 133, 'y' => 95],
             $barangay => ['x' => 175, 'y' => 95],
             $city => ['x' => 130, 'y' => 102.5],
             $province => ['x' => 163, 'y' => 102.5],
-            $zipcode => ['x' => 120, 'y' => 110],
+            $zipcode => ['x' => 124, 'y' => 110],
             $lotNopermanent => ['x' => 133, 'y' => 114.5],
             $streetpermanent => ['x' => 175, 'y' => 114.5],
             $subdivisionpermanent => ['x' => 133, 'y' => 122.5],
             $barangaypermanent => ['x' => 175, 'y' => 122.5],
             $citypermanent => ['x' => 133, 'y' => 130.5], 
             $provincepermanent => ['x' => 163, 'y' => 130.5],
-            $zipcodepermanent => ['x' => 120, 'y' => 138.5],
-            $telephone => ['x' => 120, 'y' => 144.5],
-            $mobile => ['x' => 120, 'y' => 150.5],
-            $email => ['x' => 120, 'y' => 156.5],
+            $zipcodepermanent => ['x' => 124, 'y' => 138.5],
+            $telephone => ['x' => 124, 'y' => 144.5],
+            $mobile => ['x' => 124, 'y' => 150.5],
+            $email => ['x' => 124, 'y' => 156.5],
 
-            $spouseSurname => ['x' => 48, 'y' => 168],
-            $spouseFirstname => ['x' => 48, 'y' => 174],
-            $spouseExtensionname => ['x' => 110, 'y' => 174],
-            $spouseMiddlename => ['x' => 48, 'y' => 180.5],
-            $spouseOccupation => ['x' => 48, 'y' => 187],
-            $spouseEmployer => ['x' => 48, 'y' => 193],
-            $spouseBusinessAddress => ['x' => 48, 'y' => 199.5],
-            $spouseTelephone => ['x' => 48, 'y' => 206],
+            $spouseSurname => ['x' => 38, 'y' => 168],
+            $spouseFirstname => ['x' => 38, 'y' => 174],
+            $spouseExtensionname => ['x' => 115, 'y' => 174],
+            $spouseMiddlename => ['x' => 38, 'y' => 180.5],
+            $spouseOccupation => ['x' => 38, 'y' => 187],
+            $spouseEmployer => ['x' => 38, 'y' => 193],
+            $spouseBusinessAddress => ['x' => 38, 'y' => 199.5],
+            $spouseTelephone => ['x' => 38, 'y' => 206],
 
-            'CHILD1' => ['x' => 120, 'y' => 174], // Y is +6.5 PER CHILD
-            'MM/DD/YYYY' => ['x' => 181, 'y' => 174], // Y is +6.5 PER CHILD
-            'CHILD2' => ['x' => 120, 'y' => 180.5], // Y is +6.5 PER CHILD
-            'MM/DD/YYY0' => ['x' => 181, 'y' => 180.5], // Y is +6.5 PER CHILD
-            'CHILD3' => ['x' => 120, 'y' => 187], // Y is +6.5 PER CHILD
-            'MM/DD/YY00' => ['x' => 181, 'y' => 187], // Y is +6.5 PER CHILD
+            $child1 => ['x' => 124, 'y' => 174], // Y is +6.5 PER CHILD
+            $childDOB1 => ['x' => 182, 'y' => 174], // Y is +6.5 PER CHILD
+            $child2 => ['x' => 124, 'y' => 180.5], // Y is +6.5 PER CHILD
+            $childDOB2 => ['x' => 182, 'y' => 180.5], // Y is +6.5 PER CHILD
+            $child3 => ['x' => 124, 'y' => 187], // Y is +6.5 PER CHILD
+            $childDOB3 => ['x' => 182, 'y' => 187], // Y is +6.5 PER CHILD
+            $child4 => ['x' => 124, 'y' => 193.5], // Y is +6.5 PER CHILD
+            $childDOB4 => ['x' => 182, 'y' => 193.5], // Y is +6.5 PER CHILD
+            $child5 => ['x' => 124, 'y' => 200], // Y is +6.5 PER CHILD
+            $childDOB5 => ['x' => 182, 'y' => 200], // Y is +6.5 PER CHILD
+            $child6 => ['x' => 124, 'y' => 206.5], // Y is +6.5 PER CHILD
+            $childDOB6 => ['x' => 182, 'y' => 206.5], // Y is +6.5 PER CHILD
+            $child7 => ['x' => 124, 'y' => 213], // Y is +6.5 PER CHILD
+            $childDOB7 => ['x' => 182, 'y' => 213], // Y is +6.5 PER CHILD
+            $child8 => ['x' => 124, 'y' => 219.5], // Y is +6.5 PER CHILD
+            $childDOB8 => ['x' => 182, 'y' => 219.5], // Y is +6.5 PER CHILD
+            $child9 => ['x' => 124, 'y' => 226], // Y is +6.5 PER CHILD
+            $childDOB9 => ['x' => 182, 'y' => 226], // Y is +6.5 PER CHILD
+            $child10 => ['x' => 124, 'y' => 232.5], // Y is +6.5 PER CHILD
+            $childDOB10 => ['x' => 182, 'y' => 232.5], // Y is +6.5 PER CHILD
+            $child11 => ['x' => 124, 'y' => 239], // Y is +6.5 PER CHILD
+            $childDOB11 => ['x' => 182, 'y' => 239], // Y is +6.5 PER CHILD
+            $child12 => ['x' => 124, 'y' => 245.5], // Y is +6.5 PER CHILD
+            $childDOB12 => ['x' => 182, 'y' => 245.5], // Y is +6.5 PER CHILD
+
+            $fatherSurname => ['x' => 38, 'y' => 212.5],
+            $fatherFirstname => ['x' => 38, 'y' => 218.5],
+            $fatherExtension => ['x' => 115, 'y' => 218.5],
+            $fatherMiddlename => ['x' => 38, 'y' => 225],
+
+            $motherMaiden => ['x' => 38, 'y' => 231.5],
+            $motherSurname => ['x' => 38, 'y' => 238],
+            $motherFirstname => ['x' => 38, 'y' => 244.5],
+            $motherMiddlename => ['x' => 38, 'y' => 250.5],
+
+            $elemNameOfSchool => ['x' => 38, 'y' => 275],
+            $elemDegree => ['x' => 92, 'y' => 275],
+            $elemFrom => ['x' => 135, 'y' => 275],
+            $elemTo => ['x' => 155, 'y' => 275],
+            $elemHigh => ['x' => 168, 'y' => 275],
+            $elemGrad => ['x' => 183, 'y' => 275],
+            $elemHonor => ['x' => 194.5, 'y' => 275],
+
+            $secNameOfSchool => ['x' => 38, 'y' => 281.7],
+            $secDegree => ['x' => 92, 'y' => 281.7],
+            $secFrom => ['x' => 135, 'y' => 281.7],
+            $secTo => ['x' => 155, 'y' => 281.7],
+            $secHigh => ['x' => 168, 'y' => 281.7],
+            $secGrad => ['x' => 183, 'y' => 281.7],
+            $secHonor => ['x' => 194.5, 'y' => 281.7],
+
+            $vocNameOfSchool => ['x' => 38, 'y' => 288.3],
+            $vocDegree => ['x' => 92, 'y' => 288.3],
+            $vocFrom => ['x' => 135, 'y' => 288.3],
+            $vocTo => ['x' => 155, 'y' => 288.3],
+            $vocHigh => ['x' => 168, 'y' => 288.3],
+            $vocGrad => ['x' => 183, 'y' => 288.3],
+            $vocHonor => ['x' => 194.5, 'y' => 288.3],
+
+            $collegeNameOfSchool => ['x' => 38, 'y' => 295.2],
+            $collegeDegree => ['x' => 92, 'y' => 295.2],
+            $collegeFrom => ['x' => 135, 'y' => 295.2],
+            $collegeTo => ['x' => 155, 'y' => 295.2],
+            $collegeHigh => ['x' => 168, 'y' => 295.2],
+            $collegeGrad => ['x' => 183, 'y' => 295.2],
+            $collegeHonor => ['x' => 194.5, 'y' => 295.2],
+
+            $gradNameOfSchool => ['x' => 38, 'y' => 301.5],
+            $gradDegree => ['x' => 92, 'y' => 301.5],
+            $gradFrom => ['x' => 135, 'y' => 301.5],
+            $gradTo => ['x' => 155, 'y' => 301.5],
+            $gradHigh => ['x' => 168, 'y' => 301.5],
+            $gradGrad => ['x' => 183, 'y' => 301.5],
+            $gradHonor => ['x' => 194.5, 'y' => 301.5],
         ],
     ],
     [
         'Second page' => [
-            'Works stuff' => ['x' => 60, 'y' => 60],
+            $eligible1 => ['x' => 7, 'y' => 31], //x is the same but y is +7
+            $eligibleRating1 => ['x' => 81, 'y' => 31],
+            $eligibleDOE1 => ['x' => 99, 'y' => 31],
+            $eligiblePOE1 => ['x' => 121, 'y' => 31],
+            $eligibleNumber1 => ['x' => 180.5, 'y' => 31],
+            $eligibleDOV => ['x' => 196, 'y' => 31],
+
+            'Eligibility2' => ['x' => 7, 'y' => 38],
+            'Rating2' => ['x' => 81, 'y' => 38],
+            'Date2' => ['x' => 99, 'y' => 38],
+            'POE2' => ['x' => 121, 'y' => 38],
+            'Number2' => ['x' => 180.5, 'y' => 38],
+            'Valid ' => ['x' => 196, 'y' => 38],
+
+            'Eligibility3' => ['x' => 7, 'y' => 45],
+            'Rating3' => ['x' => 81, 'y' => 45],
+            'Date3' => ['x' => 99, 'y' => 45],
+            'POE3' => ['x' => 121, 'y' => 45],
+            'Number3' => ['x' => 180.5, 'y' => 45],
+            'Valid  ' => ['x' => 196, 'y' => 45],
         ],
     ],
     [
@@ -274,10 +432,51 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
         foreach ($sectionContent as $text => $coordinates) {
             $pdf->SetXY($coordinates['x'], $coordinates['y']);
 
-            if (strpos($text, '•') !== false) {
-                $pdf->SetFont('helvetica', '', 30); // Set the font size to 30 for the dot character
+            // Adjust font size for specific variables
+            if ($text === $elemNameOfSchool 
+            || $text === $elemDegree
+                || $text === $elemFrom
+                    || $text === $elemTo
+                        || $text === $elemHigh
+                            || $text === $elemGrad
+                                || $text === $elemHonor
+            || $text === $secNameOfSchool
+                || $text === $secDegree
+                    || $text === $secFrom
+                        || $text === $secTo
+                            || $text === $secHigh
+                                || $text === $secGrad
+                                    || $text === $secHonor
+            || $text === $vocNameOfSchool
+                || $text === $vocDegree
+                    || $text === $vocFrom
+                        || $text === $vocTo
+                            || $text === $vocHigh
+                                || $text === $vocGrad
+                                    || $text === $vocHonor
+            || $text === $collegeNameOfSchool
+                || $text === $collegeDegree
+                    || $text === $collegeFrom
+                        || $text === $collegeTo
+                            || $text === $collegeHigh
+                                || $text === $collegeGrad
+                                    || $text === $collegeHonor
+            || $text === $gradNameOfSchool
+                || $text === $gradDegree
+                    || $text === $gradFrom
+                        || $text === $gradTo
+                            || $text === $gradHigh
+                                || $text === $gradGrad
+                                    || $text === $gradHonor
+            ) {
+                $pdf->SetFont('helvetica', '', 6); // Set the font size to 7 for the specified variables
+                //$pdf->Write(0, chunk_split($text, 32, "\n"));
             } else {
-                $pdf->SetFont('helvetica', '', 10); // Set the font size to 10 for other text
+                if (strpos($text, '•') !== false) {
+                    $pdf->SetFont('helvetica', '', 30); // Set the font size to 30 for the dot character
+                } else {
+                    $pdf->SetFont('helvetica', '', 10); // Set the font size to 10 for other text
+                }
             }
 
             $pdf->Write(0, $text);

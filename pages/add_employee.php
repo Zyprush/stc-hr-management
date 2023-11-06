@@ -504,16 +504,20 @@ require('../config/countries.php');
 
                                 <div class="form-group">
                                     <div class="row">
-                                        <label for="mother">Mother's Maiden Name:</label>
-                                        <div class="col-sm-4 mb-1">
+                                        <label for="mother">Mother's Full Name:</label>
+                                        <div class="col-sm-3 mb-1">
+                                            <input type="text" class="form-control" id="mother_maiden"
+                                                name="mother_maiden" placeholder="Mother's Maiden Name">
+                                        </div>
+                                        <div class="col-sm-3 mb-1">
                                             <input type="text" class="form-control" id="mother_surname"
                                                 name="mother_surname" placeholder="Surname">
                                         </div>
-                                        <div class="col-sm-4 mb-1">
+                                        <div class="col-sm-3 mb-1">
                                             <input type="text" class="form-control" id="mother_firstname"
                                                 name="mother_firstname" placeholder="First Name">
                                         </div>
-                                        <div class="col-sm-4 mb-1">
+                                        <div class="col-sm-3 mb-1">
                                             <input type="text" class="form-control" id="mother_middlename"
                                                 name="mother_middlename" placeholder="Middle Name">
                                         </div>
