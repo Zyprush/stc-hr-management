@@ -24,24 +24,27 @@ if ($result->num_rows > 0) {
     // Function to format data
     function formatData($value, $type = '') {
         global $naCounter; // Access the global counter variable
-
+    
         if ($type === 'date') {
-            // Convert date format from 'yyyy-mm-dd' to 'mm-dd-yyyy'
-            $formattedValue = DateTime::createFromFormat('Y-m-d', $value)->format('m-d-Y');
+            // Check if the date is '0000-00-00'
+            if ($value === '0000-00-00') {
+                // If it is, return an empty string
+                return '';
+            } else {
+                // Convert date format from 'yyyy-mm-dd' to 'mm-dd-yyyy'
+                $formattedValue = DateTime::createFromFormat('Y-m-d', $value)->format('m-d-Y');
+                return $formattedValue;
+            }
         } else {
             // Convert to uppercase
             $formattedValue = strtoupper($value);
-
-            // Replace empty values with distinct 'N/A' values for array keys
-            $formattedValue = !empty($formattedValue) ? $formattedValue : 'N/A' . str_repeat(' ', $naCounter++);        
-        }
-
-        return $formattedValue;
-    }
-
     
-
-
+            // Replace empty values with distinct 'N/A' values for array keys
+            $formattedValue = !empty($formattedValue) ? $formattedValue : 'N/A' . str_repeat(' ', $naCounter++);
+            return $formattedValue;
+        }
+    }
+    
     
     // Fetching data from the database
     $lastName = formatData($row['LastName']);
@@ -281,7 +284,159 @@ if ($work_experienceResult->num_rows > 0) {
     echo "No work_experience found for the given EmployeeID.";
 }
 
+// Query to fetch voluntary_work of the employee
+$voluntary_workQuery = "SELECT * FROM voluntary_work WHERE `EmployeeID` = ?";
+$voluntary_workStmt = $conn->prepare($voluntary_workQuery);
 
+if (!$voluntary_workStmt) {
+    die("Error in voluntary_work SQL query: " . $conn->error);
+}
+
+$voluntary_workStmt->bind_param("i", $id);
+$voluntary_workStmt->execute();
+$voluntary_workResult = $voluntary_workStmt->get_result();
+
+if ($voluntary_workResult->num_rows > 0) {
+    $voluntary_workData = $voluntary_workResult->fetch_all(MYSQLI_ASSOC);
+
+    $counter = 1;
+
+    foreach ($voluntary_workData as $volunterRow) {
+        ${'volunter' . $counter} = formatData($volunterRow['OrganizationName']);
+        ${'volunterPosition' . $counter} = formatData($volunterRow['WorkPosition']);
+        ${'volunterHours' . $counter} = formatData($volunterRow['HoursWorked']);
+        ${'volunterWFD' . $counter} = formatData($volunterRow['WorkFromDate'], 'date');
+        ${'volunterWTD' . $counter} = formatData($volunterRow['WorkToDate'], 'date');
+        $counter++;
+    }
+
+    for ($i = 1; $i < $counter; $i++) {
+        echo "$volunter1 $volunterPosition1 $volunterHours1 $volunterWFD1 $volunterWTD1";
+    }
+} else {
+    echo "No voluntary_work found for the given EmployeeID.";
+}
+
+// Query to fetch learning_development of the employee
+$learning_developmentQuery = "SELECT * FROM learning_development WHERE `EmployeeID` = ?";
+$learning_developmentStmt = $conn->prepare($learning_developmentQuery);
+
+if (!$learning_developmentStmt) {
+    die("Error in learning_development SQL query: " . $conn->error);
+}
+
+$learning_developmentStmt->bind_param("i", $id);
+$learning_developmentStmt->execute();
+$learning_developmentResult = $learning_developmentStmt->get_result();
+
+if ($learning_developmentResult->num_rows > 0) {
+    $learning_developmentData = $learning_developmentResult->fetch_all(MYSQLI_ASSOC);
+
+    $counter = 1;
+
+    foreach ($learning_developmentData as $learningRow) {
+        ${'learning' . $counter} = formatData($learningRow['LDTitle']);
+        ${'learningType' . $counter} = formatData($learningRow['LDType']);
+        ${'learningSponsor' . $counter} = formatData($learningRow['LDSponsor']);
+        ${'learningHours' . $counter} = formatData($learningRow['LDHours']);
+        ${'learningSD' . $counter} = formatData($learningRow['LDStartDate'], 'date');
+        ${'learningFD' . $counter} = formatData($learningRow['LDFinishDate'], 'date');
+        $counter++;
+    }
+
+    for ($i = 1; $i < $counter; $i++) {
+        echo "$learning1 $learningType1 $learningSponsor1 $learningHours1 $learningSD1 $learningFD1";
+    }
+} else {
+    echo "No learning_development found for the given EmployeeID.";
+}
+
+// Query to fetch special_skills of the employee
+$special_skillsQuery = "SELECT * FROM special_skills WHERE `EmployeeID` = ?";
+$special_skillsStmt = $conn->prepare($special_skillsQuery);
+
+if (!$special_skillsStmt) {
+    die("Error in special_skills SQL query: " . $conn->error);
+}
+
+$special_skillsStmt->bind_param("i", $id);
+$special_skillsStmt->execute();
+$special_skillsResult = $special_skillsStmt->get_result();
+
+if ($special_skillsResult->num_rows > 0) {
+    $special_skillsData = $special_skillsResult->fetch_all(MYSQLI_ASSOC);
+
+    $counter = 1;
+
+    foreach ($special_skillsData as $skillRow) {
+        ${'skill' . $counter} = formatData($skillRow['Skill']);
+        $counter++;
+    }
+
+    for ($i = 1; $i < $counter; $i++) {
+        echo "$skill1";
+    }
+} else {
+    echo "No special_skills found for the given EmployeeID.";
+}
+
+// Query to fetch non_academic_distinctions of the employee
+$non_academic_distinctionsQuery = "SELECT * FROM non_academic_distinctions WHERE `EmployeeID` = ?";
+$non_academic_distinctionsStmt = $conn->prepare($non_academic_distinctionsQuery);
+
+if (!$non_academic_distinctionsStmt) {
+    die("Error in non_academic_distinctions SQL query: " . $conn->error);
+}
+
+$non_academic_distinctionsStmt->bind_param("i", $id);
+$non_academic_distinctionsStmt->execute();
+$non_academic_distinctionsResult = $non_academic_distinctionsStmt->get_result();
+
+if ($non_academic_distinctionsResult->num_rows > 0) {
+    $non_academic_distinctionsData = $non_academic_distinctionsResult->fetch_all(MYSQLI_ASSOC);
+
+    $counter = 1;
+
+    foreach ($non_academic_distinctionsData as $distinctionRow) {
+        ${'distinction' . $counter} = formatData($distinctionRow['Distinction']);
+        $counter++;
+    }
+
+    for ($i = 1; $i < $counter; $i++) {
+        echo "$distinction1";
+    }
+} else {
+    echo "No non_academic_distinctions found for the given EmployeeID.";
+}
+
+// Query to fetch memberships of the employee
+$membershipsQuery = "SELECT * FROM memberships WHERE `EmployeeID` = ?";
+$membershipsStmt = $conn->prepare($membershipsQuery);
+
+if (!$membershipsStmt) {
+    die("Error in memberships SQL query: " . $conn->error);
+}
+
+$membershipsStmt->bind_param("i", $id);
+$membershipsStmt->execute();
+$membershipsResult = $membershipsStmt->get_result();
+
+if ($membershipsResult->num_rows > 0) {
+    $membershipsData = $membershipsResult->fetch_all(MYSQLI_ASSOC);
+
+    $counter = 1;
+
+    foreach ($membershipsData as $membershipRow) {
+        ${'membership' . $counter} = formatData($membershipRow['Membership']);
+        $counter++;
+    }
+
+    for ($i = 1; $i < $counter; $i++) {
+        echo "$membership1";
+    }
+} else {
+    echo "No memberships found for the given EmployeeID.";
+}
 
 // Content for each section of every page
 $pageContent = [
@@ -472,19 +627,227 @@ $pageContent = [
             $experienceWTD1 => ['x' => 23.5, 'y' => 111.5],
             $experienceGov1 => ['x' => 200.5, 'y' => 110.5],
 
-            $experience2 . ' '  => ['x' => 38, 'y' => 118],
-            $experienceDepartment2 . ' ' => ['x' => 89, 'y' => 118],
-            $experienceSalary2 . ' ' => ['x' => 137, 'y' => 118],
-            $experienceST2 . ' ' => ['x' => 152, 'y' => 118],
-            $experienceAS2 . ' ' => ['x' => 167.5, 'y' => 118],
-            $experienceWFD2 . ' ' => ['x' => 6.5, 'y' => 119],
-            $experienceWTD2 . ' ' => ['x' => 23.5, 'y' => 119],
-            $experienceGov2 . ' ' => ['x' => 200.5, 'y' => 118],
+            $experience2 . ' '  => ['x' => 38, 'y' => 117.5], // + 7.5
+            $experienceDepartment2 . ' ' => ['x' => 89, 'y' => 117.5],
+            $experienceSalary2 . ' ' => ['x' => 137, 'y' => 117.5],
+            $experienceST2 . ' ' => ['x' => 152, 'y' => 117.5],
+            $experienceAS2 . ' ' => ['x' => 167.5, 'y' => 117.5],
+            $experienceWFD2 . ' ' => ['x' => 6.5, 'y' => 118.5],
+            $experienceWTD2 . ' ' => ['x' => 23.5, 'y' => 118.5],
+            $experienceGov2 . ' ' => ['x' => 200.5, 'y' => 117.5],
+
+            $experience3 . '  '  => ['x' => 38, 'y' => 125], // + 7.5
+            $experienceDepartment3 . '  ' => ['x' => 89, 'y' => 125],
+            $experienceSalary3 . '  ' => ['x' => 137, 'y' => 125],
+            $experienceST3 . '  ' => ['x' => 152, 'y' => 125],
+            $experienceAS3 . '  ' => ['x' => 167.5, 'y' => 125],
+            $experienceWFD3 . '  ' => ['x' => 6.5, 'y' => 125.5],
+            $experienceWTD3 . '  ' => ['x' => 23.5, 'y' => 125.5],
+            $experienceGov3 . '  ' => ['x' => 200.5, 'y' => 125],
+
+            $experience4 . '   '  => ['x' => 38, 'y' => 132.5], // + 7.5
+            $experienceDepartment4 . '   ' => ['x' => 89, 'y' => 132.5],
+            $experienceSalary4 . '   ' => ['x' => 137, 'y' => 132.5],
+            $experienceST4 . '   ' => ['x' => 152, 'y' => 132.5],
+            $experienceAS4 . '   ' => ['x' => 167.5, 'y' => 132.5],
+            $experienceWFD4 . '   ' => ['x' => 6.5, 'y' => 132.5],
+            $experienceWTD4 . '   ' => ['x' => 23.5, 'y' => 132.5],
+            $experienceGov4 . '   ' => ['x' => 200.5, 'y' => 132.5],
+
+            $experience5 => ['x' => 38, 'y' => 140],
+            $experienceDepartment5 => ['x' => 89, 'y' => 140],
+            $experienceSalary5 => ['x' => 137, 'y' => 140],
+            $experienceST5 => ['x' => 152, 'y' => 140],
+            $experienceAS5 => ['x' => 167.5, 'y' => 140],
+            $experienceWFD5 => ['x' => 6.5, 'y' => 140.5],
+            $experienceWTD5 => ['x' => 23.5, 'y' => 140.5],
+            $experienceGov5 => ['x' => 200.5, 'y' => 140],
+
+            $experience6 => ['x' => 38, 'y' => 147.5],
+            $experienceDepartment6 => ['x' => 89, 'y' => 147.5],
+            $experienceSalary6 => ['x' => 137, 'y' => 147.5],
+            $experienceST6 => ['x' => 152, 'y' => 147.5],
+            $experienceAS6 => ['x' => 167.5, 'y' => 147.5],
+            $experienceWFD6 => ['x' => 6.5, 'y' => 147.5],
+            $experienceWTD6 => ['x' => 23.5, 'y' => 147.5],
+            $experienceGov6 => ['x' => 200.5, 'y' => 147.5],
+
+            $experience7 => ['x' => 38, 'y' => 155],
+            $experienceDepartment7 => ['x' => 89, 'y' => 155],
+            $experienceSalary7 => ['x' => 137, 'y' => 155],
+            $experienceST7 => ['x' => 152, 'y' => 155],
+            $experienceAS7 => ['x' => 167.5, 'y' => 155],
+            $experienceWFD7 => ['x' => 6.5, 'y' => 155.5],
+            $experienceWTD7 => ['x' => 23.5, 'y' => 155.5],
+            $experienceGov7 => ['x' => 200.5, 'y' => 155],
+
+            $experience8 => ['x' => 38, 'y' => 162.5],
+            $experienceDepartment8 => ['x' => 89, 'y' => 162.5],
+            $experienceSalary8 => ['x' => 137, 'y' => 162.5],
+            $experienceST8 => ['x' => 152, 'y' => 162.5],
+            $experienceAS8 => ['x' => 167.5, 'y' => 162.5],
+            $experienceWFD8 => ['x' => 6.5, 'y' => 162.5],
+            $experienceWTD8 => ['x' => 23.5, 'y' => 162.5],
+            $experienceGov8 => ['x' => 200.5, 'y' => 162.5],
+
+            $experience9 => ['x' => 38, 'y' => 170],
+            $experienceDepartment9 => ['x' => 89, 'y' => 170],
+            $experienceSalary9 => ['x' => 137, 'y' => 170],
+            $experienceST9 => ['x' => 152, 'y' => 170],
+            $experienceAS9 => ['x' => 167.5, 'y' => 170],
+            $experienceWFD9 => ['x' => 6.5, 'y' => 170.5],
+            $experienceWTD9 => ['x' => 23.5, 'y' => 170.5],
+            $experienceGov9 => ['x' => 200.5, 'y' => 170],
+
+            $experience10 => ['x' => 38, 'y' => 177.5],
+            $experienceDepartment10 => ['x' => 89, 'y' => 177.5],
+            $experienceSalary10 => ['x' => 137, 'y' => 177.5],
+            $experienceST10 => ['x' => 152, 'y' => 177.5],
+            $experienceAS10 => ['x' => 167.5, 'y' => 177.5],
+            $experienceWFD10 => ['x' => 6.5, 'y' => 177.5],
+            $experienceWTD10 => ['x' => 23.5, 'y' => 177.5],
+            $experienceGov10 => ['x' => 200.5, 'y' => 177.5],
         ],
     ],
     [
         'Third page' => [
-            'Family matter' => ['x' => 70, 'y' => 70],
+
+            $volunter1 => ['x' => 7, 'y' => 31],
+            $volunterWFD1 . ' ' => ['x' => 84, 'y' => 32], //x + 2 // y + 1
+            $volunterWTD1 . ' ' => ['x' => 101, 'y' => 32], //x + 2 // y + 1
+            $volunterHours1 => ['x' => 115.5, 'y' => 31],
+            $volunterPosition1 => ['x' => 133, 'y' => 31],
+
+            $volunter2 => ['x' => 7, 'y' => 38],
+            $volunterWFD2 . '  ' => ['x' => 84, 'y' => 39],
+            $volunterWTD2 . '  ' => ['x' => 101, 'y' => 39],
+            $volunterHours2 => ['x' => 115.5, 'y' => 38],
+            $volunterPosition2 => ['x' => 133, 'y' => 38],
+
+            $volunter3 => ['x' => 7, 'y' => 45],
+            $volunterWFD3 . '   ' => ['x' => 84, 'y' => 46],
+            $volunterWTD3 . '   ' => ['x' => 101, 'y' => 46],
+            $volunterHours3 => ['x' => 115.5, 'y' => 45],
+            $volunterPosition3 => ['x' => 133, 'y' => 45],
+
+            $volunter4 => ['x' => 7, 'y' => 52],
+            $volunterWFD4 . '    ' => ['x' => 84, 'y' => 52],
+            $volunterWTD4 . '    ' => ['x' => 101, 'y' => 52],
+            $volunterHours4 => ['x' => 115.5, 'y' => 52],
+            $volunterPosition4 => ['x' => 133, 'y' => 52],
+
+            $volunter5 => ['x' => 7, 'y' => 59],
+            $volunterWFD5 . '     ' => ['x' => 84, 'y' => 59],
+            $volunterWTD5 . '     ' => ['x' => 101, 'y' => 59],
+            $volunterHours5 => ['x' => 115.5, 'y' => 59],
+            $volunterPosition5 => ['x' => 133, 'y' => 59],
+
+            $volunter6 => ['x' => 7, 'y' => 66],
+            $volunterWFD6 . '      ' => ['x' => 84, 'y' => 66],
+            $volunterWTD6 . '      ' => ['x' => 101, 'y' => 66],
+            $volunterHours6 => ['x' => 115.5, 'y' => 66],
+            $volunterPosition6 => ['x' => 133, 'y' => 66],
+
+            $volunter7 => ['x' => 7, 'y' => 73],
+            $volunterWFD7 . '       ' => ['x' => 84, 'y' => 73],
+            $volunterWTD7 . '       ' => ['x' => 101, 'y' => 73],
+            $volunterHours7 => ['x' => 115.5, 'y' => 73],
+            $volunterPosition7 => ['x' => 133, 'y' => 73],                 
+
+            $learning1 => ['x' => 8, 'y' => 108],
+            $learningSD1 => ['x' => 84, 'y' => 108],
+            $learningFD1 => ['x' => 101, 'y' => 108],
+            $learningHours1 => ['x' => 115.5, 'y' => 108],
+            $learningType1 => ['x' => 133, 'y' => 108],
+            $learningSponsor1 => ['x' => 159, 'y' => 108],
+
+            $learning2 => ['x' => 8, 'y' => 115.5],
+            $learningSD2 => ['x' => 84, 'y' => 115.5],
+            $learningFD2 => ['x' => 101, 'y' => 115.5],
+            $learningHours2 => ['x' => 115.5, 'y' => 115.5],
+            $learningType2 => ['x' => 133, 'y' => 115.5],
+            $learningSponsor2 => ['x' => 159, 'y' => 115.5],
+
+            $learning3 => ['x' => 8, 'y' => 123],
+            $learningSD3 => ['x' => 84, 'y' => 123],
+            $learningFD3 => ['x' => 101, 'y' => 123],
+            $learningHours3 => ['x' => 115.5, 'y' => 123],
+            $learningType3 => ['x' => 133, 'y' => 123],
+            $learningSponsor3 => ['x' => 159, 'y' => 123],
+
+            $learning4 => ['x' => 8, 'y' => 130.5],
+            $learningSD4 => ['x' => 84, 'y' => 130.5],
+            $learningFD4 => ['x' => 101, 'y' => 130.5],
+            $learningHours4 => ['x' => 115.5, 'y' => 130.5],
+            $learningType4 => ['x' => 133, 'y' => 130.5],
+            $learningSponsor4 => ['x' => 159, 'y' => 130.5],
+
+            $learning5 => ['x' => 8, 'y' => 138],
+            $learningSD5 => ['x' => 84, 'y' => 138],
+            $learningFD5 => ['x' => 101, 'y' => 138],
+            $learningHours5 => ['x' => 115.5, 'y' => 138],
+            $learningType5 => ['x' => 133, 'y' => 138],
+            $learningSponsor5 => ['x' => 159, 'y' => 138],
+
+            $learning6 => ['x' => 8, 'y' => 145.5],
+            $learningSD6 => ['x' => 84, 'y' => 145.5],
+            $learningFD6 => ['x' => 101, 'y' => 145.5],
+            $learningHours6 => ['x' => 115.5, 'y' => 145.5],
+            $learningType6 => ['x' => 133, 'y' => 145.5],
+            $learningSponsor6 => ['x' => 159, 'y' => 145.5],
+
+            $learning7 => ['x' => 8, 'y' => 153],
+            $learningSD7 => ['x' => 84, 'y' => 153],
+            $learningFD7 => ['x' => 101, 'y' => 153],
+            $learningHours7 => ['x' => 115.5, 'y' => 153],
+            $learningType7 => ['x' => 133, 'y' => 153],
+            $learningSponsor7 => ['x' => 159, 'y' => 153],
+
+            $learning8 => ['x' => 8, 'y' => 160.5],
+            $learningSD8 => ['x' => 84, 'y' => 160.5],
+            $learningFD8 => ['x' => 101, 'y' => 160.5],
+            $learningHours8 => ['x' => 115.5, 'y' => 160.5],
+            $learningType8 => ['x' => 133, 'y' => 160.5],
+            $learningSponsor8 => ['x' => 159, 'y' => 160.5],
+
+            $learning9 => ['x' => 8, 'y' => 168],
+            $learningSD9 => ['x' => 84, 'y' => 168],
+            $learningFD9 => ['x' => 101, 'y' => 168],
+            $learningHours9 => ['x' => 115.5, 'y' => 168],
+            $learningType9 => ['x' => 133, 'y' => 168],
+            $learningSponsor9 => ['x' => 159, 'y' => 168],
+
+            $learning10 => ['x' => 8, 'y' => 175.5],
+            $learningSD10 => ['x' => 84, 'y' => 175.5],
+            $learningFD10 => ['x' => 101, 'y' => 175.5],
+            $learningHours10 => ['x' => 115.5, 'y' => 175.5],
+            $learningType10 => ['x' => 133, 'y' => 175.5],
+            $learningSponsor10 => ['x' => 159, 'y' => 175.5],
+
+            $skill1 => ['x' => 8, 'y' => 251.5],
+            $skill2 => ['x' => 8, 'y' => 259],
+            $skill3 => ['x' => 8, 'y' => 266],
+            $skill4 => ['x' => 8, 'y' => 273.5],
+            $skill5 => ['x' => 8, 'y' => 281],
+            $skill6 => ['x' => 8, 'y' => 288.5],
+            $skill7 => ['x' => 8, 'y' => 296],
+
+            $distinction1 => ['x' => 71, 'y' => 251.5],
+            $distinction2 => ['x' => 71, 'y' => 259],
+            $distinction3 => ['x' => 71, 'y' => 266],
+            $distinction4 => ['x' => 71, 'y' => 273.5],
+            $distinction5 => ['x' => 71, 'y' => 281],
+            $distinction6 => ['x' => 71, 'y' => 288.5],
+            $distinction7 => ['x' => 71, 'y' => 296],
+
+            $membership1 => ['x' => 159, 'y' => 251.5],
+            $membership2 => ['x' => 159, 'y' => 259],
+            $membership3 => ['x' => 159, 'y' => 266],
+            $membership4 => ['x' => 159, 'y' => 273.5],
+            $membership5 => ['x' => 159, 'y' => 281],
+            $membership6 => ['x' => 159, 'y' => 288.5],
+            $membership7 => ['x' => 159, 'y' => 296],
+
         ],
     ],
     [
@@ -558,8 +921,20 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
                         || $text === $eligibleDOV1
             || $text === $experienceWFD1 
                 || $text === $experienceWTD1 
-                    || $text === $experienceWFD2 
-                        || $text === $experienceWTD2
+                    || $text === $experienceWFD2 . ' ' 
+                        || $text === $experienceWTD2 . ' '
+                            || $text === $experienceWFD3 . '  ' 
+                                || $text === $experienceWTD3 . '  '
+                                    || $text === $experienceWFD4 . '   ' 
+                                        || $text === $experienceWTD4 . '   '
+            || $text === $volunterWFD1 . ' ' || $text === $volunterWTD1 . ' '
+            || $text === $volunterWFD2 . '  ' || $text === $volunterWTD2 . '  '
+            || $text === $volunterWFD3 . '   ' || $text === $volunterWTD3 . '   '
+            || $text === $volunterWFD4 . '    ' || $text === $volunterWTD4 . '    '
+            || $text === $volunterWFD5 . '     ' || $text === $volunterWTD5 . '     '
+            || $text === $volunterWFD7 . '      ' || $text === $volunterWTD7 . '      '
+            || $text === $volunterWFD8 . '       ' || $text === $volunterWTD8 . '       '
+            || $text === $learningSD1 || $text === $learningFD1
             ) {
                 $pdf->SetFont('helvetica', '', 6); // Set the font size to 7 for the specified variables
                 //$pdf->Write(0, chunk_split($text, 32, "\n"));
