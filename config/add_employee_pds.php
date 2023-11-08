@@ -115,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $guilty_admin_offense = $_POST['guilty_admin_offense'];
     $guilty_admin_details = $_POST['guilty_admin_details'];
+    
     $criminal_charged = $_POST['criminal_charged'];
     $criminal_charged_date = $_POST['criminal_charged_date'];
     $criminal_charged_status = $_POST['criminal_charged_status'];

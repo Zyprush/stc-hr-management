@@ -54,7 +54,7 @@ if ($result->num_rows > 0) {
     $birthdate = formatData($row['Birthdate'], 'date');
 
     //personal
-    $placeOfBirth = formatData($row['PlaceOfBirth']);
+    $placeOfBirth = formatData($row['PlaceOfBirth']) . '     ';
     $sex = formatData($row['Sex']);
     $civilStatus = formatData($row['CivilStatus']);
     $height = formatData($row['Height']);
@@ -145,7 +145,51 @@ if ($result->num_rows > 0) {
     $gradGrad = formatData($row['GradGrad']). '      ';
     $gradHonor = formatData($row['GradHonor']). '      ';
 
+    //last page
+    $related_a = formatData($row['related_a']);
+    $related_details_a = formatData($row['related_details_a']);
+    $related_b = formatData($row['related_b']);
+    $related_details_b = formatData($row['related_details_b']);
 
+    $guilty_admin_offense = formatData($row['guilty_admin_offense']);
+    $guilty_admin_details = formatData($row['guilty_admin_details']);
+
+    $criminal_charged = formatData($row['criminal_charged']);
+    $criminal_charged_date = formatData($row['criminal_charged_date']);
+    $criminal_charged_status = formatData($row['criminal_charged_status']);
+
+    $crime_violation = formatData($row['crime_violation']);
+    $crime_violation_details = formatData($row['crime_violation_details']);
+
+    $seperated_service = formatData($row['seperated_service']);
+    $seperated_service_details = formatData($row['seperated_service_details']);
+
+    $candidate = formatData($row['candidate']);
+    $candidate_details = formatData($row['candidate_details']);
+    $q38b = formatData($row['q38b']);
+    $q38b_details = formatData($row['q38b_details']);
+
+    $q39 = formatData($row['q39']);
+    $q39_details = formatData($row['q39_details']);
+
+    $q40a = formatData($row['q40a']);
+    $q40a_details = formatData($row['q40a_details']);
+    $q40b = formatData($row['q40b']);
+    $q40b_details = formatData($row['q40b_details']);
+    $q40c = formatData($row['q40c']);
+    $q40c_details = formatData($row['q40c_details']);
+
+    $ref_name_1 = formatData($row['ref_name_1']);
+    $ref_name_2 = formatData($row['ref_name_2']);
+    $ref_name_3 = formatData($row['ref_name_3']);
+
+    $ref_address_1 = formatData($row['ref_address_1']);
+    $ref_address_2 = formatData($row['ref_address_2']);
+    $ref_address_3 = formatData($row['ref_address_3']);
+
+    $ref_number_1 = formatData($row['ref_number_1']);
+    $ref_number_2 = formatData($row['ref_number_2']);
+    $ref_number_3 = formatData($row['ref_number_3']);
 
 
 // File path to the PDF file you want to modify
@@ -852,7 +896,11 @@ $pageContent = [
     ],
     [
         'Fourth page' => [
-            'Work collage' => ['x' => 80, 'y' => 80],
+            '•     ' => ['x' => $related_a === 'YES' ? 138.5 : 163 , 'y' => 18],
+            '•      ' => ['x' => $related_b === 'YES' ? 138.5 : 163 , 'y' => 23.5],
+            $related_details_b => ['x' => 146 , 'y' => 38],
+            '•       ' => ['x' => $guilty_admin_offense === 'YES' ? 138 : 163 , 'y' => 40],
+            '•        ' => ['x' => $criminal_charged === 'YES' ? 138 : 164 , 'y' => 57.5],
         ],
     ],
 ];
@@ -935,6 +983,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             || $text === $volunterWFD7 . '      ' || $text === $volunterWTD7 . '      '
             || $text === $volunterWFD8 . '       ' || $text === $volunterWTD8 . '       '
             || $text === $learningSD1 || $text === $learningFD1
+            || $text === $placeOfBirth
             ) {
                 $pdf->SetFont('helvetica', '', 6); // Set the font size to 7 for the specified variables
                 //$pdf->Write(0, chunk_split($text, 32, "\n"));
