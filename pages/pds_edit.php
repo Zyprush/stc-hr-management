@@ -900,7 +900,14 @@ $pageContent = [
             '•      ' => ['x' => $related_b === 'YES' ? 138.5 : 163 , 'y' => 23.5],
             $related_details_b => ['x' => 146 , 'y' => 38],
             '•       ' => ['x' => $guilty_admin_offense === 'YES' ? 138 : 163 , 'y' => 40],
+            $guilty_admin_details => ['x' => 146 , 'y' => 54],
             '•        ' => ['x' => $criminal_charged === 'YES' ? 138 : 164 , 'y' => 57.5],
+            $criminal_charged_date => ['x' => 164 , 'y' => 72],
+            $criminal_charged_status => ['x' => 164 , 'y' => 77],
+            '•         ' => ['x' => $crime_violation === 'YES' ? 138 : 164 , 'y' => 79.2],
+            $crime_violation_details => ['x' => 146 , 'y' => 94],
+            //'•          ' => ['x' => $crime_violation === 'YES' ? 138 : 164 , 'y' => 79.2],
+
         ],
     ],
 ];
