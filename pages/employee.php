@@ -342,17 +342,31 @@ $(document).ready(function() {
                 "render": function(data, type, row) {
                     // Add action buttons here for edit, delete, etc.
                     return `
-                    <a class="me-3" href="#" data-toggle="modal" data-target="#editEmployeeModal" data-record-id="${row.ID}">
+                    <a class="m-1" href="#" data-toggle="modal" data-target="#editEmployeeModal" data-record-id="${row.ID}">
                         <img src="../assets/img/icons/edit.svg" alt="Edit">
                     </a>
-                    <a class="delete-button" data-record-id="${row.ID}" href="#">
+                    <a class="m-1 delete-button" data-record-id="${row.ID}" href="#">
                         <img src="../assets/img/icons/delete.svg" alt="Delete">
+                    </a>
+                    <a class="m-1 pdf-button" data-record-id="${row.ID}" href="#">
+                        <img src="../assets/img/icons/pdf.svg" alt="PDF">
                     </a>
                 `;
                 }
             }
         ]
     });
+
+    $('#event_table tbody').on('click', '.pdf-button', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        var button = $(this);
+        var recordId = $(button).data('record-id');
+
+        // Open the PDF file using the constructed file name
+        window.open('pds_edit.php?id=' + recordId);
+    });
+
 
 
     // Handle delete button click

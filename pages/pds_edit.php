@@ -1034,9 +1034,19 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 // Output the modified PDF to a file with a new name
 $pdf->Output($outputPath, 'F');
 
-echo 'Modified PDF saved successfully as ' . $outputPath;
+echo 'Modified PDF saved successfully as ' . str_replace(__DIR__, '', $outputPath);
+header('Location: ' . str_replace(__DIR__, '', $outputPath));
 
 } else {
     echo 'No data found for the provided ID.';
 }
+
+
+//header('Location: ' . $outputPath);
+//exit();
 ?>
+
+<script>
+    var outputPath = "<?php echo $outputFileName; ?>";
+    window.location.href = '../assets/pds/' + outputPath;
+</script>
