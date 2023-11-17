@@ -182,8 +182,8 @@ require('../config/countries.php');
                                                 <option value="">--Select--</option> <!-- Default option -->
                                                 <?php
                                                 while ($row = $result->fetch_assoc()) {
-                                                    $departmentName = $row['Department'];
-                                                    echo "<option value=\"$departmentName\">$departmentName</option>";
+                                                    $department = $row['Department'];
+                                                    echo "<option value=\"$department\">$department</option>";
                                                 }
                                                 ?>
                                             </select>
