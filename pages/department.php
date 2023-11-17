@@ -1,6 +1,7 @@
 <?php
 include('../includes/header.php');
 include('../config/authentication.php');
+include('../config/fetch_departments_options.php');
 ?>
 
 <div id="global-loader">
@@ -152,6 +153,18 @@ include('../config/authentication.php');
                                     <div class="form-group">
                                         <label for="departmentName">Department:</label>
                                         <input type="text" class="form-control" id="departmentName" name="departmentName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="root">Under In:</label>
+                                        <select class="form-control" id="root" name="root" required>
+                                            <option value="None">None</option>
+                                            <?php
+                                            while ($row = $result->fetch_assoc()) {
+                                                $departmentName = $row['Department'];
+                                                echo "<option value=\"$departmentName\">$departmentName</option>";
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
