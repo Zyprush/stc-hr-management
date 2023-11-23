@@ -1,6 +1,15 @@
 <?php
 include('../includes/header.php');
 include('../config/authentication.php');
+
+if (isset($_GET['id'])) {
+    // Retrieve the 'id' parameter value
+    $id = $_GET['id'];
+    // Use the retrieved value (e.g., display it)
+    //echo "ID from URL: " . $id;
+} else {
+    //echo "No ID parameter found in the URL.";
+}
 ?>
 
 <div id="global-loader">
@@ -109,14 +118,16 @@ include('../config/authentication.php');
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Department List</h4>
-                    <h6>Manage Departments</h6>
+                    <h4>Department List </h4>
+                    <h6>Department of $parent </h6>
                 </div>
-                <div class="page-btn">
-                    <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
-                        <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Department
-                    </a>
-                </div>
+                <!--
+                    <div class="page-btn">
+                        <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
+                            <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Department
+                        </a>
+                    </div>
+                -->
             </div>
             <div class="card">
                 <div class="card-body">
@@ -238,9 +249,11 @@ xhr.send();
 
 <script>
 $(document).ready(function() {
+    var id = "<?php echo $id; ?>";
+
     var table = $('#department_table').DataTable({
         "ajax": {
-            "url": "../config/fetch_departments.php",
+            "url": "../config/fetch_departments_child.php?id=" + id,
             "type": "POST",
             "dataSrc": ""
         },
@@ -255,23 +268,53 @@ $(document).ready(function() {
                 "render": function(data, type, row) {
                     // Add a data-attribute to store the record ID
                     return `
-                        <a class="view-button m-1" data-record-id="${row.ID}" href="#">
-                            <img src="../assets/img/icons/eye.svg" alt="View">
-                        </a>
+                            <a class="me-3" href="#" data-toggle="modal" data-target="#editDepartmentModal" data-record-id="${row.ID}" data-record-name="${row.Department}">
+                                <img src="../assets/img/icons/edit.svg" alt="Edit">
+                            </a>
+                            <a class="delete-button" data-record-id="${row.ID}" href="#">
+                                <img src="../assets/img/icons/delete.svg" alt="Delete">
+                            </a>
                         `;
                 }
             }
         ]
     });
 
-    $('#department_table tbody').on('click', '.view-button', function(event) {
-        event.preventDefault(); // Prevent default link behavior
+    // Handle delete button click
+    $('#department_table tbody').on('click', '.delete-button', function() {
+        var button = this;
+        var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
 
-        var button = $(this);
-        var recordId = $(button).data('record-id');
+        var confirmDelete = confirm('Are you sure you want to delete this record?');
 
-        // Open the PDF file using the constructed file name
-        window.open('department_childs.php?id=' + recordId);
+        if (confirmDelete) {
+            $.ajax({
+                type: 'POST',
+                url: '../config/delete_department.php',
+                data: {
+                    record_id: recordId // Pass the record_id as a parameter
+                },
+                success: function(response) {
+                    alert(response);
+                    table.ajax.reload(); // Refresh the DataTable
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error: ' + status + ' ' + error);
+                }
+            });
+        }
     });
+
+    // Handle Edit button click
+    $('#department_table tbody').on('click', '[data-toggle="modal"][data-target="#editDepartmentModal"]',
+        function() {
+            var button = this;
+            var recordId = $(button).data('record-id');
+            var recordName = $(button).data('record-name');
+
+            // Set the record details in the modal form fields
+            $('#edit_department_id').val(recordId);
+            $('#edit_department_name').val(recordName);
+        });
 });
 </script>
