@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $extension = $_POST['extension'];
     $startDate = $_POST['startDate'];
     $type = $_POST['type'];
-    $department = $_POST['department'];
+    $name_department = $_POST['name_department'];
     $position = $_POST['position'];
     $endDate = $_POST['endDate'];
 
@@ -176,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             Extension TEXT,
             StartDate DATE,
             Type TEXT NOT NULL,
-            Department TEXT,
+            Name_department TEXT,
             Position TEXT NOT NULL,
             EndDate DATE,
             Birthdate DATE,
@@ -533,7 +533,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Now, perform the database insertion for the employee
     $insertEmployeeQuery = "INSERT INTO employees (
-        FirstName, MiddleName, LastName, Extension, StartDate, Type, Department, Position, EndDate,
+        FirstName, MiddleName, LastName, Extension, StartDate, Type, Name_department, Position, EndDate,
         Birthdate, PlaceOfBirth, Sex, CivilStatus, Height, Weight, BloodType, PhilHealth, GSIS, PagIbig, SSS, TIN,
         Agency, Citizenship, DualCitizenship, LotNo, Street, Barangay, Subdivision, City, Province, Zipcode,
         LotNoPermanent, StreetPermanent, BarangayPermanent, SubdivisionPermanent, CityPermanent, ProvincePermanent,
@@ -552,7 +552,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         q40a, q40a_details, q40b, q40b_details, q40c, q40c_details,
         ref_name_1, ref_name_2, ref_name_3, ref_address_1, ref_address_2, ref_address_3, ref_number_1, ref_number_2, ref_number_3
     ) VALUES (
-        '$firstName', '$middleName', '$lastName', '$extension', '$startDate', '$type', '$department', '$position', '$endDate',
+        '$firstName', '$middleName', '$lastName', '$extension', '$startDate', '$type', '$name_department', '$position', '$endDate',
         '$birthdate', '$placeOfBirth', '$sex', '$civilStatus', $height, $weight, '$bloodtype', '$philhealth', '$gsis', '$pagibig', '$sss', '$tin',
         '$agency', '$citizenship', '$dualCitizenship', '$lotNo', '$street', '$barangay', '$subdivision', '$city', '$province', '$zipcode',
         '$lotNo_permanent', '$street_permanent', '$barangay_permanent', '$subdivision_permanent', '$city_permanent', '$province_permanent', '$zipcode_permanent',

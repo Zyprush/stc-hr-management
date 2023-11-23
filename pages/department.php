@@ -1,7 +1,6 @@
 <?php
 include('../includes/header.php');
 include('../config/authentication.php');
-include('../config/fetch_departments_options.php');
 ?>
 
 <div id="global-loader">
@@ -49,13 +48,15 @@ include('../config/fetch_departments_options.php');
                         <a class="dropdown-item" href="#"> <i class="me-2" data-feather="user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
+                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+                    class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">My Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
@@ -138,7 +139,8 @@ include('../config/fetch_departments_options.php');
 
 
             <!-- Add -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -152,18 +154,14 @@ include('../config/fetch_departments_options.php');
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="departmentName">Department:</label>
-                                        <input type="text" class="form-control" id="departmentName" name="departmentName" required>
+                                        <input type="text" class="form-control" id="departmentName"
+                                            name="departmentName" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="root">Under In:</label>
                                         <select class="form-control" id="root" name="root" required>
                                             <option value="None">None</option>
-                                            <?php
-                                            while ($row = $result->fetch_assoc()) {
-                                                $departmentName = $row['Department'];
-                                                echo "<option value=\"$departmentName\">$departmentName</option>";
-                                            }
-                                            ?>
+
                                         </select>
                                     </div>
                                 </div>
@@ -178,7 +176,8 @@ include('../config/fetch_departments_options.php');
             </div>
 
             <!-- Edit -->
-            <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog" aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog"
+                aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -192,7 +191,8 @@ include('../config/fetch_departments_options.php');
                                 <input type="hidden" name="edit_department_id" id="edit_department_id">
                                 <div class="form-group">
                                     <label for="edit_department_name">Department Name:</label>
-                                    <input type="text" class="form-control" id="edit_department_name" name="edit_department_name">
+                                    <input type="text" class="form-control" id="edit_department_name"
+                                        name="edit_department_name">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
                             </form>
@@ -208,65 +208,96 @@ include('../config/fetch_departments_options.php');
 <?php
 include('../includes/footer.php');
 ?>
+<script>
+// Fetch data from PHP using AJAX
+var selectRoot = document.getElementById('root');
+
+// AJAX request
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+            var departments = JSON.parse(xhr.responseText);
+
+            // Update options in the dropdown
+            departments.forEach(function(department) {
+                var option = document.createElement('option');
+                option.value = department['Department']; // Assuming 'Department' is the column name
+                option.textContent = department['Department']; // Assuming 'Department' is the column name
+                selectRoot.appendChild(option);
+            });
+        } else {
+            console.error('Request failed: ' + xhr.status);
+        }
+    }
+};
+
+xhr.open('GET', '../config/get_departments_root.php', true);
+xhr.send();
+</script>
 
 <script>
-    $(document).ready(function() {
-        var table = $('#department_table').DataTable({
-            "ajax": {
-                "url": "../config/fetch_departments.php",
-                "type": "POST",
-                "dataSrc": ""
+$(document).ready(function() {
+    var table = $('#department_table').DataTable({
+        "ajax": {
+            "url": "../config/fetch_departments.php",
+            "type": "POST",
+            "dataSrc": ""
+        },
+        "columns": [{
+                "data": "ID"
             },
-            "columns": [{
-                    "data": "ID"
-                },
-                {
-                    "data": "Department"
-                },
-                {
-                    "data": null,
-                    "render": function(data, type, row) {
-                        // Add a data-attribute to store the record ID
-                        return `
-                                    <a class="me-3" href="#" data-toggle="modal" data-target="#editDepartmentModal" data-record-id="${row.ID}" data-record-name="${row.Department}">
-                                        <img src="../assets/img/icons/edit.svg" alt="Edit">
-                                    </a>
-                                    <a class="delete-button" data-record-id="${row.ID}" href="#">
-                                        <img src="../assets/img/icons/delete.svg" alt="Delete">
-                                    </a>
-                                `;
-                    }
+            {
+                "data": "Department"
+            },
+            {
+                "data": null,
+                "render": function(data, type, row) {
+                    // Add a data-attribute to store the record ID
+                    return `
+                        <a class="view-button m-1" data-record-id="${row.ID}" href="#">
+                            <img src="../assets/img/icons/eye.svg" alt="View">
+                        </a>
+                        <a class="edit-button m-1" href="#" data-toggle="modal" data-target="#editDepartmentModal" data-record-id="${row.ID}" data-record-name="${row.Department}">
+                            <img src="../assets/img/icons/edit.svg" alt="Edit">
+                        </a>
+                        <a class="delete-button m-1" data-record-id="${row.ID}" href="#">
+                            <img src="../assets/img/icons/delete.svg" alt="Delete">
+                        </a>
+                        `;
                 }
-            ]
-        });
-
-        // Handle delete button click
-        $('#department_table tbody').on('click', '.delete-button', function() {
-            var button = this;
-            var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
-
-            var confirmDelete = confirm('Are you sure you want to delete this record?');
-
-            if (confirmDelete) {
-                $.ajax({
-                    type: 'POST',
-                    url: '../config/delete_department.php',
-                    data: {
-                        record_id: recordId // Pass the record_id as a parameter
-                    },
-                    success: function(response) {
-                        alert(response);
-                        table.ajax.reload(); // Refresh the DataTable
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('AJAX Error: ' + status + ' ' + error);
-                    }
-                });
             }
-        });
+        ]
+    });
 
-        // Handle Edit button click
-        $('#department_table tbody').on('click', '[data-toggle="modal"][data-target="#editDepartmentModal"]', function() {
+    // Handle delete button click
+    $('#department_table tbody').on('click', '.delete-button', function() {
+        var button = this;
+        var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
+
+        var confirmDelete = confirm('Are you sure you want to delete this record?');
+
+        if (confirmDelete) {
+            $.ajax({
+                type: 'POST',
+                url: '../config/delete_department.php',
+                data: {
+                    record_id: recordId // Pass the record_id as a parameter
+                },
+                success: function(response) {
+                    alert(response);
+                    table.ajax.reload(); // Refresh the DataTable
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error: ' + status + ' ' + error);
+                }
+            });
+        }
+    });
+
+    // Handle Edit button click
+    $('#department_table tbody').on('click', '[data-toggle="modal"][data-target="#editDepartmentModal"]',
+        function() {
             var button = this;
             var recordId = $(button).data('record-id');
             var recordName = $(button).data('record-name');
@@ -275,5 +306,5 @@ include('../includes/footer.php');
             $('#edit_department_id').val(recordId);
             $('#edit_department_name').val(recordName);
         });
-    });
+});
 </script>

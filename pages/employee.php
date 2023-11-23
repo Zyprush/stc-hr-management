@@ -166,79 +166,6 @@ include('../config/fetch_departments_options.php');
                 </div>
             </div>
 
-            <!-- Add -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Add Employee</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="../config/add_employee.php" method="post">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="firstName">First Name:</label>
-                                        <input type="text" class="form-control" id="firstName" name="firstName"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="middleName">Middle Name:</label>
-                                        <input type="text" class="form-control" id="middleName" name="middleName">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="lastName">Last Name:</label>
-                                        <input type="text" class="form-control" id="lastName" name="lastName" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="extension">Extension:</label>
-                                        <input type="text" class="form-control" id="extension" name="extension">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="startDate">Start Date:</label>
-                                        <input type="date" class="form-control" id="startDate" name="startDate"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="type">Type:</label>
-                                        <select class="form-control" id="type" name="type" required>
-                                            <option value="Full-Time">Full-Time</option>
-                                            <option value="Part-Time">Part-Time</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="department">Department:</label>
-                                        <select class="form-control" id="department" name="department" required>
-                                            <?php
-                                            while ($row = $result->fetch_assoc()) {
-                                                $departmentName = $row['Department'];
-                                                echo "<option value=\"$departmentName\">$departmentName</option>";
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="position">Position:</label>
-                                        <input type="text" class="form-control" id="position" name="position" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="endDate">End Date:</label>
-                                        <input type="date" class="form-control" id="endDate" name="endDate" required>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Edit Employee Modal -->
             <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog"
                 aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
@@ -329,7 +256,7 @@ $(document).ready(function() {
                 "data": "Type"
             },
             {
-                "data": "Department"
+                "data": "Name_department"
             },
             {
                 "data": "Position"
@@ -417,7 +344,7 @@ $(document).ready(function() {
                 $('#edit_extension').val(employee.Extension);
                 $('#edit_start_date').val(employee.StartDate);
                 $('#edit_employee_type').val(employee.Type);
-                $('#edit_employee_department').val(employee.Department);
+                $('#edit_employee_department').val(employee.Name_department);
                 $('#edit_employee_position').val(employee.Position);
                 $('#edit_end_date').val(employee.EndDate);
             },

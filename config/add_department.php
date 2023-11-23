@@ -3,17 +3,18 @@ session_start();
 include 'dbcon.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve the department name from the POST request
+    // Retrieve the department name and root from the POST request
     $departmentName = $_POST['departmentName'];
+    $root = $_POST['root'];
 
-    // Validate departmentName here if needed
+    // Validate $departmentName and $root here if needed
 
     // Check if the 'departments' table exists, and create it if not
     $checkTableQuery = "SHOW TABLES LIKE 'departments'";
-    $tableResult = mysqli_query($conn, $checkTableQuery); // Use $conn here
+    $tableResult = mysqli_query($conn, $checkTableQuery);
 
     if (!$tableResult) {
-        echo 'Error checking table existence: ' . mysqli_error($conn); // Use $conn here
+        echo 'Error checking table existence: ' . mysqli_error($conn);
         exit;
     }
 
@@ -21,33 +22,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // The table doesn't exist, create it
         $createTableQuery = "CREATE TABLE departments (
             ID INT AUTO_INCREMENT PRIMARY KEY,
-            Department VARCHAR(255) NOT NULL
+            Department VARCHAR(255) NOT NULL,
+            Root VARCHAR(255) NOT NULL
         )";
 
-        if (mysqli_query($conn, $createTableQuery)) { // Use $conn here
+        if (mysqli_query($conn, $createTableQuery)) {
             echo 'Table "departments" created successfully. ';
         } else {
-            echo 'Error creating table: ' . mysqli_error($conn); // Use $conn here
+            echo 'Error creating table: ' . mysqli_error($conn);
             exit;
         }
     }
 
-    // Now, perform the database insertion
-    $insertQuery = "INSERT INTO departments (Department) VALUES ('$departmentName')";
+    // Now, perform the database insertion with both departmentName and root
+    $insertQuery = "INSERT INTO departments (Department, Root) VALUES ('$departmentName', '$root')";
 
-    if (mysqli_query($conn, $insertQuery)) { // Use $conn here
+    if (mysqli_query($conn, $insertQuery)) {
         // Set a session value to indicate success
-        session_start();
         $_SESSION['message'] = 'Department added successfully';
 
         // Redirect to department.php
         header('Location: ../pages/department.php');
         exit();
     } else {
-        echo 'Error inserting data: ' . mysqli_error($conn); // Use $conn here
+        echo 'Error inserting data: ' . mysqli_error($conn);
 
         // Set a session value to indicate the error
-        session_start();
         $_SESSION['message'] = 'Error adding department';
 
         // Redirect to department.php
@@ -57,4 +57,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Close the database connection
-mysqli_close($conn); // Use $conn here
+mysqli_close($conn);
+?>

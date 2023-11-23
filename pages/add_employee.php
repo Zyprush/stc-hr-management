@@ -178,14 +178,8 @@ require('../config/countries.php');
                                         </div>
                                         <div class="col-sm-4">
                                             <label for="department">Department:</label>
-                                            <select class="form-control" id="department" name="department">
+                                            <select class="form-control" id="name_department" name="name_department">
                                                 <option value="">--Select--</option> <!-- Default option -->
-                                                <?php
-                                                while ($row = $result->fetch_assoc()) {
-                                                    $department = $row['Department'];
-                                                    echo "<option value=\"$department\">$department</option>";
-                                                }
-                                                ?>
                                             </select>
                                         </div>
                                         <div class="col-sm-4">
@@ -1306,7 +1300,33 @@ require('../config/countries.php');
         </div>
     </div>
 </div>
+<script>
+// Fetch data from PHP using AJAX
+var selectDepartment = document.getElementById('name_department');
 
+// AJAX request
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+            var departments = JSON.parse(xhr.responseText);
+
+            // Update options in the dropdown
+            departments.forEach(function(department) {
+                var option = document.createElement('option');
+                option.value = department['Department']; // Assuming 'Department' is the column name
+                option.textContent = department['Department']; // Assuming 'Department' is the column name
+                selectDepartment.appendChild(option);
+            });
+        } else {
+            console.error('Request failed: ' + xhr.status);
+        }
+    }
+};
+
+xhr.open('GET', '../config/get_departments.php', true);
+xhr.send();
+</script>
 <script>
 $(document).ready(function() {
     var current_page = 1;
