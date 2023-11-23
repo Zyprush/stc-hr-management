@@ -10,6 +10,8 @@ if (isset($_GET['id'])) {
 } else {
     //echo "No ID parameter found in the URL.";
 }
+
+
 ?>
 
 <div id="global-loader">
