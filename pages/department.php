@@ -74,7 +74,7 @@ include('../config/authentication.php');
                     </li>
                     <li class="active">
                         <a href="department.php"><i data-feather="users"></i>
-                            <span> Department</span> </a>
+                            <span> Office</span> </a>
                     </li>
                     <li class="menu">
                         <a href="employee.php"><i data-feather="user"></i>
@@ -86,11 +86,11 @@ include('../config/authentication.php');
                     </li>
                     <li class="menu">
                         <a href="event.php"><i data-feather="calendar"></i>
-                            <span> Event</span> </a>
+                            <span> Report</span> </a>
                     </li>
                     <li class="menu">
                         <a href="activities.php"><i data-feather="activity"></i>
-                            <span> Activities</span> </a>
+                            <span> Promotion </span> </a>
                     </li>
                     <li class="menu">
                         <a href="benefits.php"><i data-feather="award"></i>
@@ -125,7 +125,6 @@ include('../config/authentication.php');
                         <table id="department_table" class="table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Department</th>
                                     <th>Actions</th>
                                 </tr>
@@ -245,9 +244,6 @@ $(document).ready(function() {
             "dataSrc": ""
         },
         "columns": [{
-                "data": "ID"
-            },
-            {
                 "data": "Department"
             },
             {
@@ -258,7 +254,7 @@ $(document).ready(function() {
                         <a class="view-button m-1" data-record-id="${row.ID}" href="#">
                             <img src="../assets/img/icons/eye.svg" alt="View">
                         </a>
-                        `;
+                    `;
                 }
             }
         ]

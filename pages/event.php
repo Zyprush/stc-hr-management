@@ -72,7 +72,7 @@ include('../config/authentication.php');
                     </li>
                     <li class="menu">
                         <a href="department.php"><i data-feather="users"></i>
-                            <span> Department</span> </a>
+                            <span> Office </span> </a>
                     </li>
                     <li class="menu">
                         <a href="employee.php"><i data-feather="user"></i>
@@ -84,11 +84,11 @@ include('../config/authentication.php');
                     </li>
                     <li class="active">
                         <a href="event.php"><i data-feather="calendar"></i>
-                            <span> Event</span> </a>
+                            <span> Report </span> </a>
                     </li>
                     <li class="menu">
                         <a href="activities.php"><i data-feather="activity"></i>
-                            <span> Activities</span> </a>
+                            <span> Promotion </span> </a>
                     </li>
                     <li class="menu">
                         <a href="benefits.php"><i data-feather="award"></i>

@@ -3,7 +3,7 @@
 include '../config/dbcon.php';
 
 // Fetch data from the 'departments' table
-$query = "SELECT * FROM departments WHERE Root = 'None'";
+$query = "SELECT * FROM departments";
 $result = $conn->query($query);
 
 if (!$result) {

@@ -5,7 +5,6 @@ include 'dbcon.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the department name and root from the POST request
     $departmentName = $_POST['departmentName'];
-    $root = $_POST['root'];
 
     // Validate $departmentName and $root here if needed
 
@@ -22,8 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // The table doesn't exist, create it
         $createTableQuery = "CREATE TABLE departments (
             ID INT AUTO_INCREMENT PRIMARY KEY,
-            Department VARCHAR(255) NOT NULL,
-            Root VARCHAR(255) NOT NULL
+            Department VARCHAR(255) NOT NULL
         )";
 
         if (mysqli_query($conn, $createTableQuery)) {
@@ -35,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Now, perform the database insertion with both departmentName and root
-    $insertQuery = "INSERT INTO departments (Department, Root) VALUES ('$departmentName', '$root')";
+    $insertQuery = "INSERT INTO departments (Department) VALUES ('$departmentName')";
 
     if (mysqli_query($conn, $insertQuery)) {
         // Set a session value to indicate success

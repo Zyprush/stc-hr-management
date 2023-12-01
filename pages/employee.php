@@ -1,7 +1,7 @@
 <?php
 include('../includes/header.php');
 include('../config/authentication.php');
-include('../config/fetch_departments_options.php');
+//include('../config/fetch_departments_options.php');
 ?>
 
 <div id="global-loader">
@@ -65,6 +65,7 @@ include('../config/fetch_departments_options.php');
             </div>
         </div>
     </div>
+
     <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
@@ -75,7 +76,7 @@ include('../config/fetch_departments_options.php');
                     </li>
                     <li class="menu">
                         <a href="department.php"><i data-feather="users"></i>
-                            <span> Department</span> </a>
+                            <span> Offices</span> </a>
                     </li>
                     <li class="active">
                         <a href="employee.php"><i data-feather="user"></i>
@@ -87,11 +88,11 @@ include('../config/fetch_departments_options.php');
                     </li>
                     <li class="menu">
                         <a href="event.php"><i data-feather="calendar"></i>
-                            <span> Event</span> </a>
+                            <span> Report </span> </a>
                     </li>
                     <li class="menu">
                         <a href="activities.php"><i data-feather="activity"></i>
-                            <span> Activities</span> </a>
+                            <span> Promotion</span> </a>
                     </li>
                     <li class="menu">
                         <a href="benefits.php"><i data-feather="award"></i>
@@ -119,8 +120,9 @@ include('../config/fetch_departments_options.php');
                             <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Employee
                         </a>
                     -->
-                    <a href="add_employee.php" class="btn btn-added"> <img src="../assets/img/icons/plus.svg" alt="img"
-                            class="me-1">Add Employee</a>
+                    <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                        <img src="../assets/img/icons/plus.svg" alt="img" class="me-1">Add Employee
+                    </a>
                 </div>
             </div>
             <div class="card">
@@ -162,6 +164,92 @@ include('../config/fetch_departments_options.php');
                             <tbody>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for adding employee -->
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog"
+                aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Your form for adding a new employee -->
+                            <form action="../config/add_new_employee.php" method="post">
+
+                                <div class="form-group">
+                                    <label for="name">Name of Incumbent</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        placeholder="EX. Juan A. Delacruz" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="office">Name of Incumbent</label>
+                                    <input type="text" class="form-control" id="office" name="office"
+                                        placeholder="EX. Juan A. Delacruz" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="item">Item No.</label>
+                                        <div class="col-sm-6">
+                                            <label for="itemOld">Old</label>
+                                            <input type="text" class="form-control" id="oldItem" name="oldItem"
+                                                placeholder="0000" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="itemNew">New</label>
+                                            <input type="text" class="form-control" id="newItem" name="newItem"
+                                                placeholder="0000" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="position">Position Title</label>
+                                    <input type="text" class="form-control" id="position" name="position" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="current">Current Year Authorized Rate/Annum</label>
+                                        <div class="col-sm-6">
+                                            <label for="sg">SG/Step</label>
+                                            <input type="text" class="form-control" name="sg" id="sg" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="amount">Amount</label>
+                                            <input type="number" class="form-control" name="amount" id="amount" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="current">Budget Year Propose Rate/Annum</label>
+                                        <div class="col-sm-6">
+                                            <label for="sg">SG/Step</label>
+                                            <input type="text" class="form-control" name="sg1" id="sg1" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="amount">Amount</label>
+                                            <input type="number" class="form-control" name="amount1" id="amount1"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Submit button for the form -->
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
