@@ -1,17 +1,16 @@
 <?php
+include('../config/dbcon.php');
 include('../includes/header.php');
 include('../config/authentication.php');
-
-if (isset($_GET['id'])) {
-    // Retrieve the 'id' parameter value
-    $id = $_GET['id'];
-    // Use the retrieved value (e.g., display it)
-    //echo "ID from URL: " . $id;
-} else {
-    //echo "No ID parameter found in the URL.";
-}
-
-
+//include('../config/fetch_departments_options.php');
+    if (isset($_GET['id'])) {
+        // Retrieve the 'id' parameter value
+        $id = $_GET['id'];
+        // Use the retrieved value (e.g., display it)
+        //echo "ID from URL: " . $id;
+    } else {
+        //echo "No ID parameter found in the URL.";
+    }
 ?>
 
 <div id="global-loader">
@@ -75,6 +74,7 @@ if (isset($_GET['id'])) {
             </div>
         </div>
     </div>
+
     <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
@@ -83,11 +83,11 @@ if (isset($_GET['id'])) {
                         <a href="dashboard.php"><i data-feather="home"></i>
                             <span> Dashboard</span> </a>
                     </li>
-                    <li class="active">
-                        <a href="department.php"><i data-feather="users"></i>
-                            <span> Department</span> </a>
-                    </li>
                     <li class="menu">
+                        <a href="department.php"><i data-feather="users"></i>
+                            <span> Offices</span> </a>
+                    </li>
+                    <li class="active">
                         <a href="employee.php"><i data-feather="user"></i>
                             <span> Employee</span> </a>
                     </li>
@@ -97,11 +97,11 @@ if (isset($_GET['id'])) {
                     </li>
                     <li class="menu">
                         <a href="event.php"><i data-feather="calendar"></i>
-                            <span> Event</span> </a>
+                            <span> Report </span> </a>
                     </li>
                     <li class="menu">
                         <a href="activities.php"><i data-feather="activity"></i>
-                            <span> Activities</span> </a>
+                            <span> Promotion</span> </a>
                     </li>
                     <li class="menu">
                         <a href="benefits.php"><i data-feather="award"></i>
@@ -120,26 +120,69 @@ if (isset($_GET['id'])) {
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Department List </h4>
-                    <h6>Department of $parent </h6>
+                    <h4><?php 
+                    // Fetch the office name from the 'departments' table based on the provided 'id'
+                    $officeQuery = "SELECT Department FROM departments WHERE ID = ?";
+                    $officeStmt = $conn->prepare($officeQuery);
+
+                    if ($officeStmt) {
+                        $officeStmt->bind_param("i", $id);
+                        $officeStmt->execute();
+                        $officeResult = $officeStmt->get_result();
+
+                        if ($officeResult->num_rows === 1) {
+                            $officeRow = $officeResult->fetch_assoc();
+                            echo $officeRow['Department'];
+                        } else {
+                            echo "Office not found";
+                        }
+
+                        $officeStmt->close();
+                    } else {
+                        echo "Error preparing office query";
+                    }
+                    ?></h4>
+                    <h6>Employee List</h6>
                 </div>
-                <!--
-                    <div class="page-btn">
-                        <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
-                            <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Department
-                        </a>
-                    </div>
-                -->
+                <div class="page-btn">
+                    <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                        <img src="../assets/img/icons/plus.svg" alt="img" class="me-1">Add Employee
+                    </a>
+                </div>
             </div>
             <div class="card">
                 <div class="card-body">
-
+                    <div class="table-top">
+                        <div class="search-set">
+                        </div>
+                        <div class="wordset">
+                            <ul>
+                                <li>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                            src="../assets/img/icons/pdf.svg" alt="img"></a>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
+                                            src="../assets/img/icons/excel.svg" alt="img"></a>
+                                </li>
+                                <li>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
+                                            src="../assets/img/icons/printer.svg" alt="img"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="table-responsive">
-                        <table id="department_table" class="table">
+                        <table id="event_table" class="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Department</th>
+                                    <th>Item No.</th>
+                                    <th>Office</th>
+                                    <th>Full Name</th>
+                                    <th>Type of Employment</th>
+                                    <th>Start Date</th>
+                                    <th>Position Title</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -150,70 +193,199 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
 
-
-            <!-- Add -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <!-- Modal for adding employee -->
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog"
+                aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Add Department</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="../config/add_department.php" method="post">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="departmentName">Department:</label>
-                                        <input type="text" class="form-control" id="departmentName"
-                                            name="departmentName" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="root">Under In:</label>
-                                        <select class="form-control" id="root" name="root" required>
-                                            <option value="None">None</option>
+                            <!-- Your form for adding a new employee -->
+                            <form action="../config/add_new_employee.php" method="post">
 
-                                        </select>
+                                <div class="form-group">
+                                    <label for="name">Name of Incumbent</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        placeholder="EX. Juan A. Delacruz" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="office">Office Name</label>
+                                    <select class="form-control" id="office" name="office" required>
+                                        <option value="">--Select--</option>
+                                        <?php
+                                    // Fetch department names from the 'departments' table
+                                    $sql = "SELECT Department FROM departments";
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $department = $row['Department'];
+                                            echo "<option value='$department'>$department</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=''>No departments found</option>";
+                                    }
+                                    ?>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="type">Type of Employment</label>
+                                    <select type="text" class="form-control" id="employment" name="employment" required>
+                                        <option value="">--Select--</option>
+                                        <option value="Permanent">Permanent</option>
+                                        <option value="Job Order">Job Order</option>
+                                        <option value="Elective">Elective</option>
+                                        <option value="Coterminous">Coterminous</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="start">Start Date</label>
+                                    <input type="date" class="form-control" id="start" name="start" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="item">Item No.</label>
+                                        <div class="col-sm-6">
+                                            <label for="itemOld">Old</label>
+                                            <input type="text" class="form-control" id="oldItem" name="oldItem"
+                                                placeholder="0000" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="itemNew">New</label>
+                                            <input type="text" class="form-control" id="newItem" name="newItem"
+                                                placeholder="0000" required>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                <div class="form-group">
+                                    <label for="position">Position Title</label>
+                                    <input type="text" class="form-control" id="position" name="position" required>
                                 </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="current">Current Year Authorized Rate/Annum</label>
+                                        <div class="col-sm-6">
+                                            <label for="sg">SG/Step</label>
+                                            <input type="text" class="form-control" name="sg" id="sg" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="amount">Amount</label>
+                                            <input type="number" class="form-control" name="amount" id="amount"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="current">Budget Year Propose Rate/Annum</label>
+                                        <div class="col-sm-6">
+                                            <label for="sg">SG/Step</label>
+                                            <input type="text" class="form-control" name="sg1" id="sg1" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="amount">Amount</label>
+                                            <input type="number" class="form-control" name="amount1" id="amount1"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Submit button for the form -->
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Edit -->
-            <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog"
-                aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
+            <!-- Edit Employee Modal -->
+            <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog"
+                aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editDepartmentModalLabel">Edit Department</h5>
+                            <h5 class="modal-title" id="editEmployeeModalLabel">Edit Employee</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="editDepartmentForm" action="../config/edit_department.php" method="post">
-                                <input type="hidden" name="edit_department_id" id="edit_department_id">
+                            <form id="editEmployeeForm" action="../config/edit_employee.php" method="post">
+                                <input type="hidden" name="edit_employee_id" id="edit_employee_id">
                                 <div class="form-group">
-                                    <label for="edit_department_name">Department Name:</label>
-                                    <input type="text" class="form-control" id="edit_department_name"
-                                        name="edit_department_name">
+                                    <label for="edit_name">Name:</label>
+                                    <input type="text" class="form-control" id="edit_name" name="edit_name">
                                 </div>
+                                <div class="form-group">
+                                    <label for="edit_office">Office:</label>
+                                    <select class="form-control" id="edit_office" name="edit_office" required>
+                                        <option value="">--Select--</option>
+                                        <?php
+                                        // Establish database connection (ensure $conn is defined)
+                                        include '../config/dbcon.php';
+
+                                        // Fetch department names from the 'departments' table
+                                        $sql = "SELECT Department FROM departments";
+                                        $result = $conn->query($sql);
+
+                                        if ($result && $result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                $department = $row['Department'];
+                                                echo "<option value='$department'>$department</option>";
+                                            }
+                                        } else {
+                                            echo "<option value=''>No departments found</option>";
+                                        }
+
+                                        // Close database connection
+                                        $conn->close();
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="employment">Type of Employment:</label>
+                                    <select class="form-control" id="edit_employment" name="edit_employment" required>
+                                        <option value="">--Select--</option>
+                                        <option value="Permanent">Permanent</option>
+                                        <option value="Job Order">Job Order</option>
+                                        <option value="Elective">Elective</option>
+                                        <option value="Coterminous">Coterminous</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="edit_start_date">Start Date:</label>
+                                    <input type="date" class="form-control" id="edit_start_date" name="edit_start_date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit_position">Position Title:</label>
+                                    <input type="text" class="form-control" id="edit_position" name="edit_position">
+                                </div>
+                                <!-- Add other necessary fields here -->
+                                <div class="form-group">
+                                    <label for="edit_sg">Current Year Authorized Rate/Annum SG:</label>
+                                    <input type="text" class="form-control" id="edit_sg" name="edit_sg">
+                                </div>
+                                <!-- Add more fields as needed -->
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -221,69 +393,57 @@ if (isset($_GET['id'])) {
 <?php
 include('../includes/footer.php');
 ?>
-<script>
-// Fetch data from PHP using AJAX
-var selectRoot = document.getElementById('root');
-
-// AJAX request
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function() {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-            var departments = JSON.parse(xhr.responseText);
-
-            // Update options in the dropdown
-            departments.forEach(function(department) {
-                var option = document.createElement('option');
-                option.value = department['Department']; // Assuming 'Department' is the column name
-                option.textContent = department['Department']; // Assuming 'Department' is the column name
-                selectRoot.appendChild(option);
-            });
-        } else {
-            console.error('Request failed: ' + xhr.status);
-        }
-    }
-};
-
-xhr.open('GET', '../config/get_departments_root.php', true);
-xhr.send();
-</script>
 
 <script>
 $(document).ready(function() {
     var id = "<?php echo $id; ?>";
-
-    var table = $('#department_table').DataTable({
+    var table = $('#event_table').DataTable({
         "ajax": {
-            "url": "../config/fetch_departments_child.php?id=" + id,
+            "url": "../config/fetch_specific_employees.php?id=" + id,
             "type": "POST",
             "dataSrc": ""
         },
         "columns": [{
-                "data": "ID"
+                "data": "ID",
+                "visible": false
             },
             {
-                "data": "Department"
+                "data": "newItem"
+            },
+            {
+                "data": "office"
+            },
+            {
+                "data": "name"
+            },
+            {
+                "data": "employment"
+            },
+            {
+                "data": "start"
+            },
+            {
+                "data": "position"
             },
             {
                 "data": null,
                 "render": function(data, type, row) {
-                    // Add a data-attribute to store the record ID
+                    // Add action buttons here for edit, delete, etc.
                     return `
-                            <a class="me-3" href="#" data-toggle="modal" data-target="#editDepartmentModal" data-record-id="${row.ID}" data-record-name="${row.Department}">
-                                <img src="../assets/img/icons/edit.svg" alt="Edit">
-                            </a>
-                            <a class="delete-button" data-record-id="${row.ID}" href="#">
-                                <img src="../assets/img/icons/delete.svg" alt="Delete">
-                            </a>
-                        `;
+                    <a class="m-1" href="#" data-toggle="modal" data-target="#editEmployeeModal" data-record-id="${row.ID}">
+                        <img src="../assets/img/icons/edit.svg" alt="Edit">
+                    </a>
+                    <a class="m-1 delete-button" data-record-id="${row.ID}" href="#">
+                        <img src="../assets/img/icons/delete.svg" alt="Delete">
+                    </a>
+                `;
                 }
             }
         ]
     });
 
     // Handle delete button click
-    $('#department_table tbody').on('click', '.delete-button', function() {
+    $('#event_table tbody').on('click', '.delete-button', function() {
         var button = this;
         var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
 
@@ -292,7 +452,7 @@ $(document).ready(function() {
         if (confirmDelete) {
             $.ajax({
                 type: 'POST',
-                url: '../config/delete_department.php',
+                url: '../config/delete_employee.php',
                 data: {
                     record_id: recordId // Pass the record_id as a parameter
                 },
@@ -307,16 +467,37 @@ $(document).ready(function() {
         }
     });
 
-    // Handle Edit button click
-    $('#department_table tbody').on('click', '[data-toggle="modal"][data-target="#editDepartmentModal"]',
-        function() {
-            var button = this;
-            var recordId = $(button).data('record-id');
-            var recordName = $(button).data('record-name');
+    //handle the edit event
+    $('#event_table tbody').on('click', '[data-target="#editEmployeeModal"]', function() {
+        var button = $(this);
+        var recordId = button.data('record-id');
 
-            // Set the record details in the modal form fields
-            $('#edit_department_id').val(recordId);
-            $('#edit_department_name').val(recordName);
+        // Fetch employee details by ID using AJAX
+        $.ajax({
+            type: 'POST',
+            url: '../config/fetch_employee.php',
+            data: {
+                employee_id: recordId
+            },
+            success: function(response) {
+                var employee = JSON.parse(response);
+
+                // Set the fetched employee details in the modal form fields
+                $('#edit_employee_id').val(employee.ID);
+                $('#edit_name').val(employee.name);
+                $('#edit_office').val(employee.office);
+                $('#edit_employment').val(employee.employment);
+                $('#edit_start_date').val(employee.start);
+                $('#edit_position').val(employee.position);
+                // Set other fields accordingly based on your database structure
+                $('#edit_sg').val(employee
+                    .sg); // Example: Current Year Authorized Rate/Annum SG field
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error: ' + status + ' ' + error);
+            }
         });
+    });
+
 });
 </script>

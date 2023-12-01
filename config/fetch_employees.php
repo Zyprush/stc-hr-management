@@ -1,34 +1,22 @@
 <?php
-// Include your database connection code here
-include '../config/dbcon.php';
+include 'dbcon.php'; // Include your database connection
 
-// Fetch data from the 'departments' table
-$query = "SELECT * FROM employees";
-$result = $conn->query($query);
+// Perform a select query to fetch data from the 'employees' table
+$query = "SELECT ID, name, newItem, office, employment, start, position FROM employees";
+
+$result = mysqli_query($conn, $query);
 
 if (!$result) {
-    die("Query failed: " . $conn->error);
+    echo json_encode(['error' => 'Error fetching data']);
+    exit;
 }
 
-// Create an array to store the department data
-$data = array();
-
-while ($row = $result->fetch_assoc()) {
-    // Combine first, middle, last, and extension into FullName
-    $fullName = $row['FirstName'] . ' ' . $row['MiddleName'] . ' ' . $row['LastName'] . ' ' . $row['Extension'];
-    $row['FullName'] = $fullName;
-
-    unset($row['FirstName'], $row['MiddleName'], $row['LastName'], $row['Extension']);
-
+$data = [];
+while ($row = mysqli_fetch_assoc($result)) {
     $data[] = $row;
 }
 
-// Close the database connection
-$conn->close();
+mysqli_close($conn);
 
-// Return the data as JSON
 echo json_encode($data);
-?>
-<?php
-
 ?>

@@ -4,6 +4,9 @@ include 'dbcon.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve employee details from the POST request
     $name = $_POST['name'];
+    $office = $_POST['office'];
+    $employment = $_POST['employment'];
+    $start = $_POST['start'];
     $oldItem = $_POST['oldItem'];
     $newItem = $_POST['newItem'];
     $position = $_POST['position'];
@@ -34,7 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             sg VARCHAR(255) NOT NULL,
             sg1 VARCHAR(255) NOT NULL,
             amount VARCHAR(255) NOT NULL,
-            amount1 VARCHAR(255) NOT NULL
+            amount1 VARCHAR(255) NOT NULL,
+            office VARCHAR(255) NOT NULL,
+            employment VARCHAR(255) NOT NULL,
+            start DATE
         )";
 
         if (mysqli_query($conn, $createTableQuery)) {
@@ -46,8 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Now, perform the database insertion
-    $insertQuery = "INSERT INTO employees (name, oldItem, newItem, position, sg, sg1, amount, amount1)
-    VALUES ('$name', '$oldItem', '$newItem', '$position', '$sg', '$sg1', '$amount', '$amount1')";
+    $insertQuery = "INSERT INTO employees (name, oldItem, newItem, position, sg, sg1, amount, amount1, office, employment, start)
+    VALUES ('$name', '$oldItem', '$newItem', '$position', '$sg', '$sg1', '$amount', '$amount1', '$office', '$employment', '$start')";
+
 
     if (mysqli_query($conn, $insertQuery)) {
         // Set a session value to indicate success

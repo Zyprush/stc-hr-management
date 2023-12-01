@@ -156,13 +156,6 @@ include('../config/authentication.php');
                                         <input type="text" class="form-control" id="departmentName"
                                             name="departmentName" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="root">Under In:</label>
-                                        <select class="form-control" id="root" name="root" required>
-                                            <option value="None">None</option>
-
-                                        </select>
-                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

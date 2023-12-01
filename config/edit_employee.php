@@ -5,22 +5,19 @@ include '../config/dbcon.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the employee ID and new employee details from the form
     $employeeId = $_POST['edit_employee_id'];
-    $newFirstName = $_POST['edit_first_name'];
-    $newMiddleName = $_POST['edit_middle_name'];
-    $newLastName = $_POST['edit_last_name'];
-    $newExtension = $_POST['edit_extension'];
+    $newName = $_POST['edit_name'];
+    $newOffice = $_POST['edit_office'];
+    $newEmployment = $_POST['edit_employment'];
     $newStartDate = $_POST['edit_start_date'];
-    $newEmployeeType = $_POST['edit_employee_type'];
-    $newEmployeeDepartment = $_POST['edit_employee_department'];
-    $newEmployeePosition = $_POST['edit_employee_position'];
-    $newEndDate = $_POST['edit_end_date'];
+    $newPosition = $_POST['edit_position'];
+    $newSg = $_POST['edit_sg'];
 
     // Prepare and execute the SQL UPDATE query
-    $query = "UPDATE employees SET FirstName = ?, MiddleName = ?, LastName = ?, Extension = ?, StartDate = ?, Type = ?, Department = ?, Position = ?, EndDate = ? WHERE ID = ?";
+    $query = "UPDATE employees SET name = ?, office = ?, employment = ?, start = STR_TO_DATE(?, '%Y-%m-%d'), position = ?, sg = ? WHERE ID = ?";
     $stmt = $conn->prepare($query);
 
     if ($stmt) {
-        $stmt->bind_param("sssssssssi", $newFirstName, $newMiddleName, $newLastName, $newExtension, $newStartDate, $newEmployeeType, $newEmployeeDepartment, $newEmployeePosition, $newEndDate, $employeeId);
+        $stmt->bind_param("ssssssi", $newName, $newOffice, $newEmployment, $newStartDate, $newPosition, $newSg, $employeeId);
         $stmt->execute();
 
         // Check if the query was successful
