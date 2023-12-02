@@ -4,6 +4,7 @@ include('../config/authentication.php');
 
 include('../config/department_count.php');
 include('../config/fetch_events_dashboard.php');
+include('../config/employee-chart.php');
 ?>
 
 <div id="global-loader">
@@ -189,7 +190,7 @@ include('../config/fetch_events_dashboard.php');
                 <div class="col-lg-7 col-sm-12 col-12 d-flex">
                     <div class="card shadow flex-fill">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">Total Employees</h5>
+                            <h5 class="card-title mb-0">Total Employees per Office</h5>
                             <a href="employee.php"><i class="fa fa-plus"></i></a>
                         </div>
                         <div class="card-body">
@@ -248,14 +249,19 @@ include('../includes/footer.php');
 
 <script>
     var ctxD = document.getElementById("doughnutChart").getContext('2d');
+    var departmentCounts = <?php echo json_encode($departmentCounts); ?>;
+
+    var labels = Object.keys(departmentCounts);
+    var data = Object.values(departmentCounts);
+
     var myDoughnutChart = new Chart(ctxD, {
         type: 'doughnut',
         data: {
-            labels: ["Permanent", "Job Order"],
+            labels: labels,
             datasets: [{
-                data: [<?php echo $permanent; ?>, <?php echo $jo; ?>],
-                backgroundColor: ["#6859f3", "#e95c41"],
-                hoverBackgroundColor: ["#4a3aae", "#c04532"]
+                data: data,
+                backgroundColor: ["#6859f3", "#e95c41", "#4a3aae", "#c04532"], // Add more colors if needed
+                hoverBackgroundColor: ["#4a3aae", "#c04532", "#2e255c", "#a82a1f"]
             }]
         },
         options: {
