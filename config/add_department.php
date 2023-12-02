@@ -3,10 +3,10 @@ session_start();
 include 'dbcon.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve the department name and root from the POST request
+    // Retrieve the department name from the POST request
     $departmentName = $_POST['departmentName'];
 
-    // Validate $departmentName and $root here if needed
+    // Validate $departmentName if needed
 
     // Check if the 'departments' table exists, and create it if not
     $checkTableQuery = "SHOW TABLES LIKE 'departments'";
@@ -32,10 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Now, perform the database insertion with both departmentName and root
-    $insertQuery = "INSERT INTO departments (Department) VALUES ('$departmentName')";
+    // Now, perform the database insertion with prepared statement
+    $insertQuery = "INSERT INTO departments (Department) VALUES (?)";
 
-    if (mysqli_query($conn, $insertQuery)) {
+    $stmt = mysqli_prepare($conn, $insertQuery);
+    mysqli_stmt_bind_param($stmt, "s", $departmentName);
+
+    if (mysqli_stmt_execute($stmt)) {
         // Set a session value to indicate success
         $_SESSION['message'] = 'Department added successfully';
 
@@ -52,8 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ../pages/department.php');
         exit();
     }
+
+    mysqli_stmt_close($stmt);
 }
 
 // Close the database connection
 mysqli_close($conn);
-?>

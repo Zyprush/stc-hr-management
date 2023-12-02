@@ -9,20 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newOffice = $_POST['edit_office'];
     $newEmployment = $_POST['edit_employment'];
     $newStartDate = $_POST['edit_start_date'];
-    $newOldItem = $_POST['edit_old_item']; // Added line for the 'edit_old_item' field
-    $newNewItem = $_POST['edit_new_item']; // Added line for the 'edit_new_item' field
+    $newEndDate = $_POST['edit_end_date']; // Added line for the 'end' field
     $newPosition = $_POST['edit_position'];
-    $newSg = $_POST['edit_sg'];
-    $newAmount = $_POST['edit_amount']; // Added line for the 'edit_amount' field
-    $newSg1 = $_POST['edit_sg1']; // Added line for the 'edit_budget_sg' field
-    $newAmount1 = $_POST['edit_amount1']; // Added line for the 'edit_budget_amount' field
 
     // Prepare and execute the SQL UPDATE query
-    $query = "UPDATE employees SET name = ?, office = ?, employment = ?, start = STR_TO_DATE(?, '%Y-%m-%d'), oldItem = ?, newItem = ?, position = ?, sg = ?, amount = ?, sg1 = ?, amount1 = ? WHERE ID = ?";
+    $query = "UPDATE employees_jo SET name = ?, office = ?, employment = ?, start = STR_TO_DATE(?, '%Y-%m-%d'), end = STR_TO_DATE(?, '%Y-%m-%d'), position = ? WHERE ID = ?";
     $stmt = $conn->prepare($query);
 
     if ($stmt) {
-        $stmt->bind_param("sssssssssssi", $newName, $newOffice, $newEmployment, $newStartDate, $newOldItem, $newNewItem, $newPosition, $newSg, $newAmount, $newSg1, $newAmount1, $employeeId);
+        $stmt->bind_param("ssssssi", $newName, $newOffice, $newEmployment, $newStartDate, $newEndDate, $newPosition, $employeeId);
         $stmt->execute();
 
         // Check if the query was successful
@@ -48,5 +43,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Redirect to the employee.php page or wherever you want to redirect
-header('Location: ../pages/employee.php');
+header('Location: ../pages/employee-jo.php');
 exit();
