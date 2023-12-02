@@ -147,5 +147,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_stmt_close($stmt);
 }
 
-// Close the database connection
+// Close the database connectionsds
 mysqli_close($conn);

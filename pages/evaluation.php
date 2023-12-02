@@ -151,8 +151,6 @@ include('../config/authentication.php');
                                     <th>Office</th>
                                     <th>Full Name</th>
                                     <th>Type of Employment</th>
-                                    <th>Start Date</th>
-                                    <th>Position Title</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -174,7 +172,7 @@ include('../includes/footer.php');
     $(document).ready(function() {
         var table = $('#event_table').DataTable({
             "ajax": {
-                "url": "../config/fetch_employees.php",
+                "url": "../config/fetch_evaluation.php",
                 "type": "POST",
                 "dataSrc": ""
             },
@@ -183,7 +181,7 @@ include('../includes/footer.php');
                     "visible": false
                 },
                 {
-                    "data": "newItem"
+                    "data": "itemNo"
                 },
                 {
                     "data": "office"
@@ -195,26 +193,28 @@ include('../includes/footer.php');
                     "data": "employment"
                 },
                 {
-                    "data": "start"
-                },
-                {
-                    "data": "position"
-                },
-                {
                     "data": null,
                     "render": function(data, type, row) {
                         // Add action buttons here for edit, delete, etc.
                         return `
-                    <a class="m-1" href="#" data-toggle="modal" data-target="#editEmployeeModal" data-record-id="${row.ID}">
-                        <img src="../assets/img/icons/edit.svg" alt="Edit">
-                    </a>
-                    <a class="m-1 delete-button" data-record-id="${row.ID}" href="#">
-                        <img src="../assets/img/icons/delete.svg" alt="Delete">
-                    </a>
+                        <a class="view-button m-1" data-record-id="${row.ID}" href="#">
+                            <img src="../assets/img/icons/eye.svg" alt="View">
+                        </a>
                 `;
                     }
                 }
             ]
         });
+    });
+
+
+    $('#event_table tbody').on('click', '.view-button', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        var button = $(this);
+        var recordId = $(button).data('record-id');
+
+        // Open the PDF file using the constructed file name
+        window.open('evaluation-child.php?id=' + recordId);
     });
 </script>
