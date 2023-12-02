@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate employee details here if needed
 
-    // Check if the 'employees' table exists, and create it if not
+    // Check if the 'employees_jo' table exists, and create it if not
     $checkTableQuery = "SHOW TABLES LIKE 'employees_jo'";
     $tableResult = mysqli_query($conn, $checkTableQuery);
 
@@ -34,28 +34,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         )";
 
         if (mysqli_query($conn, $createTableQuery)) {
-            echo 'Table "employees" created successfully.';
+            echo 'Table "employees_jo" created successfully.';
         } else {
             echo 'Error creating table: ' . mysqli_error($conn);
             exit;
         }
     }
 
-    // Now, perform the database insertion
+    // Now, perform the database insertion using prepared statements
     $insertQuery = "INSERT INTO employees_jo (name, end, position, office, employment, start)
-    VALUES ('$name', '$end', '$position', '$office', '$employment', '$start')";
+    VALUES (?, ?, ?, ?, ?, ?)";
 
+    $stmt = mysqli_prepare($conn, $insertQuery);
+    mysqli_stmt_bind_param($stmt, 'ssssss', $name, $end, $position, $office, $employment, $start);
 
-    if (mysqli_query($conn, $insertQuery)) {
+    if (mysqli_stmt_execute($stmt)) {
         // Set a session value to indicate success
         session_start();
         $_SESSION['message'] = 'Employee added successfully';
 
-        // Redirect to the employee.php page (or your desired destination)
+        // Redirect to the employee-jo.php page (or your desired destination)
         header('Location: ../pages/employee-jo.php');
         exit();
     } else {
-        echo 'Error inserting data: ' . mysqli_error($conn);
+        echo 'Error inserting data: ' . mysqli_stmt_error($stmt);
 
         // Set a session value to indicate the error
         session_start();
@@ -65,6 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ../pages/employee-jo.php');
         exit();
     }
+
+    // Close the statement
+    mysqli_stmt_close($stmt);
 }
 
 // Close the database connection

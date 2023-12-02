@@ -195,7 +195,7 @@ include('../config/authentication.php');
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
                                                 $department = $row['Department'];
-                                                echo "<option value='$department'>$department</option>";
+                                                echo "<option value='" . htmlspecialchars($department, ENT_QUOTES) . "'>$department</option>";
                                             }
                                         } else {
                                             echo "<option value=''>No departments found</option>";
@@ -307,7 +307,7 @@ include('../config/authentication.php');
                                         if ($result && $result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
                                                 $department = $row['Department'];
-                                                echo "<option value='$department'>$department</option>";
+                                                echo "<option value='" . htmlspecialchars($department, ENT_QUOTES) . "'>$department</option>";
                                             }
                                         } else {
                                             echo "<option value=''>No departments found</option>";

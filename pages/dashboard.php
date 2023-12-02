@@ -1,6 +1,7 @@
 <?php
 include('../includes/header.php');
 include('../config/authentication.php');
+
 include('../config/department_count.php');
 include('../config/fetch_events_dashboard.php');
 ?>
@@ -116,51 +117,75 @@ include('../config/fetch_events_dashboard.php');
         <div class="content">
             <div class="row">
 
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                     <div class="card shadow">
                         <div class="card-header text-white" style="background-color: #377ede;">
-                            <h5>Departments</h5>
+                            <h5>Offices</h5>
                         </div>
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <h1 class="text-center" style="margin: auto;"><?php echo $departmentCount; ?></h1>
-                            <a href="department.php" class="d-block p-2 rounded-3 pointer" style="background-color: #377ede;">
-                                <i class="fa fa-plus text-white"></i>
-                            </a>
+                            <!--
+                                <a href="department.php" class="d-block p-2 rounded-3 pointer" style="background-color: #377ede;">
+                                    <i class="fa fa-plus text-white"></i>
+                                </a>
+                            -->
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                     <div class="card shadow">
                         <div class="card-header text-white" style="background-color: #6859f3;">
-                            <h5>Job Order</h5>
-                        </div>
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <h1 class="text-center" style="margin: auto;">10</h1>
-                            <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #6859f3;">
-                                <i class="fa fa-plus text-white"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card shadow">
-                        <div class="card-header text-white" style="background-color: #e95c41;">
                             <h5>Permanent</h5>
                         </div>
                         <div class="card-body d-flex justify-content-between align-items-center">
-                            <h1 class="text-center" style="margin: auto;">10</h1>
-                            <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #e95c41;">
-                                <i class="fa fa-plus text-white"></i>
-                            </a>
+                            <h1 class="text-center" style="margin: auto;"><?php echo $permanent; ?></h1>
+                            <!--
+                                <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #6859f3;">
+                                    <i class="fa fa-plus text-white"></i>
+                                </a>
+                            -->
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                    <div class="card shadow">
+                        <div class="card-header text-white" style="background-color: #e95c41;">
+                            <h5>Job Order</h5>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <h1 class="text-center" style="margin: auto;"><?php echo $jo; ?></h1>
+                            <!--
+                                <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #e95c41;">
+                                    <i class="fa fa-plus text-white"></i>
+                                </a>
+                            -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                    <div class="card shadow">
+                        <div class="card-header text-white bg-danger">
+                            <h5>Expiring Contract</h5>
+                        </div>
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <h1 class="text-center" style="margin: auto;"><?php echo $expiring; ?></h1>
+                            <!--
+                                <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #e95c41;">
+                                    <i class="fa fa-plus text-white"></i>
+                                </a>
+                            -->
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 
             <div class="row">
+
                 <div class="col-lg-7 col-sm-12 col-12 d-flex">
                     <div class="card shadow flex-fill">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
@@ -178,6 +203,7 @@ include('../config/fetch_events_dashboard.php');
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-5 col-sm-12 col-12 d-flex">
                     <div class="card shadow flex-fill">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
@@ -225,11 +251,11 @@ include('../includes/footer.php');
     var myDoughnutChart = new Chart(ctxD, {
         type: 'doughnut',
         data: {
-            labels: ["Male", "Female"],
+            labels: ["Permanent", "Job Order"],
             datasets: [{
-                data: [200, 300],
-                backgroundColor: ["#6672fb", "#ff3d55"],
-                hoverBackgroundColor: ["#3348db", "#d42644"]
+                data: [<?php echo $permanent; ?>, <?php echo $jo; ?>],
+                backgroundColor: ["#6859f3", "#e95c41"],
+                hoverBackgroundColor: ["#4a3aae", "#c04532"]
             }]
         },
         options: {

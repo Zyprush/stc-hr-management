@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newSg1 = $_POST['edit_sg1']; // Added line for the 'edit_budget_sg' field
     $newAmount1 = $_POST['edit_amount1']; // Added line for the 'edit_budget_amount' field
 
-    // Prepare and execute the SQL UPDATE query
+    // Prepare and execute the SQL UPDATE query using prepared statements
     $query = "UPDATE employees SET name = ?, office = ?, employment = ?, start = STR_TO_DATE(?, '%Y-%m-%d'), oldItem = ?, newItem = ?, position = ?, sg = ?, amount = ?, sg1 = ?, amount1 = ? WHERE ID = ?";
     $stmt = $conn->prepare($query);
 

@@ -51,12 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Now, perform the database insertion
+    // Now, perform the database insertion using prepared statements
     $insertQuery = "INSERT INTO employees (name, oldItem, newItem, position, sg, sg1, amount, amount1, office, employment, start)
-    VALUES ('$name', '$oldItem', '$newItem', '$position', '$sg', '$sg1', '$amount', '$amount1', '$office', '$employment', '$start')";
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
+    $stmt = mysqli_prepare($conn, $insertQuery);
+    mysqli_stmt_bind_param($stmt, 'sssssssssss', $name, $oldItem, $newItem, $position, $sg, $sg1, $amount, $amount1, $office, $employment, $start);
 
-    if (mysqli_query($conn, $insertQuery)) {
+    if (mysqli_stmt_execute($stmt)) {
         // Set a session value to indicate success
         session_start();
         $_SESSION['message'] = 'Employee added successfully';
@@ -75,6 +77,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ../pages/employee.php');
         exit();
     }
+
+    // Close the statement
+    mysqli_stmt_close($stmt);
 }
 
 // Close the database connection
