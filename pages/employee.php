@@ -82,11 +82,11 @@ include('../config/authentication.php');
                             <span> Employee</span> </a>
                     </li>
                     <li class="menu">
-                        <a href="report.php"><i data-feather="bar-chart-2"></i>
+                        <a href="evaluation.php"><i data-feather="bar-chart-2"></i>
                             <span> Evaluation</span> </a>
                     </li>
                     <li class="menu">
-                        <a href="event.php"><i data-feather="calendar"></i>
+                        <a href="report.php"><i data-feather="calendar"></i>
                             <span> Report </span> </a>
                     </li>
                     <li class="menu">
