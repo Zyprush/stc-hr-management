@@ -58,13 +58,15 @@ if (isset($_GET['id'])) {
                         <a class="dropdown-item" href="#"> <i class="me-2" data-feather="user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
+                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+                    class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">My Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
@@ -85,29 +87,43 @@ if (isset($_GET['id'])) {
                         <a href="department.php"><i data-feather="users"></i>
                             <span> Offices</span> </a>
                     </li>
-                    <li class="active">
-                        <a href="employee.php"><i data-feather="user"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="user"></i>
                             <span> Employee</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Employee -->
+                            <li><a href="employee.php">Permanent</a></li>
+                            <li><a href="employee-jo.php">Job Order</a></li>
+                            <li><a href="employee-file.php">File</a></li>
+                        </ul>
                     </li>
-                    <li class="menu">
-                        <a href="report.php"><i data-feather="bar-chart-2"></i>
+                    <li class="active">
+                        <a href="evaluation.php"><i data-feather="users"></i>
                             <span> Evaluation</span> </a>
                     </li>
                     <li class="menu">
-                        <a href="event.php"><i data-feather="calendar"></i>
-                            <span> Report </span> </a>
+                        <a href="training.php"><i data-feather="users"></i>
+                            <span> Training</span> </a>
                     </li>
-                    <li class="menu">
-                        <a href="activities.php"><i data-feather="activity"></i>
-                            <span> Promotion</span> </a>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="calendar"></i>
+                            <span> Report</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Report -->
+                            <li><a href="benefits.php">Benefits</a></li>
+                            <li><a href="promotion.php">Promotion</a></li>
+                        </ul>
                     </li>
-                    <li class="menu">
-                        <a href="benefits.php"><i data-feather="award"></i>
-                            <span> Benefits</span> </a>
-                    </li>
-                    <li class="menu">
-                        <a href="settings.php"><i data-feather="settings"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="settings"></i>
                             <span> Settings</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Settings -->
+                            <li><a href="settings.php">Office</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -152,7 +168,6 @@ if (isset($_GET['id'])) {
             </div>
             <div class="card">
                 <div class="card-body">
-
                     <?php
                     // Prepare and execute the query
                     $query = "SELECT * FROM evaluation_table WHERE evaluatee_id = ?";
@@ -219,7 +234,7 @@ if (isset($_GET['id'])) {
                                 echo '<div class="col-sm-3"><h5>Final Average Rating</h5></div>';
                                 echo "<div class='col-sm-3'></div>";
                                 echo "<div class='col-sm-3'><h4>{$row['final_average_rating']}</h4></div>";
-                                echo '<div class="col-sm-3"><button class="btn btn-primary m-2">Edit</button><a href="../config/delete_evaluation.php?id=' . $row['ID'] . '" class="btn btn-danger">Delete</a></div>';
+                                echo '<div class="col-sm-3"><button class="btn btn-primary m-2">Edit</button><a href="#" class="btn btn-danger" onclick="confirmDelete(' . $row['ID'] . ')">Delete</a></div>';
                                 echo '</div>';
 
                                 echo '<div class="row">';
@@ -236,13 +251,13 @@ if (isset($_GET['id'])) {
                                 $evaluationNumber++;
                             }
                         } else {
-                            echo "No evaluations found for the given ID.";
+                            echo "No evaluations found.";
                         }
 
                         // Close the statement
                         mysqli_stmt_close($stmt);
                     } else {
-                        echo 'Error preparing statement: ' . mysqli_error($conn);
+                        echo 'No Evaluation Found';
                     }
 
                     // Close the database connection
@@ -252,7 +267,8 @@ if (isset($_GET['id'])) {
             </div>
 
             <!-- Modal for adding employee -->
-            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog"
+                aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -263,17 +279,21 @@ if (isset($_GET['id'])) {
                         </div>
                         <div class="modal-body">
                             <!-- Your form for adding a new employee -->
-                            <form action="../config/add_employee_evaluation.php" method="post" enctype="multipart/form-data">
+                            <form action="../config/add_employee_evaluation.php" method="post"
+                                enctype="multipart/form-data">
 
-                                <input type="hidden" name="evaluatee_id" value="<?php echo htmlspecialchars($_GET['id']); ?>">
+                                <input type="hidden" name="evaluatee_id"
+                                    value="<?php echo htmlspecialchars($_GET['id']); ?>">
 
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" id="semester" name="semester" placeholder="Semester">
+                                            <input type="text" class="form-control" id="semester" name="semester"
+                                                placeholder="Semester">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="date" class="form-control" id="date" name="date" placeholder="Date">
+                                            <input type="date" class="form-control" id="date" name="date"
+                                                placeholder="Date">
                                         </div>
                                     </div>
                                 </div>
@@ -306,10 +326,12 @@ if (isset($_GET['id'])) {
                                             </p>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="strategic_mfo" id="strategic_mfo">
+                                            <input type="text" class="form-control" name="strategic_mfo"
+                                                id="strategic_mfo">
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="strategic_rating" id="strategic_rating">
+                                            <input type="text" class="form-control" name="strategic_rating"
+                                                id="strategic_rating">
                                         </div>
                                     </div>
                                 </div>
@@ -322,10 +344,12 @@ if (isset($_GET['id'])) {
                                             </p>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="core_function_mfo" id="core_function_mfo">
+                                            <input type="text" class="form-control" name="core_function_mfo"
+                                                id="core_function_mfo">
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="core_function_rating" id="core_function_rating">
+                                            <input type="text" class="form-control" name="core_function_rating"
+                                                id="core_function_rating">
                                         </div>
                                     </div>
                                 </div>
@@ -338,10 +362,12 @@ if (isset($_GET['id'])) {
                                             </p>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="support_function_mfo" id="support_function_mfo">
+                                            <input type="text" class="form-control" name="support_function_mfo"
+                                                id="support_function_mfo">
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="support_function_rating" id="support_function_rating">
+                                            <input type="text" class="form-control" name="support_function_rating"
+                                                id="support_function_rating">
                                         </div>
                                     </div>
                                 </div>
@@ -357,7 +383,8 @@ if (isset($_GET['id'])) {
 
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="total_overall_rating" id="total_overall_rating">
+                                            <input type="text" class="form-control" name="total_overall_rating"
+                                                id="total_overall_rating">
                                         </div>
                                     </div>
                                 </div>
@@ -373,7 +400,8 @@ if (isset($_GET['id'])) {
 
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="final_average_rating" id="final_average_rating">
+                                            <input type="text" class="form-control" name="final_average_rating"
+                                                id="final_average_rating">
                                         </div>
                                     </div>
                                 </div>
@@ -389,14 +417,16 @@ if (isset($_GET['id'])) {
 
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="adjective_rating" id="adjective_rating">
+                                            <input type="text" class="form-control" name="adjective_rating"
+                                                id="adjective_rating">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="supportingDocument">Supporting Document</label>
-                                    <input type="file" class="form-control" id="supportingDocument" name="supportingDocument">
+                                    <input type="file" class="form-control" id="supportingDocument"
+                                        name="supportingDocument">
                                     <small class="form-text text-muted">Upload a file related to the evaluation.</small>
                                 </div>
 
@@ -408,7 +438,6 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
 
-
         </div>
     </div>
 </div>
@@ -416,3 +445,12 @@ if (isset($_GET['id'])) {
 <?php
 include('../includes/footer.php');
 ?>
+
+<script>
+    function confirmDelete(id) {
+        if (confirm("Are you sure you want to delete this evaluation?")) {
+            // If the user confirms, redirect to the delete URL or perform the delete action here
+            window.location.href = "../config/delete_evaluation.php?id=" + id;
+        }
+    }
+</script>
