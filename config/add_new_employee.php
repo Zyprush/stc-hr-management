@@ -100,41 +100,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_stmt_execute($stmtEvaluation);
         mysqli_stmt_close($stmtEvaluation);
 
-        // Check and create the 'training' table if it doesn't exist
-        $checkTrainingTableQuery = "SHOW TABLES LIKE 'training'";
-        $trainingTableResult = mysqli_query($conn, $checkTrainingTableQuery);
+        // Check and create the 'employee_files' table if it doesn't exist
+        $checkFilesTableQuery = "SHOW TABLES LIKE 'employee_files'";
+        $filesTableResult = mysqli_query($conn, $checkFilesTableQuery);
 
-        if (!$trainingTableResult) {
-            echo 'Error checking training table existence: ' . mysqli_error($conn);
+        if (!$filesTableResult) {
+            echo 'Error checking employee_files table existence: ' . mysqli_error($conn);
             exit;
         }
 
-        if (mysqli_num_rows($trainingTableResult) == 0) {
+        if (mysqli_num_rows($filesTableResult) == 0) {
             // The table doesn't exist, create it
-            $createTrainingTableQuery = "CREATE TABLE training (
+            $createFilesTableQuery = "CREATE TABLE employee_files (
                 ID INT AUTO_INCREMENT PRIMARY KEY,
-                training_type VARCHAR(255) NOT NULL,
-                name VARCHAR(255) NOT NULL,
-                timeDuration VARCHAR(255) NOT NULL,
-                position VARCHAR(255) NOT NULL,
-                description VARCHAR(255) NOT NULL
+                name VARCHAR(255) NOT NULL
             )";
 
-            if (mysqli_query($conn, $createTrainingTableQuery)) {
-                echo 'Table "training" created successfully.';
+            if (mysqli_query($conn, $createFilesTableQuery)) {
+                echo 'Table "employee_files" created successfully.';
             } else {
-                echo 'Error creating training table: ' . mysqli_error($conn);
+                echo 'Error creating employee_files table: ' . mysqli_error($conn);
                 exit;
             }
         }
 
-        // Insert data into the 'training' table
-        $insertTrainingQuery = "INSERT INTO training (training_type, name, timeDuration, position, description)
-        VALUES ('n/a', ?, 'n/a', ?, 'n/a')";
-        $stmtTraining = mysqli_prepare($conn, $insertTrainingQuery);
-        mysqli_stmt_bind_param($stmtTraining, 'ss', $name, $position);
-        mysqli_stmt_execute($stmtTraining);
-        mysqli_stmt_close($stmtTraining);
+        // Insert data into the 'employee_files' table
+        $insertFilesQuery = "INSERT INTO employee_files (name) VALUES (?)";
+        $stmtFiles = mysqli_prepare($conn, $insertFilesQuery);
+        mysqli_stmt_bind_param($stmtFiles, 's', $name);
+        mysqli_stmt_execute($stmtFiles);
+        mysqli_stmt_close($stmtFiles);
 
         // Redirect to the employee.php page (or your desired destination)
         header('Location: ../pages/employee.php');
@@ -147,5 +142,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_stmt_close($stmt);
 }
 
-// Close the database connectionsds
+// Close the database connections
 mysqli_close($conn);

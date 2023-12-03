@@ -1,7 +1,16 @@
 <?php
 include('../config/dbcon.php');
 include('../includes/header.php');
-include('../config/authentication.php')
+include('../config/authentication.php');
+//include('../config/fetch_departments_options.php');
+if (isset($_GET['id'])) {
+    // Retrieve the 'id' parameter value
+    $id = $_GET['id'];
+    // Use the retrieved value (e.g., display it)
+    //echo "ID from URL: " . $id;
+} else {
+    $id = "0";
+}
 ?>
 
 <div id="global-loader">
@@ -125,18 +134,36 @@ include('../config/authentication.php')
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Files 201</h4>
-                    <h6>Manage Employee Files</h6>
+                    <h4>201 Files</h4>
+                    <h6><?php
+                        // Fetch the name name from the 'departments' table based on the provided 'id'
+                        $nameQuery = "SELECT name FROM employee_files WHERE ID = ?";
+                        $nameStmt = $conn->prepare($nameQuery);
+
+                        if ($nameStmt) {
+                            $nameStmt->bind_param("i", $id);
+                            $nameStmt->execute();
+                            $nameResult = $nameStmt->get_result();
+
+                            if ($nameResult->num_rows === 1) {
+                                $nameRow = $nameResult->fetch_assoc();
+                                echo $nameRow['name'];
+                            } else {
+                                echo "name not found";
+                            }
+
+                            $nameStmt->close();
+                        } else {
+                            echo "Error preparing name query";
+                        }
+                        ?></h6>
                 </div>
                 <div class="page-btn">
                     <!--
-                        <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
-                            <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Employee
-                        </a>
-                        <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
-                            <img src="../assets/img/icons/plus.svg" alt="img" class="me-1">Add Employee
-                        </a>
-                    -->
+                        -->
+                    <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                        <img src="../assets/img/icons/plus.svg" alt="img" class="me-1">Add File
+                    </a>
                 </div>
             </div>
             <div class="card">
@@ -146,13 +173,55 @@ include('../config/authentication.php')
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th></th>
-                                    <th>Name</th>
+                                    <th>File Name</th>
+                                    <th>Date Uploaded</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for adding employee -->
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog"
+                aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Your form for adding a new employee -->
+                            <?php 
+                            if (isset($_GET['id'])) {
+                                // Retrieve the 'id' parameter value
+                                $id = $_GET['id'];
+                                // Use the retrieved value (e.g., display it)
+                                //echo "ID from URL: " . $id;
+                            } else {
+                                $id = "0";
+                            }
+                            ?>
+                            <form action="../config/add_new_employee_file.php" method="post"
+                                enctype="multipart/form-data">
+
+                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
+                                <div class="form-group">
+                                    <label for="file">Add file</label>
+                                    <input type="file" class="form-control" id="file" name="file" required>
+                                </div>
+
+                                <!-- Submit button for the form -->
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,32 +236,50 @@ include('../includes/footer.php');
 
 <script>
 $(document).ready(function() {
+    var id = "<?php echo $id; ?>";
     var table = $('#event_table').DataTable({
         "ajax": {
-            "url": "../config/fetch_employees_files.php",
+            "url": "../config/fetch_employee_files.php?id=" + id,
             "type": "POST",
             "dataSrc": ""
         },
-        "columns": [
-            { "data": "ID", "visible": false },
+        "columns": [{
+                "data": "file_id",
+                "visible": false
+            },
+            {
+                "data": "file_name"
+            },
+            {
+                "data": "upload_date"
+            },
             {
                 "data": null,
                 "render": function(data, type, row) {
-                    return `<img src="../assets/img/folder-logo.png" alt="logo" style="height: 50px;">`;
+                    return `
+                    <a class="m-1 pdf-button" href="../config/${row.file_directory}${row.file_name}" target="_blank">
+                        <img src="../assets/img/icons/pdf.svg" alt="pdf">
+                    </a>
+                    <a class="m-1 download-button" href="../config/download_file.php?file_directory=${row.file_directory}&file_name=${row.file_name}">
+                        <img src="../assets/img/icons/download.svg" alt="download">
+                    </a>
+                    <a class="m-1 printer-button" href="#" onclick="printFile('../config/${row.file_directory}${row.file_name}'); return false;">
+                        <img src="../assets/img/icons/printer.svg" alt="printer">
+                    </a>
+                        `;
                 }
-            },
-            { "data": "name" }
-        ],
-        "select": "single" // Allow only single row selection
-    });
-
-    $('#event_table tbody').on('dblclick', 'tr', function() {
-        var data = table.row(this).data();
-        
-        if (data) {
-            // Redirect to employee-files.php with the row ID
-            window.location.href = 'employee-files.php?id=' + data.ID;
-        }
+            }
+        ]
     });
 });
+
+function printFile(fileURL) {
+    // Open a new window and load the file URL
+    var fileWindow = window.open(fileURL);
+
+    // When the file window finishes loading, trigger the print dialog
+    fileWindow.onload = function() {
+        fileWindow.print();
+    };
+}
 </script>
