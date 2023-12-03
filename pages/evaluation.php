@@ -49,13 +49,15 @@ include('../config/authentication.php');
                         <a class="dropdown-item" href="#"> <i class="me-2" data-feather="user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
+                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+                    class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">My Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
@@ -76,29 +78,43 @@ include('../config/authentication.php');
                         <a href="department.php"><i data-feather="users"></i>
                             <span> Offices</span> </a>
                     </li>
-                    <li class="menu">
-                        <a href="employee.php"><i data-feather="user"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="user"></i>
                             <span> Employee</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Employee -->
+                            <li><a href="employee.php">Permanent</a></li>
+                            <li><a href="employee-jo.php">Job Order</a></li>
+                            <li><a href="employee-file">File</a></li>
+                        </ul>
                     </li>
                     <li class="active">
-                        <a href="evaluation.php"><i data-feather="bar-chart-2"></i>
+                        <a href="evaluation.php"><i data-feather="users"></i>
                             <span> Evaluation</span> </a>
                     </li>
                     <li class="menu">
-                        <a href="report.php"><i data-feather="calendar"></i>
-                            <span> Report </span> </a>
+                        <a href="training.php"><i data-feather="users"></i>
+                            <span> Training</span> </a>
                     </li>
-                    <li class="menu">
-                        <a href="activities.php"><i data-feather="activity"></i>
-                            <span> Promotion</span> </a>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="calendar"></i>
+                            <span> Report</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Report -->
+                            <li><a href="benefits.php">Benefits</a></li>
+                            <li><a href="promotion.php">Promotion</a></li>
+                        </ul>
                     </li>
-                    <li class="menu">
-                        <a href="benefits.php"><i data-feather="award"></i>
-                            <span> Benefits</span> </a>
-                    </li>
-                    <li class="menu">
-                        <a href="settings.php"><i data-feather="settings"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="settings"></i>
                             <span> Settings</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Settings -->
+                            <li><a href="settings.php">Office</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -131,13 +147,16 @@ include('../config/authentication.php');
                         <div class="wordset">
                             <ul>
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="../assets/img/icons/pdf.svg" alt="img"></a>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                            src="../assets/img/icons/pdf.svg" alt="img"></a>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="../assets/img/icons/excel.svg" alt="img"></a>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
+                                            src="../assets/img/icons/excel.svg" alt="img"></a>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="../assets/img/icons/printer.svg" alt="img"></a>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
+                                            src="../assets/img/icons/printer.svg" alt="img"></a>
                                 </li>
                             </ul>
                         </div>
@@ -169,52 +188,52 @@ include('../includes/footer.php');
 ?>
 
 <script>
-    $(document).ready(function() {
-        var table = $('#event_table').DataTable({
-            "ajax": {
-                "url": "../config/fetch_evaluation.php",
-                "type": "POST",
-                "dataSrc": ""
+$(document).ready(function() {
+    var table = $('#event_table').DataTable({
+        "ajax": {
+            "url": "../config/fetch_evaluation.php",
+            "type": "POST",
+            "dataSrc": ""
+        },
+        "columns": [{
+                "data": "ID",
+                "visible": false
             },
-            "columns": [{
-                    "data": "ID",
-                    "visible": false
-                },
-                {
-                    "data": "itemNo"
-                },
-                {
-                    "data": "office"
-                },
-                {
-                    "data": "name"
-                },
-                {
-                    "data": "employment"
-                },
-                {
-                    "data": null,
-                    "render": function(data, type, row) {
-                        // Add action buttons here for edit, delete, etc.
-                        return `
+            {
+                "data": "itemNo"
+            },
+            {
+                "data": "office"
+            },
+            {
+                "data": "name"
+            },
+            {
+                "data": "employment"
+            },
+            {
+                "data": null,
+                "render": function(data, type, row) {
+                    // Add action buttons here for edit, delete, etc.
+                    return `
                         <a class="view-button m-1" data-record-id="${row.ID}" href="#">
                             <img src="../assets/img/icons/eye.svg" alt="View">
                         </a>
                 `;
-                    }
                 }
-            ]
-        });
+            }
+        ]
     });
+});
 
 
-    $('#event_table tbody').on('click', '.view-button', function(event) {
-        event.preventDefault(); // Prevent default link behavior
+$('#event_table tbody').on('click', '.view-button', function(event) {
+    event.preventDefault(); // Prevent default link behavior
 
-        var button = $(this);
-        var recordId = $(button).data('record-id');
+    var button = $(this);
+    var recordId = $(button).data('record-id');
 
-        // Open the PDF file using the constructed file name
-        window.open('evaluation-child.php?id=' + recordId);
-    });
+    // Open the PDF file using the constructed file name
+    window.open('evaluation-child.php?id=' + recordId);
+});
 </script>

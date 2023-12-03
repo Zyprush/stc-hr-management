@@ -108,8 +108,8 @@ include('../config/authentication.php');
                             <span> Report</span> </a>
                         <ul class="submenu">
                             <!-- Dropdown submenu for Report -->
-                            <li><a href="benefits.php" class="active">Benefits</a></li>
-                            <li><a href="promotion.php">Promotion</a></li>
+                            <li><a href="benefits.php" >Benefits</a></li>
+                            <li><a href="promotion.php" class="active">Promotion</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
@@ -129,7 +129,7 @@ include('../config/authentication.php');
     <div class="page-wrapper">
         <div class="content">
             <div class="row">
-                <h1>this is benefits</h1>
+                <h1>this is promotion</h1>
             </div>
         </div>
     </div>

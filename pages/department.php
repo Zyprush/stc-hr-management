@@ -48,13 +48,15 @@ include('../config/authentication.php');
                         <a class="dropdown-item" href="#"> <i class="me-2" data-feather="user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
+                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+                    class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">My Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
@@ -62,6 +64,7 @@ include('../config/authentication.php');
             </div>
         </div>
     </div>
+
     <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
@@ -72,36 +75,51 @@ include('../config/authentication.php');
                     </li>
                     <li class="active">
                         <a href="department.php"><i data-feather="users"></i>
-                            <span> Office</span> </a>
+                            <span> Offices</span> </a>
                     </li>
-                    <li class="menu">
-                        <a href="employee.php"><i data-feather="user"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="user"></i>
                             <span> Employee</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Employee -->
+                            <li><a href="employee.php">Permanent</a></li>
+                            <li><a href="employee-jo.php">Job Order</a></li>
+                            <li><a href="employee-file.php">File</a></li>
+                        </ul>
                     </li>
                     <li class="menu">
-                        <a href="evaluation.php"><i data-feather="bar-chart-2"></i>
+                        <a href="evaluation.php"><i data-feather="users"></i>
                             <span> Evaluation</span> </a>
                     </li>
                     <li class="menu">
-                        <a href="report.php"><i data-feather="calendar"></i>
+                        <a href="training.php"><i data-feather="users"></i>
+                            <span> Training</span> </a>
+                    </li>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="calendar"></i>
                             <span> Report</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Report -->
+                            <li><a href="benefits.php">Benefits</a></li>
+                            <li><a href="promotion.php">Promotion</a></li>
+                        </ul>
                     </li>
-                    <li class="menu">
-                        <a href="activities.php"><i data-feather="activity"></i>
-                            <span> Promotion </span> </a>
-                    </li>
-                    <li class="menu">
-                        <a href="benefits.php"><i data-feather="award"></i>
-                            <span> Benefits</span> </a>
-                    </li>
-                    <li class="menu">
-                        <a href="settings.php"><i data-feather="settings"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="settings"></i>
                             <span> Settings</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Settings -->
+                            <li><a href="settings.php">Office</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
+
 
     <div class="page-wrapper">
         <div class="content">
@@ -136,7 +154,8 @@ include('../config/authentication.php');
 
 
             <!-- Add -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -150,7 +169,8 @@ include('../config/authentication.php');
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="departmentName">Department:</label>
-                                        <input type="text" class="form-control" id="departmentName" name="departmentName" required>
+                                        <input type="text" class="form-control" id="departmentName"
+                                            name="departmentName" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -164,7 +184,8 @@ include('../config/authentication.php');
             </div>
 
             <!-- Edit -->
-            <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog" aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog"
+                aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -178,7 +199,8 @@ include('../config/authentication.php');
                                 <input type="hidden" name="edit_department_id" id="edit_department_id">
                                 <div class="form-group">
                                     <label for="edit_department_name">Department Name:</label>
-                                    <input type="text" class="form-control" id="edit_department_name" name="edit_department_name">
+                                    <input type="text" class="form-control" id="edit_department_name"
+                                        name="edit_department_name">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
                             </form>
@@ -195,66 +217,66 @@ include('../config/authentication.php');
 include('../includes/footer.php');
 ?>
 <script>
-    // Fetch data from PHP using AJAX
-    var selectRoot = document.getElementById('root');
+// Fetch data from PHP using AJAX
+var selectRoot = document.getElementById('root');
 
-    // AJAX request
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                var departments = JSON.parse(xhr.responseText);
+// AJAX request
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+            var departments = JSON.parse(xhr.responseText);
 
-                // Update options in the dropdown
-                departments.forEach(function(department) {
-                    var option = document.createElement('option');
-                    option.value = department['Department']; // Assuming 'Department' is the column name
-                    option.textContent = department['Department']; // Assuming 'Department' is the column name
-                    selectRoot.appendChild(option);
-                });
-            } else {
-                console.error('Request failed: ' + xhr.status);
-            }
+            // Update options in the dropdown
+            departments.forEach(function(department) {
+                var option = document.createElement('option');
+                option.value = department['Department']; // Assuming 'Department' is the column name
+                option.textContent = department['Department']; // Assuming 'Department' is the column name
+                selectRoot.appendChild(option);
+            });
+        } else {
+            console.error('Request failed: ' + xhr.status);
         }
-    };
+    }
+};
 
-    xhr.open('GET', '../config/get_departments_root.php', true);
-    xhr.send();
+xhr.open('GET', '../config/get_departments_root.php', true);
+xhr.send();
 </script>
 
 <script>
-    $(document).ready(function() {
-        var table = $('#department_table').DataTable({
-            "ajax": {
-                "url": "../config/fetch_departments.php",
-                "type": "POST",
-                "dataSrc": ""
+$(document).ready(function() {
+    var table = $('#department_table').DataTable({
+        "ajax": {
+            "url": "../config/fetch_departments.php",
+            "type": "POST",
+            "dataSrc": ""
+        },
+        "columns": [{
+                "data": "Department"
             },
-            "columns": [{
-                    "data": "Department"
-                },
-                {
-                    "data": null,
-                    "render": function(data, type, row) {
-                        // Add a data-attribute to store the record ID
-                        return `
+            {
+                "data": null,
+                "render": function(data, type, row) {
+                    // Add a data-attribute to store the record ID
+                    return `
                         <a class="view-button m-1" data-record-id="${row.ID}" href="#">
                             <img src="../assets/img/icons/eye.svg" alt="View">
                         </a>
                     `;
-                    }
                 }
-            ]
-        });
-
-        $('#department_table tbody').on('click', '.view-button', function(event) {
-            event.preventDefault(); // Prevent default link behavior
-
-            var button = $(this);
-            var recordId = $(button).data('record-id');
-
-            // Open the PDF file using the constructed file name
-            window.open('department_childs.php?id=' + recordId);
-        });
+            }
+        ]
     });
+
+    $('#department_table tbody').on('click', '.view-button', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        var button = $(this);
+        var recordId = $(button).data('record-id');
+
+        // Open the PDF file using the constructed file name
+        window.open('department_childs.php?id=' + recordId);
+    });
+});
 </script>

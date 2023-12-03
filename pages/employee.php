@@ -50,13 +50,15 @@ include('../config/authentication.php');
                         <a class="dropdown-item" href="#"> <i class="me-2" data-feather="user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
+                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+                    class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">My Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
@@ -77,34 +79,49 @@ include('../config/authentication.php');
                         <a href="department.php"><i data-feather="users"></i>
                             <span> Offices</span> </a>
                     </li>
-                    <li class="active">
-                        <a href="employee.php"><i data-feather="user"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="user"></i>
                             <span> Employee</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Employee -->
+                            <li><a href="employee.php" class="active">Permanent</a></li>
+                            <li><a href="employee-jo.php">Job Order</a></li>
+                            <li><a href="employee-file.php">File</a></li>
+                        </ul>
                     </li>
                     <li class="menu">
-                        <a href="evaluation.php"><i data-feather="bar-chart-2"></i>
+                        <a href="evaluation.php"><i data-feather="users"></i>
                             <span> Evaluation</span> </a>
                     </li>
                     <li class="menu">
-                        <a href="report.php"><i data-feather="calendar"></i>
-                            <span> Report </span> </a>
+                        <a href="training.php"><i data-feather="users"></i>
+                            <span> Training</span> </a>
                     </li>
-                    <li class="menu">
-                        <a href="activities.php"><i data-feather="activity"></i>
-                            <span> Promotion</span> </a>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="calendar"></i>
+                            <span> Report</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Report -->
+                            <li><a href="benefits.php">Benefits</a></li>
+                            <li><a href="promotion.php">Promotion</a></li>
+                        </ul>
                     </li>
-                    <li class="menu">
-                        <a href="benefits.php"><i data-feather="award"></i>
-                            <span> Benefits</span> </a>
-                    </li>
-                    <li class="menu">
-                        <a href="settings.php"><i data-feather="settings"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="settings"></i>
                             <span> Settings</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Settings -->
+                            <li><a href="settings.php">Office</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
+
 
     <div class="page-wrapper">
         <div class="content">
@@ -132,13 +149,16 @@ include('../config/authentication.php');
                         <div class="wordset">
                             <ul>
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img src="../assets/img/icons/pdf.svg" alt="img"></a>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                            src="../assets/img/icons/pdf.svg" alt="img"></a>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img src="../assets/img/icons/excel.svg" alt="img"></a>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
+                                            src="../assets/img/icons/excel.svg" alt="img"></a>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="../assets/img/icons/printer.svg" alt="img"></a>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
+                                            src="../assets/img/icons/printer.svg" alt="img"></a>
                                 </li>
                             </ul>
                         </div>
@@ -165,7 +185,8 @@ include('../config/authentication.php');
             </div>
 
             <!-- Modal for adding employee -->
-            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog"
+                aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -180,7 +201,8 @@ include('../config/authentication.php');
 
                                 <div class="form-group">
                                     <label for="name">Name of Incumbent</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="EX. Juan A. Delacruz" required>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        placeholder="EX. Juan A. Delacruz" required>
                                 </div>
 
                                 <div class="form-group">
@@ -224,11 +246,13 @@ include('../config/authentication.php');
                                         <label for="item">Item No.</label>
                                         <div class="col-sm-6">
                                             <label for="itemOld">Old</label>
-                                            <input type="text" class="form-control" id="oldItem" name="oldItem" placeholder="0000" required>
+                                            <input type="text" class="form-control" id="oldItem" name="oldItem"
+                                                placeholder="0000" required>
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="itemNew">New</label>
-                                            <input type="text" class="form-control" id="newItem" name="newItem" placeholder="0000" required>
+                                            <input type="text" class="form-control" id="newItem" name="newItem"
+                                                placeholder="0000" required>
                                         </div>
                                     </div>
                                 </div>
@@ -261,7 +285,8 @@ include('../config/authentication.php');
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="amount">Amount</label>
-                                            <input type="text" class="form-control" name="amount1" id="amount1" required>
+                                            <input type="text" class="form-control" name="amount1" id="amount1"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
@@ -276,7 +301,8 @@ include('../config/authentication.php');
             </div>
 
             <!-- Edit Employee Modal -->
-            <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog"
+                aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -331,25 +357,29 @@ include('../config/authentication.php');
 
                                 <div class="form-group">
                                     <label for="edit_start_date">Start Date:</label>
-                                    <input type="date" class="form-control" id="edit_start_date" name="edit_start_date" required>
+                                    <input type="date" class="form-control" id="edit_start_date" name="edit_start_date"
+                                        required>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label for="edit_old_item">Item No. (Old):</label>
-                                            <input type="text" class="form-control" id="edit_old_item" name="edit_old_item" placeholder="0000" required>
+                                            <input type="text" class="form-control" id="edit_old_item"
+                                                name="edit_old_item" placeholder="0000" required>
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="edit_new_item">Item No. (New):</label>
-                                            <input type="text" class="form-control" id="edit_new_item" name="edit_new_item" placeholder="0000" required>
+                                            <input type="text" class="form-control" id="edit_new_item"
+                                                name="edit_new_item" placeholder="0000" required>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="edit_position">Position Title:</label>
-                                    <input type="text" class="form-control" id="edit_position" name="edit_position" required>
+                                    <input type="text" class="form-control" id="edit_position" name="edit_position"
+                                        required>
                                 </div>
 
                                 <div class="form-group">
@@ -357,11 +387,13 @@ include('../config/authentication.php');
                                         <label for="edit_sg">Current Year Authorized Rate/Annum SG:</label>
                                         <div class="col-sm-6">
                                             <label for="edit_sg">SG/Step</label>
-                                            <input type="text" class="form-control" id="edit_sg" name="edit_sg" required>
+                                            <input type="text" class="form-control" id="edit_sg" name="edit_sg"
+                                                required>
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="edit_amount">Amount</label>
-                                            <input type="text" class="form-control" id="edit_amount" name="edit_amount" required>
+                                            <input type="text" class="form-control" id="edit_amount" name="edit_amount"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
@@ -371,11 +403,13 @@ include('../config/authentication.php');
                                         <label for="edit_sg1">Budget Year Propose Rate/Annum SG:</label>
                                         <div class="col-sm-6">
                                             <label for="edit_sg1">SG/Step</label>
-                                            <input type="text" class="form-control" id="edit_sg1" name="edit_sg1" required>
+                                            <input type="text" class="form-control" id="edit_sg1" name="edit_sg1"
+                                                required>
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="edit_amount1">Amount</label>
-                                            <input type="text" class="form-control" id="edit_amount1" name="edit_amount1" required>
+                                            <input type="text" class="form-control" id="edit_amount1"
+                                                name="edit_amount1" required>
                                         </div>
                                     </div>
                                 </div>
@@ -397,40 +431,40 @@ include('../includes/footer.php');
 ?>
 
 <script>
-    $(document).ready(function() {
-        var table = $('#event_table').DataTable({
-            "ajax": {
-                "url": "../config/fetch_employees.php",
-                "type": "POST",
-                "dataSrc": ""
+$(document).ready(function() {
+    var table = $('#event_table').DataTable({
+        "ajax": {
+            "url": "../config/fetch_employees.php",
+            "type": "POST",
+            "dataSrc": ""
+        },
+        "columns": [{
+                "data": "ID",
+                "visible": false
             },
-            "columns": [{
-                    "data": "ID",
-                    "visible": false
-                },
-                {
-                    "data": "newItem"
-                },
-                {
-                    "data": "office"
-                },
-                {
-                    "data": "name"
-                },
-                {
-                    "data": "employment"
-                },
-                {
-                    "data": "start"
-                },
-                {
-                    "data": "position"
-                },
-                {
-                    "data": null,
-                    "render": function(data, type, row) {
-                        // Add action buttons here for edit, delete, etc.
-                        return `
+            {
+                "data": "newItem"
+            },
+            {
+                "data": "office"
+            },
+            {
+                "data": "name"
+            },
+            {
+                "data": "employment"
+            },
+            {
+                "data": "start"
+            },
+            {
+                "data": "position"
+            },
+            {
+                "data": null,
+                "render": function(data, type, row) {
+                    // Add action buttons here for edit, delete, etc.
+                    return `
                     <a class="m-1" href="#" data-toggle="modal" data-target="#editEmployeeModal" data-record-id="${row.ID}">
                         <img src="../assets/img/icons/edit.svg" alt="Edit">
                     </a>
@@ -438,70 +472,72 @@ include('../includes/footer.php');
                         <img src="../assets/img/icons/delete.svg" alt="Delete">
                     </a>
                 `;
-                    }
                 }
-            ]
-        });
-
-        // Handle delete button click
-        $('#event_table tbody').on('click', '.delete-button', function() {
-            var button = this;
-            var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
-
-            var confirmDelete = confirm('Are you sure you want to delete this record?');
-
-            if (confirmDelete) {
-                $.ajax({
-                    type: 'POST',
-                    url: '../config/delete_employee.php',
-                    data: {
-                        record_id: recordId // Pass the record_id as a parameter
-                    },
-                    success: function(response) {
-                        alert(response);
-                        table.ajax.reload(); // Refresh the DataTable
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('AJAX Error: ' + status + ' ' + error);
-                    }
-                });
             }
-        });
+        ]
+    });
 
-        // handle the edit event
-        $('#event_table tbody').on('click', '[data-target="#editEmployeeModal"]', function() {
-            var button = $(this);
-            var recordId = button.data('record-id');
+    // Handle delete button click
+    $('#event_table tbody').on('click', '.delete-button', function() {
+        var button = this;
+        var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
 
-            // Fetch employee details by ID using AJAX
+        var confirmDelete = confirm('Are you sure you want to delete this record?');
+
+        if (confirmDelete) {
             $.ajax({
                 type: 'POST',
-                url: '../config/fetch_employee.php',
+                url: '../config/delete_employee.php',
                 data: {
-                    employee_id: recordId
+                    record_id: recordId // Pass the record_id as a parameter
                 },
                 success: function(response) {
-                    var employee = JSON.parse(response);
-
-                    // Set the fetched employee details in the modal form fields
-                    $('#edit_employee_id').val(employee.ID);
-                    $('#edit_name').val(employee.name);
-                    $('#edit_office').val(employee.office);
-                    $('#edit_employment').val(employee.employment);
-                    $('#edit_start_date').val(employee.start);
-                    $('#edit_position').val(employee.position);
-                    $('#edit_old_item').val(employee.oldItem); // Added line for the 'oldItem' field
-                    $('#edit_new_item').val(employee.newItem); // Added line for the 'newItem' field
-                    $('#edit_sg').val(employee.sg);
-                    $('#edit_amount').val(employee.amount);
-                    $('#edit_sg1').val(employee.sg1);
-                    $('#edit_amount1').val(employee.amount1);
+                    alert(response);
+                    table.ajax.reload(); // Refresh the DataTable
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error: ' + status + ' ' + error);
                 }
             });
-        });
-
+        }
     });
+
+    // handle the edit event
+    $('#event_table tbody').on('click', '[data-target="#editEmployeeModal"]', function() {
+        var button = $(this);
+        var recordId = button.data('record-id');
+
+        // Fetch employee details by ID using AJAX
+        $.ajax({
+            type: 'POST',
+            url: '../config/fetch_employee.php',
+            data: {
+                employee_id: recordId
+            },
+            success: function(response) {
+                var employee = JSON.parse(response);
+
+                // Set the fetched employee details in the modal form fields
+                $('#edit_employee_id').val(employee.ID);
+                $('#edit_name').val(employee.name);
+                $('#edit_office').val(employee.office);
+                $('#edit_employment').val(employee.employment);
+                $('#edit_start_date').val(employee.start);
+                $('#edit_position').val(employee.position);
+                $('#edit_old_item').val(employee
+                .oldItem); // Added line for the 'oldItem' field
+                $('#edit_new_item').val(employee
+                .newItem); // Added line for the 'newItem' field
+                $('#edit_sg').val(employee.sg);
+                $('#edit_amount').val(employee.amount);
+                $('#edit_sg1').val(employee.sg1);
+                $('#edit_amount1').val(employee.amount1);
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error: ' + status + ' ' + error);
+            }
+        });
+    });
+
+});
 </script>

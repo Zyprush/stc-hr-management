@@ -84,9 +84,9 @@ include('../config/authentication.php')
                             <span> Employee</span> </a>
                         <ul class="submenu">
                             <!-- Dropdown submenu for Employee -->
-                            <li><a href="employee.php" >Permanent</a></li>
-                            <li><a href="employee-jo.php" class="active">Job Order</a></li>
-                            <li><a href="employee-file.php">File</a></li>
+                            <li><a href="employee.php">Permanent</a></li>
+                            <li><a href="employee-jo.php" >Job Order</a></li>
+                            <li><a href="employee-file" class="active">File</a></li>
                         </ul>
                     </li>
                     <li class="menu">
@@ -125,7 +125,7 @@ include('../config/authentication.php')
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Job Order Employee List</h4>
+                    <h4>Files 201</h4>
                     <h6>Manage Employee</h6>
                 </div>
                 <div class="page-btn">

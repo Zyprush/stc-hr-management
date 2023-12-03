@@ -54,7 +54,8 @@ include('../config/employee-chart.php');
                         <a class="dropdown-item" href="#"> <i class="me-2" data-feather="user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
+                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
@@ -62,7 +63,8 @@ include('../config/employee-chart.php');
 
 
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+                    class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">My Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
@@ -85,38 +87,49 @@ include('../config/employee-chart.php');
                         <a href="department.php"><i data-feather="users"></i>
                             <span> Offices</span> </a>
                     </li>
-                    <li class="menu">
-                        <a href="employee.php"><i data-feather="user"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="user"></i>
                             <span> Employee</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Employee -->
+                            <li><a href="employee.php">Permanent</a></li>
+                            <li><a href="employee-jo.php">Job Order</a></li>
+                            <li><a href="employee-file.php">File</a></li>
+                        </ul>
                     </li>
                     <li class="menu">
-                        <a href="evaluation.php"><i data-feather="bar-chart-2"></i>
+                        <a href="evaluation.php"><i data-feather="users"></i>
                             <span> Evaluation</span> </a>
                     </li>
                     <li class="menu">
-                        <a href="training.php"><i data-feather="bar-chart-2"></i>
+                        <a href="training.php"><i data-feather="users"></i>
                             <span> Training</span> </a>
                     </li>
-                    <li class="menu">
-                        <a href="report.php"><i data-feather="calendar"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="calendar"></i>
                             <span> Report</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Report -->
+                            <li><a href="benefits.php">Benefits</a></li>
+                            <li><a href="promotion.php">Promotion</a></li>
+                        </ul>
                     </li>
-                    <li class="menu">
-                        <a href="activities.php"><i data-feather="activity"></i>
-                            <span> Promotion</span> </a>
-                    </li>
-                    <li class="menu">
-                        <a href="benefits.php"><i data-feather="award"></i>
-                            <span> Benefits</span> </a>
-                    </li>
-                    <li class="menu">
-                        <a href="settings.php"><i data-feather="settings"></i>
+                    <li class="submenu">
+                        <!-- Add "has-submenu" class to create dropdown -->
+                        <a href="#"><i data-feather="settings"></i>
                             <span> Settings</span> </a>
+                        <ul class="submenu">
+                            <!-- Dropdown submenu for Settings -->
+                            <li><a href="settings.php">Office</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
+
 
     <div class="page-wrapper">
         <div class="content">
@@ -228,11 +241,13 @@ include('../config/employee-chart.php');
                                     // Increment the color index, and wrap around if necessary
                                     $colorIndex = ($colorIndex + 1) % count($colors);
                                 ?>
-                                    <div class="card col-12 mb-2 p-1" style="border-left: 10px solid <?php echo $color; ?>;">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center border-0">
-                                            <?php echo $eventInfo; ?> <i class="fa fa-ellipsis-v"></i>
-                                        </li>
-                                    </div>
+                                <div class="card col-12 mb-2 p-1"
+                                    style="border-left: 10px solid <?php echo $color; ?>;">
+                                    <li
+                                        class="list-group-item d-flex justify-content-between align-items-center border-0">
+                                        <?php echo $eventInfo; ?> <i class="fa fa-ellipsis-v"></i>
+                                    </li>
+                                </div>
                                 <?php
                                 }
                                 ?>
@@ -252,24 +267,24 @@ include('../includes/footer.php');
 ?>
 
 <script>
-    var ctxD = document.getElementById("doughnutChart").getContext('2d');
-    var departmentCounts = <?php echo json_encode($departmentCounts); ?>;
+var ctxD = document.getElementById("doughnutChart").getContext('2d');
+var departmentCounts = <?php echo json_encode($departmentCounts); ?>;
 
-    var labels = Object.keys(departmentCounts);
-    var data = Object.values(departmentCounts);
+var labels = Object.keys(departmentCounts);
+var data = Object.values(departmentCounts);
 
-    var myDoughnutChart = new Chart(ctxD, {
-        type: 'doughnut',
-        data: {
-            labels: labels,
-            datasets: [{
-                data: data,
-                backgroundColor: ["#6859f3", "#e95c41", "#4a3aae", "#c04532"], // Add more colors if needed
-                hoverBackgroundColor: ["#4a3aae", "#c04532", "#2e255c", "#a82a1f"]
-            }]
-        },
-        options: {
-            responsive: true
-        }
-    });
+var myDoughnutChart = new Chart(ctxD, {
+    type: 'doughnut',
+    data: {
+        labels: labels,
+        datasets: [{
+            data: data,
+            backgroundColor: ["#6859f3", "#e95c41", "#4a3aae", "#c04532"], // Add more colors if needed
+            hoverBackgroundColor: ["#4a3aae", "#c04532", "#2e255c", "#a82a1f"]
+        }]
+    },
+    options: {
+        responsive: true
+    }
+});
 </script>
