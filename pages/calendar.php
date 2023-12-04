@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>How to create dynamic event calendar in HTML and PHP</title>
-<!-- *Note: You must have internet connection on your laptop or pc other wise below code is not working -->
-<!-- CSS for full calender -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
-<!-- JS for jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- JS for full calender -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
-<!-- bootstrap css and js -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+<?php include('../includes/header.php'); ?>
+
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
@@ -23,6 +8,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- Start popup dialog box -->
 <div class="modal fade" id="event_entry_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-md" role="document">
@@ -66,6 +52,8 @@
 	</div>
 </div>
 <!-- End popup dialog box -->
+
+</body>
 
 <script>
 $(document).ready(function() {
@@ -152,4 +140,44 @@ $.ajax({
 return false;
 }
 </script>
+
+
+
+<script src="../assets/js/feather.min.js"></script>
+
+<script src="../assets/js/jquery.slimscroll.min.js"></script>
+
+<script src="../assets/js/jquery.dataTables.min.js"></script>
+<script src="../assets/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="../assets/plugins/apexchart/apexcharts.min.js"></script>
+<script src="../assets/plugins/apexchart/chart-data.js"></script>
+
+<script src="../assets/js/script.js"></script>
+
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="assets/js/feather.min.js"></script>
+
+<script src="assets/js/jquery.slimscroll.min.js"></script>
+
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="../assets/plugins/toastr/toastr.min.js"></script>
+<script src="../assets/plugins/toastr/toastr.js"></script>
+
+<script src="assets/plugins/select2/js/select2.min.js"></script>
+
+<script src="assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
+<script src="assets/plugins/sweetalert/sweetalerts.min.js"></script>
+
+<script src="../assets/js/bootstrap.min.js"></script>
+
+<script src="assets/js/script.js"></script>
+
 </html> 

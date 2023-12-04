@@ -13,7 +13,6 @@ if ($results->num_rows > 0) {
         $data_arr[$i]['start'] = date("Y-m-d", strtotime($data_row['event_start_date']));
         $data_arr[$i]['end'] = date("Y-m-d", strtotime($data_row['event_end_date']));
         $data_arr[$i]['color'] = '#' . substr(uniqid(), -6); // 'green'; pass colour name
-        $data_arr[$i]['url'] = '#';
         $i++;
     }
 
