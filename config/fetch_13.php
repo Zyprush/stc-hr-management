@@ -2,7 +2,7 @@
 include 'dbcon.php'; // Include your database connection
 
 // Calculate the date one month ago from today
-$oneMonthAgo = date('Y-m-d', strtotime('-1 month'));
+$oneMonthAgo = date('Y-m-d', strtotime('-6 month'));
 
 // Perform a select query to fetch data from the 'employees' table for employees who started at least 1 month ago
 $query = "SELECT ID, name, office, position, start,

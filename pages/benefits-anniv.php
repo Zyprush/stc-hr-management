@@ -151,7 +151,6 @@ include('../config/authentication.php');
                                     <th>Name</th>
                                     <th>Office</th>
                                     <th>Position</th>
-                                    <th>Duration</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -172,7 +171,7 @@ include('../includes/footer.php');
 $(document).ready(function() {
     var table = $('#event_table').DataTable({
         "ajax": {
-            "url": "../config/fetch_13.php",
+            "url": "../config/fetch_anniv.php",
             "type": "POST",
             "dataSrc": ""
         },
@@ -188,9 +187,6 @@ $(document).ready(function() {
             },
             {
                 "data": "position"
-            },
-            {
-                "data": "duration"
             }
         ]
     });
