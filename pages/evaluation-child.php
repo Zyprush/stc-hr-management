@@ -234,7 +234,7 @@ if (isset($_GET['id'])) {
                                 echo '<div class="col-sm-3"><h5>Final Average Rating</h5></div>';
                                 echo "<div class='col-sm-3'></div>";
                                 echo "<div class='col-sm-3'><h4>{$row['final_average_rating']}</h4></div>";
-                                echo '<div class="col-sm-3"><button class="btn btn-primary m-2">Edit</button><a href="#" class="btn btn-danger" onclick="confirmDelete(' . $row['ID'] . ')">Delete</a></div>';
+                                echo '<div class="col-sm-3"><a href="#" class="btn btn-danger" onclick="confirmDelete(' . $row['ID'] . ')">Delete</a></div>';
                                 echo '</div>';
 
                                 echo '<div class="row">';

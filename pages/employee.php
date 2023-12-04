@@ -186,6 +186,11 @@ include('../config/authentication.php');
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="birthday">Birthday</label>
+                                    <input class="form-control" type="date" name="birthday" id="birthday" required>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="office">Office Name</label>
                                     <select class="form-control" id="office" name="office" required>
                                         <option value="">--Select--</option>

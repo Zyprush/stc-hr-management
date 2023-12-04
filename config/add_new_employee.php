@@ -4,6 +4,7 @@ include 'dbcon.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve employee details from the POST request
     $name = $_POST['name'];
+    $birthday = $_POST['birthday'];
     $office = $_POST['office'];
     $employment = $_POST['employment'];
     $start = $_POST['start'];
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $createTableQuery = "CREATE TABLE employees (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
+            birthday DATE NOT NULL,
             oldItem VARCHAR(255) NOT NULL,
             newItem VARCHAR(255) NOT NULL,
             position VARCHAR(255) NOT NULL,
@@ -52,11 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Now, perform the database insertion using prepared statements
-    $insertQuery = "INSERT INTO employees (name, oldItem, newItem, position, sg, sg1, amount, amount1, office, employment, start)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $insertQuery = "INSERT INTO employees (name, birthday, oldItem, newItem, position, sg, sg1, amount, amount1, office, employment, start)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conn, $insertQuery);
-    mysqli_stmt_bind_param($stmt, 'sssssssssss', $name, $oldItem, $newItem, $position, $sg, $sg1, $amount, $amount1, $office, $employment, $start);
+    mysqli_stmt_bind_param($stmt, 'ssssssssssss', $name, $birthday, $oldItem, $newItem, $position, $sg, $sg1, $amount, $amount1, $office, $employment, $start);
 
     if (mysqli_stmt_execute($stmt)) {
         // Set a session value to indicate success
