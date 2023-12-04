@@ -275,7 +275,7 @@ include('../config/authentication.php');
                     <div class="card shadow">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h5 class="card-title">
-                                List of nearly expires
+                                List of Contract nearly expires
                             </h5>
                         </div>
                         <div class="card-body">
