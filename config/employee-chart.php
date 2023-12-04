@@ -61,8 +61,3 @@ if ($resultDepartments->num_rows > 0) {
 
 // Close the database connection
 $conn->close();
-
-// Display the results
-foreach ($departmentCounts as $department => $count) {
-    echo "$department = $count employee<br>";
-}

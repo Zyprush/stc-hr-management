@@ -1,7 +1,12 @@
 <?php
 include('../includes/header.php');
 include('../config/authentication.php');
+
+include('../config/department_count.php');
+include('../config/fetch_events_dashboard.php');
+include('../config/employee-chart.php');
 ?>
+
 <div id="global-loader">
     <div class="whirly-loader"> </div>
 </div>
@@ -68,11 +73,11 @@ include('../config/authentication.php');
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
-                    <li class="active">
+                    <li class="menu">
                         <a href="dashboard.php"><i data-feather="home"></i>
                             <span> Dashboard</span> </a>
                     </li>
-                    <li class="menu">
+                    <li class="active">
                         <a href="department.php"><i data-feather="users"></i>
                             <span> Offices</span> </a>
                     </li>
@@ -122,156 +127,160 @@ include('../config/authentication.php');
 
     <div class="page-wrapper">
         <div class="content">
-
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Dashboard</h4>
-                    <h6>Dashboard</h6>
+                    <h4>Department List</h4>
+                    <h6>Manage Departments</h6>
                 </div>
                 <div class="page-btn">
-                    <!--
-                        <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
+                    <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
                         <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Department
                     </a>
-                    -->
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table id="department_table" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Department</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                    <div class="card shadow">
-                        <?php include('../config/department_count.php');?>
-                        <div class="card-header text-white" style="background-color: #377ede;">
-                            <h5>Offices</h5>
-                        </div>
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <h1 class="text-center" style="margin: auto;"><?php echo $departmentCount; ?></h1>
-                            <!--
-                                <a href="department.php" class="d-block p-2 rounded-3 pointer" style="background-color: #377ede;">
-                                    <i class="fa fa-plus text-white"></i>
-                                </a>
-                            -->
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                    <div class="card shadow">
-                        <div class="card-header text-white" style="background-color: #6859f3;">
-                            <h5>Permanent</h5>
+            <!-- Add -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Add Department</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <h1 class="text-center" style="margin: auto;"><?php echo $permanent; ?></h1>
-                            <!--
-                                <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #6859f3;">
-                                    <i class="fa fa-plus text-white"></i>
-                                </a>
-                            -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                    <div class="card shadow">
-                        <div class="card-header text-white" style="background-color: #e95c41;">
-                            <h5>Job Order</h5>
-                        </div>
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <h1 class="text-center" style="margin: auto;"><?php echo $jo; ?></h1>
-                            <!--
-                                <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #e95c41;">
-                                    <i class="fa fa-plus text-white"></i>
-                                </a>
-                            -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                    <div class="card shadow">
-                        <div class="card-header text-white bg-danger">
-                            <h5>Expiring Contract</h5>
-                        </div>
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <h1 class="text-center" style="margin: auto;"><?php echo $expiring; ?></h1>
-                            <!--
-                                <a href="employee.php" class="d-block p-2 rounded-3 pointer" style="background-color: #e95c41;">
-                                    <i class="fa fa-plus text-white"></i>
-                                </a>
-                            -->
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="row">
-                <div class="col-lg-6 col-sm-12 col-12 d-flex">
-                    <div class="card shadow flex-fill">
-                        <?php include('../config/employee-chart.php'); ?>
-                        <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">Total Employees per Office</h5>
-                            <a href="employee.php"><i class="fa fa-plus"></i></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <canvas id="doughnutChart"></canvas>
+                        <div class="modal-body">
+                            <form action="../config/add_department.php" method="post">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="departmentName">Department:</label>
+                                        <input type="text" class="form-control" id="departmentName"
+                                            name="departmentName" required>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-sm-12 col-12 d-flex">
-                    <div class="card shadow flex-fill">
-                        <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">Events</h5>
-                            <a href="#"><i class="fa fa-plus"></i></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12">
-                                        asdasd
-                                    </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Edit -->
+            <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog"
+                aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editDepartmentModalLabel">Edit Department</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editDepartmentForm" action="../config/edit_department.php" method="post">
+                                <input type="hidden" name="edit_department_id" id="edit_department_id">
+                                <div class="form-group">
+                                    <label for="edit_department_name">Department Name:</label>
+                                    <input type="text" class="form-control" id="edit_department_name"
+                                        name="edit_department_name">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
 
-
 <?php
 include('../includes/footer.php');
 ?>
+<script>
+// Fetch data from PHP using AJAX
+var selectRoot = document.getElementById('root');
+
+// AJAX request
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+            var departments = JSON.parse(xhr.responseText);
+
+            // Update options in the dropdown
+            departments.forEach(function(department) {
+                var option = document.createElement('option');
+                option.value = department['Department']; // Assuming 'Department' is the column name
+                option.textContent = department['Department']; // Assuming 'Department' is the column name
+                selectRoot.appendChild(option);
+            });
+        } else {
+            console.error('Request failed: ' + xhr.status);
+        }
+    }
+};
+
+xhr.open('GET', '../config/get_departments_root.php', true);
+xhr.send();
+</script>
 
 <script>
-var ctxD = document.getElementById("doughnutChart").getContext('2d');
-var departmentCounts = <?php echo json_encode($departmentCounts); ?>;
+$(document).ready(function() {
+    var table = $('#department_table').DataTable({
+        "ajax": {
+            "url": "../config/fetch_departments.php",
+            "type": "POST",
+            "dataSrc": ""
+        },
+        "columns": [{
+                "data": "Department"
+            },
+            {
+                "data": null,
+                "render": function(data, type, row) {
+                    // Add a data-attribute to store the record ID
+                    return `
+                        <a class="view-button m-1" data-record-id="${row.ID}" href="#">
+                            <img src="../assets/img/icons/eye.svg" alt="View">
+                        </a>
+                    `;
+                }
+            }
+        ]
+    });
 
-var labels = Object.keys(departmentCounts);
-var data = Object.values(departmentCounts);
+    $('#department_table tbody').on('click', '.view-button', function(event) {
+        event.preventDefault(); // Prevent default link behavior
 
-var myDoughnutChart = new Chart(ctxD, {
-    type: 'doughnut',
-    data: {
-        labels: labels,
-        datasets: [{
-            data: data,
-            backgroundColor: ["#6859f3", "#e95c41", "#4a3aae", "#c04532"], // Add more colors if needed
-            hoverBackgroundColor: ["#4a3aae", "#c04532", "#2e255c", "#a82a1f"]
-        }]
-    },
-    options: {
-        responsive: true
-    }
+        var button = $(this);
+        var recordId = $(button).data('record-id');
+
+        // Open the PDF file using the constructed file name
+        window.open('department_childs.php?id=' + recordId);
+    });
 });
 </script>
