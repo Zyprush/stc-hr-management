@@ -104,8 +104,8 @@ include('../config/authentication.php');
                             <span> Report</span> </a>
                         <ul class="submenu">
                             <!-- Dropdown submenu for Report -->
-                            <li><a href="benefits.php">Benefits</a></li>
-                            <li><a href="promotion.php" class="active">Promotion</a></li>
+                            <li><a href="benefits.php"  class="active">Benefits</a></li>
+                            <li><a href="promotion.php">Promotion</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
@@ -127,8 +127,8 @@ include('../config/authentication.php');
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Promotion</h4>
-                    <h6>List of Employees to promote.</h6>
+                    <h4>Retirement Benefits</h4>
+                    <h6>List of Retirement beneficiaries.</h6>
                 </div>
                 <div class="page-btn">
                     <!--
@@ -151,7 +151,7 @@ include('../config/authentication.php');
                                     <th>Name</th>
                                     <th>Office</th>
                                     <th>Position</th>
-                                    <th>Ratings</th>
+                                    <th>Duration</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -172,7 +172,7 @@ include('../includes/footer.php');
 $(document).ready(function() {
     var table = $('#event_table').DataTable({
         "ajax": {
-            "url": "../config/fetch_promotion.php",
+            "url": "../config/fetch_13.php",
             "type": "POST",
             "dataSrc": ""
         },
@@ -190,7 +190,7 @@ $(document).ready(function() {
                 "data": "position"
             },
             {
-                "data": "adjective_rating"
+                "data": "duration"
             }
         ]
     });

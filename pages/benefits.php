@@ -21,7 +21,6 @@ include('../config/authentication.php');
             <a id="toggle_btn" href="javascript:void(0);">
             </a>
         </div>
-
         <a id="mobile_btn" class="mobile_btn" href="#sidebar">
             <span class="bar-icon">
                 <span></span>
@@ -29,7 +28,6 @@ include('../config/authentication.php');
                 <span></span>
             </span>
         </a>
-
         <ul class="nav user-menu">
             <li class="nav-item dropdown has-arrow main-drop">
                 <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
@@ -56,8 +54,6 @@ include('../config/authentication.php');
                 </div>
             </li>
         </ul>
-
-
         <div class="dropdown mobile-user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
                     class="fa fa-ellipsis-v"></i></a>
@@ -67,9 +63,7 @@ include('../config/authentication.php');
                 <a class="dropdown-item" href="../config/logout.php">Logout</a>
             </div>
         </div>
-
     </div>
-
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
@@ -91,7 +85,7 @@ include('../config/authentication.php');
                             <!-- Dropdown submenu for Employee -->
                             <li><a href="employee.php">Permanent</a></li>
                             <li><a href="employee-jo.php">Job Order</a></li>
-                            <li><a href="employee-file">File</a></li>
+                            <li><a href="employee-file.php">File</a></li>
                         </ul>
                     </li>
                     <li class="menu">
@@ -126,10 +120,62 @@ include('../config/authentication.php');
         </div>
     </div>
 
+
     <div class="page-wrapper">
         <div class="content">
-            <div class="row">
-                <h1>this is benefits</h1>
+            <div class="page-header">
+                <div class="page-title">
+                    <h4>Benefits</h4>
+                    <h6>Manage Employee's Benefits</h6>
+                </div>
+                <div class="page-btn">
+                    <!--
+                        <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
+                            <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Department
+                        </a>
+                    -->
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table id="#" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Benefits</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Loyalty Awardees</th>
+                                    <th><a class="view-button m-1" href="benefits-loyalty.php">
+                                            <img src="../assets/img/icons/eye.svg" alt="View">
+                                        </a></th>
+                                </tr>
+                                <tr>
+                                    <th>13th Month Pay</th>
+                                    <th><a class="view-button m-1" href="benefits-13.php">
+                                            <img src="../assets/img/icons/eye.svg" alt="View">
+                                        </a></th>
+                                </tr>
+                                <tr>
+                                    <th>Anniversarry Bonus</th>
+                                    <th><a class="view-button m-1" href="benefits-anniv.php">
+                                            <img src="../assets/img/icons/eye.svg" alt="View">
+                                        </a></th>
+                                </tr>
+                                <tr>
+                                    <th>Retirement Benifits</th>
+                                    <th><a class="view-button m-1" href="benefits-retired.php">
+                                            <img src="../assets/img/icons/eye.svg" alt="View">
+                                        </a></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -137,5 +183,4 @@ include('../config/authentication.php');
 
 <?php
 include('../includes/footer.php');
-
 ?>
