@@ -45,14 +45,19 @@ while ($row = mysqli_fetch_assoc($result)) {
 // Create a writer object
 $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 
-// Save the file
-$filename = 'Job-Order-Employees.xlsx';
+// Save the file into the 'jo_excel' folder
+$folderPath = 'jo_excel/';
+if (!file_exists($folderPath)) {
+    mkdir($folderPath, 0777, true);
+}
+$filename = $folderPath . 'Job-Order-Employees.xlsx';
 $writer->save($filename);
 
 // Set headers for file download
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename=' . $filename);
+header('Content-Disposition: attachment; filename=' . basename($filename));
 header('Cache-Control: max-age=0');
 
 // Send file to browser
-$writer->save('php://output');
+readfile($filename);
+?>
