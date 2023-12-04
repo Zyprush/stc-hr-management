@@ -376,9 +376,38 @@ function display_events() {
                 events: events,
                 eventRender: function(event, element, view) {
                     element.bind('click', function() {
-                        alert(event.event_id);
+                        // Show a confirmation dialog before deleting the event
+                        if (confirm('Are you sure you want to delete this event?')) {
+                            // AJAX request to delete the event from the database
+                            $.ajax({
+                                url: '../config/delete_event.php', // Replace with your delete event script URL
+                                type: 'POST',
+                                data: {
+                                    event_id: event.event_id
+                                }, // Send event ID to identify the event
+                                success: function(response) {
+                                    console.log(
+                                    response); // Log the response for debugging
+
+                                    if (response.status === true) {
+                                        $('#calendar').fullCalendar(
+                                            'removeEvents', event._id);
+                                        alert(
+                                        'Event deleted successfully!');
+                                        location.reload();
+                                    } else {
+                                        alert('Event deleted successfully!');
+                                        location.reload();
+                                    }
+                                },
+                                error: function(xhr, status) {
+                                    alert('Error deleting event.');
+                                }
+                            });
+                        }
                     });
                 }
+
             }); //end fullCalendar block	
         }, //end success block
         error: function(xhr, status) {

@@ -1,36 +1,39 @@
 <?php
-include '../config/dbcon.php'; // Include your database connection code here
+// Include your database connection file
+include '../config/dbcon.php'; // Replace with the correct path to your connection file
 
-if (isset($_POST['record_id'])) {
-    $recordId = $_POST['record_id'];
+// Check if event_id is provided via POST request
+if(isset($_POST['event_id'])) {
+    // Sanitize the input to prevent SQL injection
+    $event_id = mysqli_real_escape_string($conn, $_POST['event_id']);
 
-    // Prepare a DELETE statement to delete a record based on its ID
-    $query = "DELETE FROM events WHERE ID = ?"; // Use the 'events' table
-    $stmt = mysqli_prepare($conn, $query);
+    // Query to delete the event from the calendar_event_master table
+    $deleteQuery = "DELETE FROM calendar_event_master WHERE event_id = '$event_id'";
 
-    if ($stmt) {
-        // Bind the parameter
-        mysqli_stmt_bind_param($stmt, "i", $recordId); // Assuming 'ID' is an integer
-
-        // Execute the statement
-        if (mysqli_stmt_execute($stmt)) {
-            // Deletion successful
-            echo 'Event deleted successfully';
-        } else {
-            // Handle the case where the deletion fails
-            echo 'Error deleting event: ' . mysqli_error($conn);
-        }
-
-        // Close the statement
-        mysqli_stmt_close($stmt);
+    if(mysqli_query($conn, $deleteQuery)) {
+        // Deletion successful
+        $response = array(
+            'status' => true,
+            'message' => 'Event deleted successfully'
+        );
+        echo json_encode($response);
     } else {
-        // Handle the case where the statement preparation fails
-        echo 'Error preparing statement: ' . mysqli_error($conn);
+        // Deletion failed
+        $response = array(
+            'status' => false,
+            'message' => 'Failed to delete event'
+        );
+        echo json_encode($response);
     }
 } else {
-    // Handle the case where no record ID is provided
-    echo 'Event ID not provided';
+    // If event_id is not provided
+    $response = array(
+        'status' => false,
+        'message' => 'Event ID not provided'
+    );
+    echo json_encode($response);
 }
 
 // Close the database connection
 mysqli_close($conn);
+?>
