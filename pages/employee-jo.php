@@ -84,7 +84,7 @@ include('../config/authentication.php')
                             <span> Employee</span> </a>
                         <ul class="submenu">
                             <!-- Dropdown submenu for Employee -->
-                            <li><a href="employee.php" >Permanent</a></li>
+                            <li><a href="employee.php">Permanent</a></li>
                             <li><a href="employee-jo.php" class="active">Job Order</a></li>
                             <li><a href="employee-file.php">File</a></li>
                         </ul>
@@ -146,16 +146,19 @@ include('../config/authentication.php')
                         </div>
                         <div class="wordset">
                             <ul>
+                                <!--
+                                    <li>
+                                        <a href="../config/generate_pdf_jo.php" data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                                src="../assets/img/icons/pdf.svg" alt="img"></a>
+                                    </li>
+                                    <li>
+                                        <a href="../config/generate_excel_jo.php" data-bs-toggle="tooltip" data-bs-placement="top" title="excel">
+                                            <img src="../assets/img/icons/excel.svg" alt="img">
+                                        </a>
+                                    </li>
+                                -->
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                            src="../assets/img/icons/pdf.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                            src="../assets/img/icons/excel.svg" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
+                                    <a href="../config/generate_excel_jo.php" data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
                                             src="../assets/img/icons/printer.svg" alt="img"></a>
                                 </li>
                             </ul>
@@ -204,10 +207,12 @@ include('../config/authentication.php')
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="office">Office Name</label>
-                                    <select class="form-control" id="office" name="office" required>
-                                        <option value="">--Select--</option>
-                                        <?php
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="office">Office Name</label>
+                                            <select class="form-control" id="office" name="office" required>
+                                                <option value="">--Select--</option>
+                                                <?php
                                         // Fetch department names from the 'departments' table
                                         $sql = "SELECT Department FROM departments";
                                         $result = $conn->query($sql);
@@ -221,11 +226,15 @@ include('../config/authentication.php')
                                             echo "<option value=''>No departments found</option>";
                                         }
                                         ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="position">Position Title</label>
-                                    <input type="text" class="form-control" id="position" name="position" required>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="position">Position Title</label>
+                                            <input type="text" class="form-control" id="position" name="position"
+                                                required>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="type">Type of Employment</label>
@@ -236,13 +245,32 @@ include('../config/authentication.php')
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="start">Start Date</label>
-                                    <input type="date" class="form-control" id="start" name="start" required>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="start">Start Date</label>
+                                            <input type="date" class="form-control" id="start" name="start" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="end">end Date</label>
+                                            <input type="date" class="form-control" id="end" name="end" required>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="end">end Date</label>
-                                    <input type="date" class="form-control" id="end" name="end" required>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="rate">Rate /Month</label>
+                                            <input type="text" class="form-control" id="rate" name="rate" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="funding">Funding Chargers</label>
+                                            <input type="text" class="form-control" id="funding" name="funding"
+                                                required>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <!-- Submit button for the form -->
                                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -9,6 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $start = $_POST['start'];
     $end = $_POST['end'];
     $position = $_POST['position'];
+    $rate = $_POST['rate'];
+    $funding = $_POST['funding'];
 
     // Validate employee details here if needed
 
@@ -30,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             position VARCHAR(255) NOT NULL,
             office VARCHAR(255) NOT NULL,
             employment VARCHAR(255) NOT NULL,
+            rate VARCHAR(255) NOT NULL,
+            funding VARCHAR(255) NOT NULL,
             start DATE
         )";
 
@@ -42,30 +46,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Now, perform the database insertion using prepared statements
-    $insertQuery = "INSERT INTO employees_jo (name, end, position, office, employment, start)
-    VALUES (?, ?, ?, ?, ?, ?)";
+    $insertQuery = "INSERT INTO employees_jo (name, end, position, office, employment, start, rate, funding)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conn, $insertQuery);
-    mysqli_stmt_bind_param($stmt, 'ssssss', $name, $end, $position, $office, $employment, $start);
 
-    if (mysqli_stmt_execute($stmt)) {
-        // Set a session value to indicate success
-        session_start();
-        $_SESSION['message'] = 'Employee added successfully';
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, 'ssssssss', $name, $end, $position, $office, $employment, $start, $rate, $funding);
 
-        // Redirect to the employee-jo.php page (or your desired destination)
-        header('Location: ../pages/employee-jo.php');
-        exit();
+        if (mysqli_stmt_execute($stmt)) {
+            // Set a session value to indicate success
+            session_start();
+            $_SESSION['message'] = 'Employee added successfully';
+
+            // Redirect to the employee-jo.php page (or your desired destination)
+            header('Location: ../pages/employee-jo.php');
+            exit();
+        } else {
+            echo 'Error inserting data: ' . mysqli_stmt_error($stmt);
+            // Rest of your error handling code...
+        }
+
+        // Close the statement
+        mysqli_stmt_close($stmt);
     } else {
-        echo 'Error inserting data: ' . mysqli_stmt_error($stmt);
-
-        // Set a session value to indicate the error
-        session_start();
-        $_SESSION['message'] = 'Error adding employee-jo';
-
-        // Redirect to the employee-jo.php page (or your desired destination)
-        header('Location: ../pages/employee-jo.php');
-        exit();
+        echo 'Error creating prepared statement: ' . mysqli_error($conn);
+        // Rest of your error handling code...
     }
 
     // Close the statement
