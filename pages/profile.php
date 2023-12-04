@@ -163,8 +163,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <ul class="submenu">
                             <!-- Dropdown submenu for Settings -->
                             <li><a href="settings.php">Office</a></li>
-                            <li><a href="profile.php" class="active">Profile</a></li>
-                            <li><a href="../config/logout.php">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -193,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <h4 class="mb-4">Edit Profile</h4>
                     <?php if (isset($errorMessage)) {
-                        echo "<p>$errorMessage</p>";
+                        echo "<p class='text-danger'>$errorMessage</p>";
                     } ?>
                     <form method="post" action="">
                         <div class="form-group">

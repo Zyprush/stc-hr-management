@@ -45,8 +45,8 @@ include('../config/authentication.php');
                             </div>
                         </div>
                         <hr class="m-0">
-                        <a class="dropdown-item" href="#"> <i class="me-2" data-feather="user"></i> My Profile</a>
-                        <a class="dropdown-item" href="#"><i class="me-2" data-feather="settings"></i>Settings</a>
+                        <a class="dropdown-item" href="profile.php"> <i class="me-2" data-feather="user"></i> My Profile</a>
+                        <a class="dropdown-item" href="settings.php"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
                         <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
                                 src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
@@ -58,8 +58,8 @@ include('../config/authentication.php');
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
                     class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#">My Profile</a>
-                <a class="dropdown-item" href="#">Settings</a>
+                <a class="dropdown-item" href="profile.php">My Profile</a>
+                <a class="dropdown-item" href="settings.php">Settings</a>
                 <a class="dropdown-item" href="../config/logout.php">Logout</a>
             </div>
         </div>
