@@ -43,6 +43,14 @@
 							</div>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-sm-12">  
+							<div class="form-group">
+							  <label for="event_time">Event Time</label>
+							  <input type="time" name="event_time" id="event_time" class="form-control" placeholder="Enter your event name">
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">

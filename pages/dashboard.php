@@ -266,6 +266,15 @@ include('../config/authentication.php');
                                                 class="form-control" placeholder="Event end date">
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="event_time">Event Time</label>
+                                                <input type="time" name="event_time" id="event_time"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -363,6 +372,7 @@ function display_events() {
                     start: result[i].start,
                     end: result[i].end,
                     color: result[i].color,
+                    time: result[i].time,
                     url: result[i].url
                 });
             })
@@ -383,7 +393,7 @@ function display_events() {
                 eventRender: function(event, element, view) {
                     element.bind('click', function() {
                         // Show a confirmation dialog before deleting the event
-                        alert('Event Title: ' + event.title);
+                        alert('Event Title: ' + event.title + '\n' + 'Event Time: ' + event.time);
                     });
                 }
 
@@ -399,7 +409,8 @@ function save_event() {
     var event_name = $("#event_name").val();
     var event_start_date = $("#event_start_date").val();
     var event_end_date = $("#event_end_date").val();
-    if (event_name == "" || event_start_date == "" || event_end_date == "") {
+    var event_time = $("#event_time").val();
+    if (event_name == "" || event_start_date == "" || event_end_date == "" || event_time == "") {
         alert("Please enter all required details.");
         return false;
     }
@@ -410,7 +421,8 @@ function save_event() {
         data: {
             event_name: event_name,
             event_start_date: event_start_date,
-            event_end_date: event_end_date
+            event_end_date: event_end_date,
+            event_time: event_time
         },
         success: function(response) {
             $('#event_entry_modal').modal('hide');

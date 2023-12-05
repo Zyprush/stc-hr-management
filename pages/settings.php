@@ -128,9 +128,12 @@ include('../config/authentication.php');
                     <h6>Manage Departments</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
+                    <!--
+                        <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
                         <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Department
                     </a>
+                    -->
+                    
                 </div>
             </div>
             <div class="card">
