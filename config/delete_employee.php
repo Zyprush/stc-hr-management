@@ -4,29 +4,53 @@ include '../config/dbcon.php'; // Include your database connection code here
 if (isset($_POST['record_id'])) {
     $recordId = $_POST['record_id'];
 
-    // Prepare a DELETE statement to delete a record based on its ID
-    $query = "DELETE FROM employees WHERE ID = ?"; // Replace 'your_table_name' with your actual table name
-    $stmt = mysqli_prepare($conn, $query);
+    // Start a transaction to ensure atomicity (all or nothing)
+    mysqli_autocommit($conn, false);
 
-    if ($stmt) {
-        // Bind the parameter
-        mysqli_stmt_bind_param($stmt, "i", $recordId); // Assuming 'ID' is an integer
+    // Prepare a DELETE statement to delete employee evaluations
+    $evalQuery = "DELETE FROM evaluation WHERE ID = ?";
+    $evalStmt = mysqli_prepare($conn, $evalQuery);
 
-        // Execute the statement
-        if (mysqli_stmt_execute($stmt)) {
-            // Deletion successful
-            echo 'Record deleted successfully';
+    // Prepare a DELETE statement to delete employee files
+    $filesQuery = "DELETE FROM employee_files WHERE ID = ?";
+    $filesStmt = mysqli_prepare($conn, $filesQuery);
+
+    // Prepare a DELETE statement to delete an employee
+    $employeeQuery = "DELETE FROM employees WHERE ID = ?";
+    $employeeStmt = mysqli_prepare($conn, $employeeQuery);
+
+    if ($evalStmt && $filesStmt && $employeeStmt) {
+        // Bind the parameter for all statements
+        mysqli_stmt_bind_param($evalStmt, "i", $recordId);
+        mysqli_stmt_bind_param($filesStmt, "i", $recordId);
+        mysqli_stmt_bind_param($employeeStmt, "i", $recordId);
+
+        // Execute the statements
+        $evalSuccess = mysqli_stmt_execute($evalStmt);
+        $filesSuccess = mysqli_stmt_execute($filesStmt);
+        $employeeSuccess = mysqli_stmt_execute($employeeStmt);
+
+        if ($evalSuccess && $filesSuccess && $employeeSuccess) {
+            // Commit the transaction if all deletions are successful
+            mysqli_commit($conn);
+            echo 'Record and related data deleted successfully';
         } else {
-            // Handle the case where the deletion fails
-            echo 'Error deleting record: ' . mysqli_error($conn);
+            // Rollback the transaction if any deletion fails
+            mysqli_rollback($conn);
+            echo 'Error deleting record or related data: ' . mysqli_error($conn);
         }
 
-        // Close the statement
-        mysqli_stmt_close($stmt);
+        // Close all statements
+        mysqli_stmt_close($evalStmt);
+        mysqli_stmt_close($filesStmt);
+        mysqli_stmt_close($employeeStmt);
     } else {
-        // Handle the case where the statement preparation fails
+        // Handle the case where statement preparation fails
         echo 'Error preparing statement: ' . mysqli_error($conn);
     }
+
+    // Restore autocommit mode
+    mysqli_autocommit($conn, true);
 } else {
     // Handle the case where no record ID is provided
     echo 'Record ID not provided';
@@ -34,3 +58,4 @@ if (isset($_POST['record_id'])) {
 
 // Close the database connection
 mysqli_close($conn);
+?>

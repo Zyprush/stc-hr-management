@@ -45,8 +45,10 @@ include('../config/authentication.php');
                             </div>
                         </div>
                         <hr class="m-0">
-                        <a class="dropdown-item" href="profile.php"> <i class="me-2" data-feather="user"></i> My Profile</a>
-                        <a class="dropdown-item" href="settings.php"><i class="me-2" data-feather="settings"></i>Settings</a>
+                        <a class="dropdown-item" href="profile.php"> <i class="me-2" data-feather="user"></i> My
+                            Profile</a>
+                        <a class="dropdown-item" href="settings.php"><i class="me-2"
+                                data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
                         <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
                                 src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
@@ -216,7 +218,11 @@ include('../config/authentication.php');
                 <div class="col-lg-6 col-sm-12 col-12 d-flex">
                     <div class="card shadow flex-fill">
                         <!---->
-                        <div class="container mt-4">
+                        <div class="card-header d-flex justify-content-between align-items-center pr-5">
+                            <h5 style="font-size:18px;font-weight:700;color:#212b36;margin:0px 0 0px 20px;">Calendar Events</h5>
+                            <a href="event.php"><i class="fa fa-eye"></i></a>
+                        </div>
+                        <div class="container">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div id="calendar"></div>
@@ -377,34 +383,7 @@ function display_events() {
                 eventRender: function(event, element, view) {
                     element.bind('click', function() {
                         // Show a confirmation dialog before deleting the event
-                        if (confirm('Are you sure you want to delete this event?')) {
-                            // AJAX request to delete the event from the database
-                            $.ajax({
-                                url: '../config/delete_event.php', // Replace with your delete event script URL
-                                type: 'POST',
-                                data: {
-                                    event_id: event.event_id
-                                }, // Send event ID to identify the event
-                                success: function(response) {
-                                    console.log(
-                                    response); // Log the response for debugging
-
-                                    if (response.status === true) {
-                                        $('#calendar').fullCalendar(
-                                            'removeEvents', event._id);
-                                        alert(
-                                        'Event deleted successfully!');
-                                        location.reload();
-                                    } else {
-                                        alert('Event deleted successfully!');
-                                        location.reload();
-                                    }
-                                },
-                                error: function(xhr, status) {
-                                    alert('Error deleting event.');
-                                }
-                            });
-                        }
+                        alert('Event Title: ' + event.title);
                     });
                 }
 

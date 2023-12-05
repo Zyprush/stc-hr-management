@@ -125,12 +125,12 @@ include('../config/authentication.php');
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Department List</h4>
-                    <h6>Manage Departments</h6>
+                    <h4>Office List</h4>
+                    <h6>Manage Offices</h6>
                 </div>
                 <div class="page-btn">
                     <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
-                        <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Department
+                        <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Office
                     </a>
                 </div>
             </div>
@@ -141,7 +141,7 @@ include('../config/authentication.php');
                         <table id="department_table" class="table">
                             <thead>
                                 <tr>
-                                    <th>Department</th>
+                                    <th>Office</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -159,7 +159,7 @@ include('../config/authentication.php');
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Add Department</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Add Office</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -168,7 +168,7 @@ include('../config/authentication.php');
                             <form action="../config/add_department.php" method="post">
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <label for="departmentName">Department:</label>
+                                        <label for="departmentName">Office Name:</label>
                                         <input type="text" class="form-control" id="departmentName"
                                             name="departmentName" required>
                                     </div>
@@ -189,7 +189,7 @@ include('../config/authentication.php');
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editDepartmentModalLabel">Edit Department</h5>
+                            <h5 class="modal-title" id="editDepartmentModalLabel">Edit Office</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -198,7 +198,7 @@ include('../config/authentication.php');
                             <form id="editDepartmentForm" action="../config/edit_department.php" method="post">
                                 <input type="hidden" name="edit_department_id" id="edit_department_id">
                                 <div class="form-group">
-                                    <label for="edit_department_name">Department Name:</label>
+                                    <label for="edit_department_name">Office Name:</label>
                                     <input type="text" class="form-control" id="edit_department_name"
                                         name="edit_department_name">
                                 </div>
