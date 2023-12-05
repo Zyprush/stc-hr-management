@@ -148,6 +148,7 @@ include('../config/authentication.php')
                                     <th>ID</th>
                                     <th></th>
                                     <th>Name</th>
+                                    <th>Office</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -181,7 +182,8 @@ $(document).ready(function() {
                     return `<img src="../assets/img/folder-logo.png" alt="logo" style="height: 50px;">`;
                 }
             },
-            { "data": "name" }
+            { "data": "name" },
+            { "data": "office" }
         ],
         "select": "single" // Allow only single row selection
     });

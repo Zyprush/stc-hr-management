@@ -2,7 +2,7 @@
 include 'dbcon.php'; // Include your database connection
 
 // Perform a select query to fetch data from the 'employees' table
-$query = "SELECT ID, name FROM employee_files";
+$query = "SELECT ID, name, office FROM employee_files";
 
 $result = mysqli_query($conn, $query);
 

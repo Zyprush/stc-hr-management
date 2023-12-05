@@ -115,7 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // The table doesn't exist, create it
             $createFilesTableQuery = "CREATE TABLE employee_files (
                 ID INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(255) NOT NULL
+                name VARCHAR(255) NOT NULL,
+                office VARCHAR(255) NOT NULL
             )";
 
             if (mysqli_query($conn, $createFilesTableQuery)) {
@@ -127,9 +128,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Insert data into the 'employee_files' table
-        $insertFilesQuery = "INSERT INTO employee_files (name) VALUES (?)";
+        $insertFilesQuery = "INSERT INTO employee_files (name, office) VALUES (?, ?)";
         $stmtFiles = mysqli_prepare($conn, $insertFilesQuery);
-        mysqli_stmt_bind_param($stmtFiles, 's', $name);
+        mysqli_stmt_bind_param($stmtFiles, 'ss', $name, $office);
         mysqli_stmt_execute($stmtFiles);
         mysqli_stmt_close($stmtFiles);
 
