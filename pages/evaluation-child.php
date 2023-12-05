@@ -234,7 +234,7 @@ if (isset($_GET['id'])) {
                                 echo '<div class="col-sm-3"><h5>Final Average Rating</h5></div>';
                                 echo "<div class='col-sm-3'></div>";
                                 echo "<div class='col-sm-3'><h4>{$row['final_average_rating']}</h4></div>";
-                                echo '<div class="col-sm-3"><a href="#" class="btn btn-danger" onclick="confirmDelete(' . $row['ID'] . ')">Delete</a></div>';
+                                echo '<div class="col-sm-3"><a href="#" class="btn btn-primary m-2" onclick="confirmEdit(' . $row['ID'] . ')" hidden>Edit</a><a href="#" class="btn btn-danger" onclick="confirmDelete(' . $row['ID'] . ')">Delete</a></div>';
                                 echo '</div>';
 
                                 echo '<div class="row">';
@@ -263,8 +263,10 @@ if (isset($_GET['id'])) {
                     // Close the database connection
                     mysqli_close($conn);
                     ?>
+
                 </div>
             </div>
+
 
             <!-- Modal for adding employee -->
             <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog"
@@ -273,7 +275,8 @@ if (isset($_GET['id'])) {
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="addEmployeeModalLabel">Evaluate</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                onclick="closeAddModal()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -447,10 +450,18 @@ include('../includes/footer.php');
 ?>
 
 <script>
-    function confirmDelete(id) {
-        if (confirm("Are you sure you want to delete this evaluation?")) {
-            // If the user confirms, redirect to the delete URL or perform the delete action here
-            window.location.href = "../config/delete_evaluation.php?id=" + id;
-        }
+function confirmDelete(id) {
+    if (confirm("Are you sure you want to delete this evaluation?")) {
+        // If the user confirms, redirect to the delete URL or perform the delete action here
+        window.location.href = "../config/delete_evaluation.php?id=" + id;
     }
+}
+
+function confirmEdit(id) {
+    window.location.href = "../pages/edit_evaluation.php?id=" + id;
+}
+
+function closeAddModal() {
+    $('#addEmployeeModal').modal('hide');
+}
 </script>

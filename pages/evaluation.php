@@ -147,8 +147,8 @@ include('../config/authentication.php');
                                 <tr>
                                     <th>ID</th>
                                     <th>Item No.</th>
-                                    <th>Office</th>
                                     <th>Full Name</th>
+                                    <th>Office</th>
                                     <th>Type of Employment</th>
                                     <th>Actions</th>
                                 </tr>
@@ -183,10 +183,10 @@ $(document).ready(function() {
                 "data": "itemNo"
             },
             {
-                "data": "office"
+                "data": "name"
             },
             {
-                "data": "name"
+                "data": "office"
             },
             {
                 "data": "employment"
