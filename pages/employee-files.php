@@ -55,8 +55,10 @@ if (isset($_GET['id'])) {
                             </div>
                         </div>
                         <hr class="m-0">
-                        <a class="dropdown-item" href="profile.php"> <i class="me-2" data-feather="user"></i> My Profile</a>
-                        <a class="dropdown-item" href="settings.php"><i class="me-2" data-feather="settings"></i>Settings</a>
+                        <a class="dropdown-item" href="profile.php"> <i class="me-2" data-feather="user"></i> My
+                            Profile</a>
+                        <a class="dropdown-item" href="settings.php"><i class="me-2"
+                                data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
                         <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
                                 src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
@@ -191,7 +193,7 @@ if (isset($_GET['id'])) {
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+                            <h5 class="modal-title" id="addEmployeeModalLabel">Add Files</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -266,10 +268,38 @@ $(document).ready(function() {
                     <a class="m-1 printer-button" href="#" onclick="printFile('../config/${row.file_directory}${row.file_name}'); return false;">
                         <img src="../assets/img/icons/printer.svg" alt="printer">
                     </a>
+                    <a class="delete-button" data-record-id="${row.file_id}" href="#">
+                        <img src="../assets/img/icons/delete.svg" alt="Delete">
+                    </a>
                         `;
                 }
             }
         ]
+    });
+
+    // Handle delete button click
+    $('#event_table tbody').on('click', '.delete-button', function() {
+        var button = this;
+        var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
+
+        var confirmDelete = confirm('Are you sure you want to delete this record?');
+
+        if (confirmDelete) {
+            $.ajax({
+                type: 'POST',
+                url: '../config/delete_files.php',
+                data: {
+                    record_id: recordId // Pass the record_id as a parameter
+                },
+                success: function(response) {
+                    alert(response);
+                    table.ajax.reload(); // Refresh the DataTable
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error: ' + status + ' ' + error);
+                }
+            });
+        }
     });
 });
 
