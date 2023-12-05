@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
 ?>
 <div class="container mt-5 mb-5">
     <form action="../config/update_evaluation.php" method="POST">
-        <input type="text" name="evaluationID" value="<?php echo $row['ID']; ?>">
+        <input type="hidden" name="evaluationID" value="<?php echo $row['ID']; ?>">
         <input type="hidden" name="evaluatee_id" value="<?php echo $row['evaluatee_id']; ?>">
         <div class="form-group">
             <div class="row">
@@ -165,9 +165,9 @@ if (isset($_GET['id'])) {
 
         <div class="form-group">
             <label for="supporting_document">Supporting Document <a href="<?php echo $row['supporting_document']; ?>"
-                    class="" target="_blank">View Here </a> or</label>
-            <input type="file" class="form-control" id="supporting_document" name="supporting_document">
-            <small class="form-text text-muted">Uploading new file will overide the existing file.</small>
+                    class="" target="_blank">View Here </a></label>
+            <input type="file" class="form-control" id="supporting_document" name="supporting_document" hidden>
+            <small class="form-text text-muted" hidden>Uploading new file will overide the existing file.</small>
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>

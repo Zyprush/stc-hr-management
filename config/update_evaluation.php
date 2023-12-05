@@ -2,7 +2,8 @@
 include 'dbcon.php'; // Include your database connection file
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $evaluationID = $_POST['id'];
+    $evaluationID = $_POST['evaluationID'];
+    $evaluatee_id = $_POST['evaluatee_id'];
     $semester = $_POST['semester'];
     $date = $_POST['date'];
     $strategic_mfo = $_POST['strategic_mfo'];
@@ -16,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adjective_rating = $_POST['adjective_rating'];
 
     // Check if a new file has been uploaded
-    if ($_FILES['supporting_document']['size'] > 0) {
+    if (!empty($_FILES['supporting_document']['name'])) {
         // Handle file upload
         $uploadDir = '../evaluation_files/';
         $uploadedFileName = $uploadDir . basename($_FILES['supporting_document']['name']);
@@ -85,21 +86,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (mysqli_stmt_execute($stmt)) {
                 // Update successful
                 echo "Evaluation updated successfully (without changing supporting_document).";
-                // header('Location: ../pages/edit_evaluation.php?id=' . $evaluationID);
+                header ('Location: ../pages/evaluation-child.php?id=' . $evaluatee_id);
             } else {
                 echo "Error updating evaluation: " . mysqli_error($conn);
-                // header('Location: ../pages/edit_evaluation.php?id=' . $evaluationID);
             }
         } else {
             echo "Error preparing update statement: " . mysqli_error($conn);
-            // header('Location: ../pages/edit_evaluation.php?id=' . $evaluationID);
         }
 
         mysqli_stmt_close($stmt);
     }
 } else {
     echo "Invalid request.";
-    // header('Location: ../pages/edit_evaluation.php?id=' . $evaluationID);
 }
 
 mysqli_close($conn);
