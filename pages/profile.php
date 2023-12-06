@@ -200,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Email:</label>
+                            <label for="email">Username:</label>
                             <input type="text" name="email" value="<?php echo $userData['email']; ?>" readonly>
                         </div>
 

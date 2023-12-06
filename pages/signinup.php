@@ -32,7 +32,7 @@ if (isset($_SESSION['logged_in'])) {
                 </h2>
                 <div class="input-field">
                     <i class="fas fa-user"></i>
-                    <input type="email" placeholder="Email" id="email" name="email" required />
+                    <input type="text" placeholder="Username" id="email" name="email" required />
                 </div>
                 <div class="input-field">
                     <i class="fas fa-lock"></i>
@@ -85,15 +85,11 @@ if (isset($_SESSION['logged_in'])) {
     <div class="panels-container">
         <div class="panel left-panel">
             <div class="content">
-                <h3>Don't have account yet?</h3>
-                <p>
-                    Signing up for an account allows you to unlock exclusive benefits and features.
-                </p>
-                <button class="btn transparent" id="sign-up-btn">
+                <button class="btn transparent" id="sign-up-btn" hidden>
                     Sign up
                 </button>
             </div>
-            <img src="../assets/img/log.svg" class="image" alt="" />
+            <img src="../assets/img/icons.jpg" class="image" alt="" style="border-radius: 50%; margin-bottom: 25px;" />
         </div>
         <div class="panel right-panel">
             <div class="content">
