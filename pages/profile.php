@@ -174,8 +174,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Settings</h4>
-                    <h6>Manage Profile</h6>
+                    <h4>Account</h4>
+                    <h6>Manage Account</h6>
                 </div>
                 <div class="page-btn">
                     <!--
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="card">
                 <div class="card-body">
 
-                    <h4 class="mb-4">Edit Profile</h4>
+                    <h4 class="mb-4">Edit Account</h4>
                     <?php if (isset($errorMessage)) {
                         echo "<p class='text-danger'>$errorMessage</p>";
                     } ?>
