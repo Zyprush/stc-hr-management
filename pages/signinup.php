@@ -89,7 +89,7 @@ if (isset($_SESSION['logged_in'])) {
                     Sign up
                 </button>
             </div>
-            <img src="../assets/img/icons.jpg" class="image" alt="" style="border-radius: 50%; margin-bottom: 25px;" />
+            <img src="../assets/img/log.svg" class="image" alt=""/>
         </div>
         <div class="panel right-panel">
             <div class="content">

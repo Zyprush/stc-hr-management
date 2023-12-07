@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($emailExists) {
     // Email already exists
     $_SESSION['status'] = "Email already exists!";
-    header('Location: ../pages/signinup.php');
+    header('Location: ../pages/users.php');
     exit();
   }
 
@@ -57,12 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($insertResult) {
     // User added successfully
     $_SESSION['status'] = "User added successfully!";
-    header('Location: ../pages/signinup.php');
+    header('Location: ../pages/users.php');
     exit();
   } else {
     // User insertion failed
     $_SESSION['status'] = "Error! Please sign up again!";
-    header('Location: ../pages/signinup.php');
+    header('Location: ../pages/users.php');
     exit();
   }
 }
