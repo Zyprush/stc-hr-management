@@ -115,6 +115,13 @@ include('../config/authentication.php');
                         <ul class="submenu">
                             <!-- Dropdown submenu for Settings -->
                             <li><a href="settings.php">Office</a></li>
+                            <?php
+                            // Check if the user role is 'Admin'
+                            if ($_SESSION['role'] === 'Admin') {
+                                // If the role is 'Admin', display the list of users link
+                                echo '<li><a href="users.php">List of Users</a></li>';
+                            }
+                            ?>
                         </ul>
                     </li>
                 </ul>
