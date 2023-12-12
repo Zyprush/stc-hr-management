@@ -134,8 +134,8 @@ include('../config/authentication.php');
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Permanent Employee List</h4>
-                    <h6>Manage Employee</h6>
+                    <h4>Elective List</h4>
+                    <h6>Manage Elective</h6>
                 </div>
                 <div class="page-btn">
                     <!--
@@ -184,10 +184,10 @@ include('../config/authentication.php');
                         </div>
                         <div class="modal-body">
                             <!-- Your form for adding a new employee -->
-                            <form action="../config/add_new_employee.php" method="post">
+                            <form action="../config/add_new_employee_elec.php" method="post">
 
                                 <div class="form-group">
-                                    <label for="name">Name of Employee</label>
+                                    <label for="name">Name of Incumbent</label>
                                     <input type="text" class="form-control" id="name" name="name"
                                         placeholder="EX. Juan A. Delacruz" required>
                                 </div>
@@ -222,8 +222,8 @@ include('../config/authentication.php');
                                     <label for="type">Type of Employment</label>
                                     <select type="text" class="form-control" id="employment" name="employment" required>
                                         <option value="">--Select--</option>
-                                        <option value="Permanent">Permanent</option>
-                                        <option value="Elective" hidden>Elective</option>
+                                        <option value="Permanent" hidden>Permanent</option>
+                                        <option value="Elective">Elective</option>
                                         <option value="Coterminous" hidden> Coterminous</option>
                                     </select>
                                 </div>
@@ -304,7 +304,7 @@ include('../config/authentication.php');
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="editEmployeeForm" action="../config/edit_employee.php" method="post">
+                            <form id="editEmployeeForm" action="../config/edit_employee_elec.php" method="post">
                                 <input type="hidden" name="edit_employee_id" id="edit_employee_id">
                                 <div class="form-group">
                                     <label for="edit_name">Name of Incumbent:</label>
@@ -340,9 +340,9 @@ include('../config/authentication.php');
                                     <label for="edit_employment">Type of Employment:</label>
                                     <select class="form-control" id="edit_employment" name="edit_employment" required>
                                         <option value="">--Select--</option>
-                                        <option value="Permanent">Permanent</option>
+                                        <option value="Permanent" hidden>Permanent</option>
                                         <option value="Job Order" hidden>Job Order</option>
-                                        <option value="Elective" hidden>Elective</option>
+                                        <option value="Elective">Elective</option>
                                         <option value="Coterminous" hidden>Coterminous</option>
                                     </select>
                                 </div>
@@ -426,7 +426,7 @@ include('../includes/footer.php');
 $(document).ready(function() {
     var table = $('#event_table').DataTable({
         "ajax": {
-            "url": "../config/fetch_employees.php",
+            "url": "../config/fetch_employees_elec.php",
             "type": "POST",
             "dataSrc": ""
         },
@@ -479,7 +479,7 @@ $(document).ready(function() {
         if (confirmDelete) {
             $.ajax({
                 type: 'POST',
-                url: '../config/delete_employee.php',
+                url: '../config/delete_employee_elec.php',
                 data: {
                     record_id: recordId // Pass the record_id as a parameter
                 },
@@ -502,7 +502,7 @@ $(document).ready(function() {
         // Fetch employee details by ID using AJAX
         $.ajax({
             type: 'POST',
-            url: '../config/fetch_employee.php',
+            url: '../config/fetch_employee_elec.php',
             data: {
                 employee_id: recordId
             },

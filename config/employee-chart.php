@@ -15,6 +15,11 @@ $checkEmployeesJoTableQuery = "SHOW TABLES LIKE 'employees_jo'";
 $tableResultEmployeesJo = mysqli_query($conn, $checkEmployeesJoTableQuery);
 $employeesJoTableExists = mysqli_num_rows($tableResultEmployeesJo) > 0;
 
+// Check if 'employees_elec' table exists
+$checkEmployeesElecTableQuery = "SHOW TABLES LIKE 'employees_elec'";
+$tableResultEmployeesElec = mysqli_query($conn, $checkEmployeesElecTableQuery);
+$employeesElecTableExists = mysqli_num_rows($tableResultEmployeesElec) > 0;
+
 // Retrieve department names from the 'departments' table
 $sqlDepartments = "SELECT Department FROM departments";
 $resultDepartments = $conn->query($sqlDepartments);
@@ -26,6 +31,7 @@ if ($resultDepartments->num_rows > 0) {
         // Initialize counts to 0
         $employeeCountEmployees = 0;
         $employeeCountEmployeesJo = 0;
+        $employeeCountEmployeesElec = 0;
 
         // Retrieve employee count for each department from the 'employees' table if it exists
         if ($employeesTableExists) {
@@ -51,8 +57,20 @@ if ($resultDepartments->num_rows > 0) {
             $stmtEmployeesJo->close();
         }
 
+        // Retrieve employee count for each department from the 'employees_elec' table if it exists
+        if ($employeesElecTableExists) {
+            $sqlEmployeesElec = "SELECT COUNT(*) AS employeeCount FROM employees_elec WHERE office = ?";
+            $stmtEmployeesElec = $conn->prepare($sqlEmployeesElec);
+            $stmtEmployeesElec->bind_param("s", $department);
+            $stmtEmployeesElec->execute();
+            $resultEmployeesElec = $stmtEmployeesElec->get_result();
+            $rowEmployeesElec = $resultEmployeesElec->fetch_assoc();
+            $employeeCountEmployeesElec = $rowEmployeesElec['employeeCount'];
+            $stmtEmployeesElec->close();
+        }
+
         // Total employee count for the department
-        $totalEmployeeCount = $employeeCountEmployees + $employeeCountEmployeesJo;
+        $totalEmployeeCount = $employeeCountEmployees + $employeeCountEmployeesJo + $employeeCountEmployeesElec;
 
         // Store the result in the array
         $departmentCounts[$department] = $totalEmployeeCount;
@@ -61,3 +79,4 @@ if ($resultDepartments->num_rows > 0) {
 
 // Close the database connection
 $conn->close();
+?>
