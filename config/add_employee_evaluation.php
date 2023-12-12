@@ -1,6 +1,6 @@
 <?php
 include 'dbcon.php';
-
+  
 // Function to create the table if it doesn't exist
 function createTableIfNeeded($conn)
 {
