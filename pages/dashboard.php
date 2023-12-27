@@ -84,6 +84,8 @@ include('../config/authentication.php');
                             <!-- Dropdown submenu for Employee -->
                             <li><a href="employee.php">Permanent</a></li>
                             <li><a href="employee-jo.php">Job Order</a></li>
+                            <li><a href="employee-elective.php">Elective</a></li>
+                            <li><a href="employee-coter.php">Coterminous</a></li>
                             <li><a href="employee-file.php">File</a></li>
                         </ul>
                     </li>
@@ -292,7 +294,7 @@ include('../config/authentication.php');
                 </div>
             </div>
 
-            <div class="row" id="expired_table"> 
+            <div class="row" id="expired_table">
                 <div class="">
                     <div class="card shadow">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
