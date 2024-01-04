@@ -85,8 +85,10 @@ include('../config/authentication.php');
                             <span> Employee</span> </a>
                         <ul class="submenu">
                             <!-- Dropdown submenu for Employee -->
-                            <li><a href="employee.php" class="active">Permanent</a></li>
+                            <li><a href="employee.php">Permanent</a></li>
                             <li><a href="employee-jo.php">Job Order</a></li>
+                            <li><a href="employee-elective.php" class="active">Elective</a></li>
+                            <li><a href="employee-coter.php">Coterminous</a></li>
                             <li><a href="employee-file.php">File</a></li>
                         </ul>
                     </li>
