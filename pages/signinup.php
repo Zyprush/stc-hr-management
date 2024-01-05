@@ -37,7 +37,7 @@ if (isset($_SESSION['logged_in'])) {
                 <div class="input-field">
                     <i class="fas fa-lock"></i>
                     <input type="password" placeholder="Password" id="password" name="password" required />
-                    <i class="fas fa-eye" id="togglePassword" style="position: absolute; right: 20px;"></i>
+                    <img src="../assets/img/icons/eye.svg" id="togglePassword" alt="View" style="position: absolute; right: 20px; margin-top: 15px;">
                 </div>
                 <input type="submit" value="Login" class="btn solid" />
 

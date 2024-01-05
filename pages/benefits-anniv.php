@@ -50,15 +50,13 @@ include('../config/authentication.php');
                         <a class="dropdown-item" href="#"> <i class="me-2" data-feather="user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
-                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
-                    class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">My Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
@@ -87,6 +85,8 @@ include('../config/authentication.php');
                             <!-- Dropdown submenu for Employee -->
                             <li><a href="employee.php">Permanent</a></li>
                             <li><a href="employee-jo.php">Job Order</a></li>
+                            <li><a href="employee-elective.php">Elective</a></li>
+                            <li><a href="employee-coter.php">Coterminous</a></li>
                             <li><a href="employee-file.php">File</a></li>
                         </ul>
                     </li>
@@ -104,7 +104,7 @@ include('../config/authentication.php');
                             <span> Report</span> </a>
                         <ul class="submenu">
                             <!-- Dropdown submenu for Report -->
-                            <li><a href="benefits.php"  class="active">Benefits</a></li>
+                            <li><a href="benefits.php" class="active">Benefits</a></li>
                             <li><a href="promotion.php">Promotion</a></li>
                         </ul>
                     </li>
@@ -122,6 +122,7 @@ include('../config/authentication.php');
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
     <div class="page-wrapper">
         <div class="content">
@@ -143,6 +144,19 @@ include('../config/authentication.php');
             </div>
             <div class="card">
                 <div class="card-body">
+                    <div class="table-top">
+                        <div class="search-set">
+                        </div>
+                        <div class="wordset">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);" id="printExcel" data-bs-toggle="tooltip" data-bs-placement="top" title="Print">
+                                        <img src="../assets/img/icons/printer.svg" alt="img">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table id="event_table" class="table">
                             <thead>
@@ -168,28 +182,92 @@ include('../includes/footer.php');
 ?>
 
 <script>
-$(document).ready(function() {
-    var table = $('#event_table').DataTable({
-        "ajax": {
-            "url": "../config/fetch_anniv.php",
-            "type": "POST",
-            "dataSrc": ""
-        },
-        "columns": [{
-                "data": "ID",
-                "visible": false
+    $(document).ready(function() {
+        var table = $('#event_table').DataTable({
+            "ajax": {
+                "url": "../config/fetch_anniv.php",
+                "type": "POST",
+                "dataSrc": ""
             },
-            {
-                "data": "name"
-            },
-            {
-                "data": "office"
-            },
-            {
-                "data": "position"
-            }
-        ]
-    });
+            "columns": [{
+                    "data": "ID",
+                    "visible": false
+                },
+                {
+                    "data": "name"
+                },
+                {
+                    "data": "office"
+                },
+                {
+                    "data": "position"
+                }
+            ]
+        });
 
-});
+        // Event listener for the printExcel button
+        $('#printExcel').on('click', function() {
+            exportToExcel();
+        });
+
+        // Function to export DataTable data to Excel
+        function exportToExcel() {
+            // Get DataTable data
+            var data = table.rows().data().toArray();
+
+            // Prepare Excel data
+            var excelData = [
+                ['List of Employee who will recieve Anniversarry Bunos.'], // Title/Header row
+                ['Name', 'Office', 'Position']
+            ];
+
+            data.forEach(function(row) {
+                excelData.push([row.name, row.office, row.position]);
+            });
+
+            // Create a worksheet
+            var ws = XLSX.utils.aoa_to_sheet(excelData);
+
+            // Merge cells for the title/header row (A1:D1)
+            ws['!merges'] = [{
+                s: {
+                    r: 0,
+                    c: 0
+                },
+                e: {
+                    r: 0,
+                    c: 4
+                }
+            }];
+
+            // Set autofit for column widths
+            var range = XLSX.utils.decode_range(ws['!ref']);
+            for (var C = range.s.c; C <= range.e.c; ++C) {
+                var maxColLength = 0;
+                for (var R = range.s.r + 1; R <= range.e.r; ++R) {
+                    var cell = ws[XLSX.utils.encode_cell({
+                        r: R,
+                        c: C
+                    })];
+                    if (cell && cell.t === 's') {
+                        maxColLength = Math.max(maxColLength, cell.v.length);
+                    }
+                }
+                if (maxColLength > 0) {
+                    ws['!cols'] = ws['!cols'] || [];
+                    ws['!cols'][C] = {
+                        width: maxColLength + 2
+                    };
+                }
+            }
+
+            // Create a workbook
+            var wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+            // Save the workbook as an Excel file
+            XLSX.writeFile(wb, 'Anniversarry.xlsx');
+        }
+
+    });
 </script>
