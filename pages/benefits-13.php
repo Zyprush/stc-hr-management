@@ -122,7 +122,7 @@ include('../config/authentication.php');
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="../assets/js/xlsx.full.min.js"></script>
 
     <div class="page-wrapper">
         <div class="content">
