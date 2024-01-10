@@ -19,9 +19,10 @@ include('../config/authentication.php')
             <a href="dashboard.php" class="logo-small">
                 HR
             </a>
-            <a id="toggle_btn" href="javascript:void(0);">
+            <a id="toggle_btn" href="#">
             </a>
         </div>
+
         <a id="mobile_btn" class="mobile_btn" href="#sidebar">
             <span class="bar-icon">
                 <span></span>
@@ -29,9 +30,134 @@ include('../config/authentication.php')
                 <span></span>
             </span>
         </a>
+
         <ul class="nav user-menu">
+
+            <li class="nav-item dropdown">
+                <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                    <img src="../assets/img/icons/notification-bing.svg" alt="img" />
+                    <span class="badge rounded-pill">0</span>
+                </a>
+                <div class="dropdown-menu notifications">
+                    <div class="topnav-dropdown-header">
+                        <span class="notification-title">Events Notifications</span>
+                        <a href="#" class="clear-noti" hidden> Clear All </a>
+                    </div>
+                    <div class="noti-content">
+                        <ul class="notification-list">
+                            <script>
+                                $(document).ready(function() {
+                                    $.ajax({
+                                        url: '../config/fetch_event.php',
+                                        type: 'GET',
+                                        dataType: 'json',
+                                        success: function(events) {
+                                            if (events.length > 0) {
+                                                displayNotifications(events);
+                                            }
+                                        },
+                                        error: function(error) {
+                                            console.error('Error fetching events:', error);
+                                        }
+                                    });
+
+                                    // Add click event for clearing notifications
+                                    $('.clear-noti').on('click', function() {
+                                        clearNotifications();
+                                    });
+                                });
+
+                                function displayNotifications(events) {
+                                    const notificationList = $('.notification-list');
+                                    const notificationCount = $('.badge');
+
+                                    // Clear existing notifications
+                                    notificationList.empty();
+
+                                    events.forEach(function(event) {
+                                        const currentDateTime = new Date();
+                                        const formattedCurrentDateTime = currentDateTime.toLocaleString();
+
+                                        const eventDateTime = new Date(event.event_start_date + ' ' + event.event_time);
+                                        const timeDifference = currentDateTime - eventDateTime;
+                                        const hoursDifference = Math.floor(timeDifference / (1000 * 60 * 60));
+
+                                        const timeAgo = getTimeAgo(timeDifference);
+
+                                        // Display notification for both future and past events
+                                        const notificationHTML = `
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media d-flex">
+                                                <span class="avatar flex-shrink-0">
+                                                    <img alt="" src="../assets/img/event_notif.png" />
+                                                </span>
+                                                <div class="media-body flex-grow-1">
+                                                    <p class="noti-details">
+                                                        <span class="noti-title">${event.event_name}</span>
+                                                        ${hoursDifference >= 0 ?
+                                                            `started ${timeAgo}` :
+                                                            `will start ${formatEventDateTime(eventDateTime)}`}
+                                                    </p>
+                                                    <p class="noti-time">
+                                                        <span class="notification-time">${formattedCurrentDateTime}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                `;
+                                        notificationList.append(notificationHTML);
+                                    });
+
+                                    // Update the notification badge count
+                                    notificationCount.text(events.length);
+                                }
+
+                                function clearNotifications() {
+                                    // You can implement logic to clear notifications here
+                                    // For example, you might want to remove notifications from local storage or mark them as read in the database
+                                    // Then, you can update the UI accordingly
+                                    const notificationList = $('.notification-list');
+                                    const notificationCount = $('.badge');
+
+                                    // Clear existing notifications
+                                    notificationList.empty();
+
+                                    // Update the notification badge count to 0
+                                    notificationCount.text('0');
+                                }
+
+                                function getTimeAgo(milliseconds) {
+                                    const seconds = Math.floor(milliseconds / 1000);
+                                    if (seconds < 60) {
+                                        return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+                                    } else if (seconds < 3600) {
+                                        const minutes = Math.floor(seconds / 60);
+                                        return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+                                    } else {
+                                        const hours = Math.floor(seconds / 3600);
+                                        return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+                                    }
+                                }
+
+                                function formatEventDateTime(eventDateTime) {
+                                    const options = {
+                                        hour: 'numeric',
+                                        minute: 'numeric'
+                                    };
+                                    return `today at ${eventDateTime.toLocaleTimeString('en-US', options)}`;
+                                }
+                            </script>
+                        </ul>
+                    </div>
+                    <div class="topnav-dropdown-footer">
+                        <a href="#" hidden>View all NoÏtifications</a>
+                    </div>
+                </div>
+            </li>
             <li class="nav-item dropdown has-arrow main-drop">
-                <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+                <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                     <span class="user-img"><img src="../assets/img/icons/users1.svg" alt="">
                         <span class="status online"></span></span>
                 </a>
@@ -48,18 +174,17 @@ include('../config/authentication.php')
                         <hr class="m-0">
                         <a class="dropdown-item" href="profile.php"> <i class="me-2" data-feather="user"></i> My
                             Profile</a>
-                        <a class="dropdown-item" href="settings.php"><i class="me-2"
-                                data-feather="settings"></i>Settings</a>
+                        <a class="dropdown-item" href="settings.php"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
-                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
+
         </ul>
+
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
-                    class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="profile.php">My Profile</a>
                 <a class="dropdown-item" href="settings.php">Settings</a>
@@ -91,6 +216,7 @@ include('../config/authentication.php')
                             <li><a href="employee-elective.php">Elective</a></li>
                             <li><a href="employee-coter.php">Coterminous</a></li>
                             <li><a href="employee-file.php">File</a></li>
+                            <li><a href="employee-expired.php">Expired Contract</a></li>
                         </ul>
                     </li>
                     <li class="menu">
@@ -185,8 +311,7 @@ include('../config/authentication.php')
             </div>
 
             <!-- Modal for adding employee -->
-            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog"
-                aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -200,16 +325,13 @@ include('../config/authentication.php')
                             <form action="../config/signup.php" method="post" onsubmit="return validatePassword()">
 
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="FullName" id="name" name="name"
-                                        required />
+                                    <input class="form-control" type="text" placeholder="FullName" id="name" name="name" required />
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Username" id="email"
-                                        name="email" />
+                                    <input class="form-control" type="text" placeholder="Username" id="email" name="email" />
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Position" id="designation"
-                                        name="designation" required />
+                                    <input class="form-control" type="text" placeholder="Position" id="designation" name="designation" required />
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control" name="department" id="department" required>
@@ -233,12 +355,10 @@ include('../config/authentication.php')
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <input class="form-control" type="password" placeholder="Password"
-                                                id="password" name="password" />
+                                            <input class="form-control" type="password" placeholder="Password" id="password" name="password" />
                                         </div>
                                         <div class="col-sm-6">
-                                            <input class="form-control" type="password" placeholder="Confirm Password"
-                                                id="confirmPassword" name="confirmPassword" required />
+                                            <input class="form-control" type="password" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword" required />
                                         </div>
                                     </div>
                                 </div>
@@ -262,8 +382,7 @@ include('../config/authentication.php')
 
 
             <!-- Edit Employee Modal -->
-            <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog"
-                aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -273,8 +392,7 @@ include('../config/authentication.php')
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="editEmployeeForm" action="../config/edit_user.php" method="post"
-                                onsubmit="return validateNewPassword()">
+                            <form id="editEmployeeForm" action="../config/edit_user.php" method="post" onsubmit="return validateNewPassword()">
                                 <input type="hidden" name="edit_user_id" id="edit_user_id">
                                 <div class="form-group">
                                     <label for="edit_name">Name:</label>
@@ -288,8 +406,7 @@ include('../config/authentication.php')
 
                                 <div class="form-group">
                                     <label for="edit_designation">Position:</label>
-                                    <input type="text" class="form-control" id="edit_designation"
-                                        name="edit_designation">
+                                    <input type="text" class="form-control" id="edit_designation" name="edit_designation">
                                 </div>
 
                                 <div class="form-group">
@@ -315,20 +432,17 @@ include('../config/authentication.php')
 
                                 <div class="form-group">
                                     <label for="edit_old_password">Current Password:</label>
-                                    <input type="password" class="form-control" id="edit_old_password"
-                                        name="edit_old_password">
+                                    <input type="password" class="form-control" id="edit_old_password" name="edit_old_password">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="edit_new_password">New Password:</label>
-                                    <input type="password" class="form-control" id="edit_new_password"
-                                        name="edit_new_password">
+                                    <input type="password" class="form-control" id="edit_new_password" name="edit_new_password">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="edit_re_new_password">Retype New Password:</label>
-                                    <input type="password" class="form-control" id="edit_re_new_password"
-                                        name="edit_re_new_password">
+                                    <input type="password" class="form-control" id="edit_re_new_password" name="edit_re_new_password">
                                 </div>
 
                                 <div class="form-group">
@@ -356,37 +470,37 @@ include('../includes/footer.php');
 ?>
 
 <script>
-$(document).ready(function() {
-    var table = $('#event_table').DataTable({
-        "ajax": {
-            "url": "../config/fetch_user.php",
-            "type": "POST",
-            "dataSrc": ""
-        },
-        "columns": [{
-                "data": "id",
-                "visible": false
+    $(document).ready(function() {
+        var table = $('#event_table').DataTable({
+            "ajax": {
+                "url": "../config/fetch_user.php",
+                "type": "POST",
+                "dataSrc": ""
             },
-            {
-                "data": "name"
-            },
-            {
-                "data": "email"
-            },
-            {
-                "data": "role"
-            },
-            {
-                "data": "department"
-            },
-            {
-                "data": "designation"
-            },
-            {
-                "data": null,
-                "render": function(data, type, row) {
-                    // Add action buttons here for edit, delete, etc.
-                    return `
+            "columns": [{
+                    "data": "id",
+                    "visible": false
+                },
+                {
+                    "data": "name"
+                },
+                {
+                    "data": "email"
+                },
+                {
+                    "data": "role"
+                },
+                {
+                    "data": "department"
+                },
+                {
+                    "data": "designation"
+                },
+                {
+                    "data": null,
+                    "render": function(data, type, row) {
+                        // Add action buttons here for edit, delete, etc.
+                        return `
                     <a class="m-1" href="#" data-toggle="modal" data-target="#editEmployeeModal" data-record-id="${row.id}">
                         <img src="../assets/img/icons/edit.svg" alt="Edit">
                     </a>
@@ -394,88 +508,88 @@ $(document).ready(function() {
                         <img src="../assets/img/icons/delete.svg" alt="Delete">
                     </a>
                 `;
+                    }
                 }
+            ]
+        });
+
+        // Handle delete button click
+        $('#event_table tbody').on('click', '.delete-button', function() {
+            var button = this;
+            var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
+
+            var confirmDelete = confirm('Are you sure you want to delete this record?');
+
+            if (confirmDelete) {
+                $.ajax({
+                    type: 'POST',
+                    url: '../config/delete_user.php',
+                    data: {
+                        record_id: recordId // Pass the record_id as a parameter
+                    },
+                    success: function(response) {
+                        alert(response);
+                        table.ajax.reload(); // Refresh the DataTable
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error: ' + status + ' ' + error);
+                    }
+                });
             }
-        ]
-    });
+        });
 
-    // Handle delete button click
-    $('#event_table tbody').on('click', '.delete-button', function() {
-        var button = this;
-        var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
+        //handle the edit event
+        $('#event_table tbody').on('click', '[data-target="#editEmployeeModal"]', function() {
+            var button = $(this);
+            var recordId = button.data('record-id');
 
-        var confirmDelete = confirm('Are you sure you want to delete this record?');
-
-        if (confirmDelete) {
+            // Fetch employee details by ID using AJAX
             $.ajax({
                 type: 'POST',
-                url: '../config/delete_user.php',
+                url: '../config/fetch_users.php',
                 data: {
-                    record_id: recordId // Pass the record_id as a parameter
+                    user_id: recordId
                 },
                 success: function(response) {
-                    alert(response);
-                    table.ajax.reload(); // Refresh the DataTable
+                    var user = JSON.parse(response);
+
+                    // Set the fetched user details in the modal form fields
+                    $('#edit_user_id').val(user.id);
+                    $('#edit_name').val(user.name);
+                    $('#edit_email').val(user.email);
+                    $('#edit_department').val(user.department);
+                    $('#edit_designation').val(user.designation);
+                    $('#edit_role').val(user.role);
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error: ' + status + ' ' + error);
                 }
             });
-        }
-    });
-
-    //handle the edit event
-    $('#event_table tbody').on('click', '[data-target="#editEmployeeModal"]', function() {
-        var button = $(this);
-        var recordId = button.data('record-id');
-
-        // Fetch employee details by ID using AJAX
-        $.ajax({
-            type: 'POST',
-            url: '../config/fetch_users.php',
-            data: {
-                user_id: recordId
-            },
-            success: function(response) {
-                var user = JSON.parse(response);
-
-                // Set the fetched user details in the modal form fields
-                $('#edit_user_id').val(user.id);
-                $('#edit_name').val(user.name);
-                $('#edit_email').val(user.email);
-                $('#edit_department').val(user.department);
-                $('#edit_designation').val(user.designation);
-                $('#edit_role').val(user.role);
-            },
-            error: function(xhr, status, error) {
-                console.error('AJAX Error: ' + status + ' ' + error);
-            }
         });
+
     });
 
-});
+    function validatePassword() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
 
-function validatePassword() {
-    var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementById("confirmPassword").value;
-
-    // Check if the password fields match
-    if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        return false; // Prevent form submission
+        // Check if the password fields match
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+            return false; // Prevent form submission
+        }
+        return true; // Proceed with form submission
     }
-    return true; // Proceed with form submission
-}
 
-function validateNewPassword() {
-    var password = document.getElementById("edit_new_password").value;
-    var confirmPassword = document.getElementById("edit_re_new_password").value;
+    function validateNewPassword() {
+        var password = document.getElementById("edit_new_password").value;
+        var confirmPassword = document.getElementById("edit_re_new_password").value;
 
-    // Check if the password fields match
-    if (password !== confirmPassword) {
-        alert("Passwords do not match");
-        return false; // Prevent form submission
+        // Check if the password fields match
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+            return false; // Prevent form submission
+        }
+        return true; // Proceed with form submission
     }
-    return true; // Proceed with form submission
-}
 </script>

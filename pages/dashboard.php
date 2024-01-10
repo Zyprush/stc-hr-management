@@ -192,8 +192,6 @@ include('../config/authentication.php');
         </div>
     </div>
 
-
-
     <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
@@ -258,7 +256,6 @@ include('../config/authentication.php');
             </div>
         </div>
     </div>
-
 
     <div class="page-wrapper">
         <div class="content">
