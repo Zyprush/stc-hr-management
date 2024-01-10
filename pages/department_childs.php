@@ -202,70 +202,7 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-inner slimscroll">
-            <div id="sidebar-menu" class="sidebar-menu">
-                <ul>
-                    <li class="menu">
-                        <a href="dashboard.php"><i data-feather="home"></i>
-                            <span> Dashboard</span> </a>
-                    </li>
-                    <li class="active">
-                        <a href="department.php"><i data-feather="users"></i>
-                            <span> Offices</span> </a>
-                    </li>
-                    <li class="submenu">
-                        <!-- Add "has-submenu" class to create dropdown -->
-                        <a href="#"><i data-feather="user"></i>
-                            <span> Employee</span> </a>
-                        <ul class="submenu">
-                            <!-- Dropdown submenu for Employee -->
-                            <li><a href="employee.php">Permanent</a></li>
-                            <li><a href="employee-jo.php">Job Order</a></li>
-                            <li><a href="employee-elective.php">Elective</a></li>
-                            <li><a href="employee-coter.php">Coterminous</a></li>
-                            <li><a href="employee-file.php">File</a></li>
-                            <li><a href="employee-expired.php">Expired Contract</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="evaluation.php"><i data-feather="users"></i>
-                            <span> Evaluation</span> </a>
-                    </li>
-                    <li class="menu">
-                        <a href="training.php"><i data-feather="users"></i>
-                            <span> Training</span> </a>
-                    </li>
-                    <li class="submenu">
-                        <!-- Add "has-submenu" class to create dropdown -->
-                        <a href="#"><i data-feather="calendar"></i>
-                            <span> Report</span> </a>
-                        <ul class="submenu">
-                            <!-- Dropdown submenu for Report -->
-                            <li><a href="benefits.php">Benefits</a></li>
-                            <li><a href="promotion.php">Promotion</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu">
-                        <!-- Add "has-submenu" class to create dropdown -->
-                        <a href="#"><i data-feather="settings"></i>
-                            <span> Settings</span> </a>
-                        <ul class="submenu">
-                            <!-- Dropdown submenu for Settings -->
-                            <li><a href="settings.php">Office</a></li>
-                            <?php
-                            // Check if the user role is 'Admin'
-                            if ($_SESSION['role'] === 'Admin') {
-                                // If the role is 'Admin', display the list of users link
-                                echo '<li><a href="users.php">List of Users</a></li>';
-                            }
-                            ?>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <?php include('../includes/sidebar.php'); ?>
 
     <div class="page-wrapper">
         <div class="content">

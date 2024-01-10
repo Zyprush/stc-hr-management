@@ -47,18 +47,15 @@ include('../config/authentication.php');
                         <hr class="m-0">
                         <a class="dropdown-item" href="profile.php"> <i class="me-2" data-feather="user"></i> My
                             Profile</a>
-                        <a class="dropdown-item" href="settings.php"><i class="me-2"
-                                data-feather="settings"></i>Settings</a>
+                        <a class="dropdown-item" href="settings.php"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
-                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
-                    class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="profile.php">My Profile</a>
                 <a class="dropdown-item" href="settings.php">Settings</a>
@@ -67,60 +64,7 @@ include('../config/authentication.php');
         </div>
     </div>
 
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-inner slimscroll">
-            <div id="sidebar-menu" class="sidebar-menu">
-                <ul>
-                    <li class="active">
-                        <a href="dashboard.php"><i data-feather="home"></i>
-                            <span> Dashboard</span> </a>
-                    </li>
-                    <li class="menu">
-                        <a href="department.php"><i data-feather="users"></i>
-                            <span> Offices</span> </a>
-                    </li>
-                    <li class="submenu">
-                        <!-- Add "has-submenu" class to create dropdown -->
-                        <a href="#"><i data-feather="user"></i>
-                            <span> Employee</span> </a>
-                        <ul class="submenu">
-                            <!-- Dropdown submenu for Employee -->
-                            <li><a href="employee.php">Permanent</a></li>
-                            <li><a href="employee-jo.php">Job Order</a></li>
-                            <li><a href="employee-file.php">File</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a href="evaluation.php"><i data-feather="users"></i>
-                            <span> Evaluation</span> </a>
-                    </li>
-                    <li class="menu">
-                        <a href="training.php"><i data-feather="users"></i>
-                            <span> Training</span> </a>
-                    </li>
-                    <li class="submenu">
-                        <!-- Add "has-submenu" class to create dropdown -->
-                        <a href="#"><i data-feather="calendar"></i>
-                            <span> Report</span> </a>
-                        <ul class="submenu">
-                            <!-- Dropdown submenu for Report -->
-                            <li><a href="benefits.php">Benefits</a></li>
-                            <li><a href="promotion.php">Promotion</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu">
-                        <!-- Add "has-submenu" class to create dropdown -->
-                        <a href="#"><i data-feather="settings"></i>
-                            <span> Settings</span> </a>
-                        <ul class="submenu">
-                            <!-- Dropdown submenu for Settings -->
-                            <li><a href="settings.php">Office</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <?php include('../includes/sidebar.php'); ?>
 
     <div class="page-wrapper">
         <div class="content">
@@ -147,8 +91,7 @@ include('../config/authentication.php');
                 </div>
 
                 <!-- Start popup dialog box -->
-                <div class="modal fade" id="event_entry_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="event_entry_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-md" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -160,8 +103,7 @@ include('../config/authentication.php');
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="event_name">Event name</label>
-                                                <input type="text" name="event_name" id="event_name"
-                                                    class="form-control" placeholder="Enter your event name">
+                                                <input type="text" name="event_name" id="event_name" class="form-control" placeholder="Enter your event name">
                                             </div>
                                         </div>
                                     </div>
@@ -169,15 +111,13 @@ include('../config/authentication.php');
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="event_start_date">Event start</label>
-                                                <input type="date" name="event_start_date" id="event_start_date"
-                                                    class="form-control onlydatepicker" placeholder="Event start date">
+                                                <input type="date" name="event_start_date" id="event_start_date" class="form-control onlydatepicker" placeholder="Event start date">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="event_end_date">Event end</label>
-                                                <input type="date" name="event_end_date" id="event_end_date"
-                                                    class="form-control" placeholder="Event end date">
+                                                <input type="date" name="event_end_date" id="event_end_date" class="form-control" placeholder="Event end date">
                                             </div>
                                         </div>
                                     </div>
@@ -185,8 +125,7 @@ include('../config/authentication.php');
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="event_time">Event Time</label>
-                                                <input type="time" name="event_time" id="event_time"
-                                                    class="form-control">
+                                                <input type="time" name="event_time" id="event_time" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -204,126 +143,126 @@ include('../config/authentication.php');
 </div>
 
 <script>
-$(document).ready(function() {
-    display_events();
-}); //end document.ready block
+    $(document).ready(function() {
+        display_events();
+    }); //end document.ready block
 
-function display_events() {
-    var events = new Array();
-    $.ajax({
-        url: '../config/display_event.php',
-        dataType: 'json',
-        success: function(response) {
+    function display_events() {
+        var events = new Array();
+        $.ajax({
+            url: '../config/display_event.php',
+            dataType: 'json',
+            success: function(response) {
 
-            var result = response.data;
-            $.each(result, function(i, item) {
-                events.push({
-                    event_id: result[i].event_id,
-                    title: result[i].title,
-                    start: result[i].start,
-                    end: result[i].end,
-                    color: result[i].color,
-                    time: result[i].time,
-                    url: result[i].url
-                });
-            })
-            var calendar = $('#calendar').fullCalendar({
-                defaultView: 'month',
-                timeZone: 'local',
-                editable: true,
-                selectable: true,
-                selectHelper: true,
-                select: function(start, end) {
-                    //alert(start);
-                    //alert(end);
-                    $('#event_start_date').val(moment(start).format('YYYY-MM-DD'));
-                    $('#event_end_date').val(moment(end).format('YYYY-MM-DD'));
-                    $('#event_entry_modal').modal('show');
-                },
-                events: events,
-                eventRender: function(event, element, view) {
-                    element.bind('click', function() {
-                        // Show a confirmation dialog before deleting the event
-                        if (confirm('Are you sure you want to delete this event?')) {
-                            // AJAX request to delete the event from the database
-                            $.ajax({
-                                url: '../config/delete_event.php', // Replace with your delete event script URL
-                                type: 'POST',
-                                data: {
-                                    event_id: event.event_id
-                                }, // Send event ID to identify the event
-                                success: function(response) {
-                                    console.log(
-                                        response
-                                    ); // Log the response for debugging
-
-                                    if (response.status === true) {
-                                        $('#calendar').fullCalendar(
-                                            'removeEvents', event._id);
-                                        alert(
-                                            'Event deleted successfully!'
-                                        );
-                                        //location.reload();
-                                    } else {
-                                        $('#calendar').fullCalendar(
-                                            'removeEvents', event._id);
-                                        alert(
-                                            'Event deleted successfully!'
-                                        );
-                                        //location.reload();
-                                    }
-                                },
-                                error: function(xhr, status) {
-                                    alert('Error deleting event.');
-                                }
-                            });
-                        }
+                var result = response.data;
+                $.each(result, function(i, item) {
+                    events.push({
+                        event_id: result[i].event_id,
+                        title: result[i].title,
+                        start: result[i].start,
+                        end: result[i].end,
+                        color: result[i].color,
+                        time: result[i].time,
+                        url: result[i].url
                     });
-                }
+                })
+                var calendar = $('#calendar').fullCalendar({
+                    defaultView: 'month',
+                    timeZone: 'local',
+                    editable: true,
+                    selectable: true,
+                    selectHelper: true,
+                    select: function(start, end) {
+                        //alert(start);
+                        //alert(end);
+                        $('#event_start_date').val(moment(start).format('YYYY-MM-DD'));
+                        $('#event_end_date').val(moment(end).format('YYYY-MM-DD'));
+                        $('#event_entry_modal').modal('show');
+                    },
+                    events: events,
+                    eventRender: function(event, element, view) {
+                        element.bind('click', function() {
+                            // Show a confirmation dialog before deleting the event
+                            if (confirm('Are you sure you want to delete this event?')) {
+                                // AJAX request to delete the event from the database
+                                $.ajax({
+                                    url: '../config/delete_event.php', // Replace with your delete event script URL
+                                    type: 'POST',
+                                    data: {
+                                        event_id: event.event_id
+                                    }, // Send event ID to identify the event
+                                    success: function(response) {
+                                        console.log(
+                                            response
+                                        ); // Log the response for debugging
 
-            }); //end fullCalendar block	
-        }, //end success block
-        error: function(xhr, status) {
-            alert(response.msg);
-        }
-    }); //end ajax block	
-}
+                                        if (response.status === true) {
+                                            $('#calendar').fullCalendar(
+                                                'removeEvents', event._id);
+                                            alert(
+                                                'Event deleted successfully!'
+                                            );
+                                            //location.reload();
+                                        } else {
+                                            $('#calendar').fullCalendar(
+                                                'removeEvents', event._id);
+                                            alert(
+                                                'Event deleted successfully!'
+                                            );
+                                            //location.reload();
+                                        }
+                                    },
+                                    error: function(xhr, status) {
+                                        alert('Error deleting event.');
+                                    }
+                                });
+                            }
+                        });
+                    }
 
-function save_event() {
-    var event_name = $("#event_name").val();
-    var event_start_date = $("#event_start_date").val();
-    var event_end_date = $("#event_end_date").val();
-    var event_time = $("#event_time").val();
-    if (event_name == "" || event_start_date == "" || event_end_date == "" || event_time == "") {
-        alert("Please enter all required details.");
-        return false;
-    }
-    $.ajax({
-        url: "../config/save_event.php",
-        type: "POST",
-        dataType: 'json',
-        data: {
-            event_name: event_name,
-            event_start_date: event_start_date,
-            event_end_date: event_end_date,
-            event_time: event_time
-        },
-        success: function(response) {
-            $('#event_entry_modal').modal('hide');
-            if (response.status == true) {
-                alert(response.msg);
-                location.reload();
-            } else {
+                }); //end fullCalendar block	
+            }, //end success block
+            error: function(xhr, status) {
                 alert(response.msg);
             }
-        },
-        error: function(xhr, status) {
-            console.log('ajax error = ' + xhr.statusText);
-            alert(response.msg);
+        }); //end ajax block	
+    }
+
+    function save_event() {
+        var event_name = $("#event_name").val();
+        var event_start_date = $("#event_start_date").val();
+        var event_end_date = $("#event_end_date").val();
+        var event_time = $("#event_time").val();
+        if (event_name == "" || event_start_date == "" || event_end_date == "" || event_time == "") {
+            alert("Please enter all required details.");
+            return false;
         }
-    });
-    return false;
-}
+        $.ajax({
+            url: "../config/save_event.php",
+            type: "POST",
+            dataType: 'json',
+            data: {
+                event_name: event_name,
+                event_start_date: event_start_date,
+                event_end_date: event_end_date,
+                event_time: event_time
+            },
+            success: function(response) {
+                $('#event_entry_modal').modal('hide');
+                if (response.status == true) {
+                    alert(response.msg);
+                    location.reload();
+                } else {
+                    alert(response.msg);
+                }
+            },
+            error: function(xhr, status) {
+                console.log('ajax error = ' + xhr.statusText);
+                alert(response.msg);
+            }
+        });
+        return false;
+    }
 </script>
 
 <?php
