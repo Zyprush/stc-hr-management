@@ -13,41 +13,62 @@ session_start();
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Retrieve the submitted email and password
-  $email = $_POST['email'];
-  $password = $_POST['password'];
+    // Retrieve the submitted email and password
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-  // Prepare the query to prevent SQL injection
-  $query = "SELECT * FROM credentials WHERE email = ?";
-  $stmt = $conn->prepare($query);
-  $stmt->bind_param('s', $email);
-  $stmt->execute();
-  $result = $stmt->get_result();
+    // Prepare the query to prevent SQL injection
+    $query = "SELECT * FROM credentials WHERE email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-  // Check if the user exists and the password is correct
-  if ($result && $result->num_rows > 0) {
-    $user = $result->fetch_assoc();
-    if (password_verify($password, $user['password'])) {
-        // Start the session
-        session_start();
+    // Check if the user exists and the password is correct
+    if ($result && $result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            // Start the session
+            session_start();
 
-        // Store user information in session variables
-        $_SESSION['logged_in'] = true;
-        $_SESSION['id'] = $user['id'];
-        $_SESSION['name'] = $user['name'];
-        $_SESSION['role'] = $user['role'];
+            // Store user information in session variables
+            $_SESSION['logged_in'] = true;
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['role'] = $user['role'];
 
-        // Redirect to the dashboard or any other authorized page
-        header('Location: ../pages/dashboard.php');
-        exit();
+            // Check if the login_logs table exists, if not, create it
+            $checkTableQuery = "SHOW TABLES LIKE 'login_logs'";
+            $tableExists = $conn->query($checkTableQuery);
+
+            if (!$tableExists->num_rows) {
+                $createTableQuery = "CREATE TABLE IF NOT EXISTS login_logs (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    user_id INT NOT NULL,
+                    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    logout_time TIMESTAMP DEFAULT null,
+                    FOREIGN KEY (user_id) REFERENCES credentials(id)
+                )";
+                $conn->query($createTableQuery);
+            }
+
+            // Insert login log into the database
+            $insertLogQuery = "INSERT INTO login_logs (user_id) VALUES (?)";
+            $insertLogStmt = $conn->prepare($insertLogQuery);
+            $insertLogStmt->bind_param('i', $user['id']);
+            $insertLogStmt->execute();
+
+            // Redirect to the dashboard or any other authorized page
+            header('Location: ../pages/dashboard.php');
+            exit();
+        } else {
+            $_SESSION['status'] = "Incorrect password!";
+            header('Location: ../pages/signinup.php');
+            exit();
+        }
     } else {
-        $_SESSION['status'] = "Incorrect password!";
+        $_SESSION['status'] = "Not registered!";
         header('Location: ../pages/signinup.php');
         exit();
     }
-  } else {
-    $_SESSION['status'] = "Not registered!";
-    header('Location: ../pages/signinup.php');
-    exit();
-  }
 }
