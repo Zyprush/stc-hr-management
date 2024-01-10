@@ -49,15 +49,13 @@ include('../config/authentication.php');
                         <a class="dropdown-item" href="profile.php"> <i class="me-2" data-feather="user"></i> My Profile</a>
                         <a class="dropdown-item" href="settings.php"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
-                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
-                    class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="profile.php">My Profile</a>
                 <a class="dropdown-item" href="settings.php">Settings</a>
@@ -157,6 +155,7 @@ include('../config/authentication.php');
                                     <th>ID</th>
                                     <th>Training Type</th>
                                     <th>Full Name</th>
+                                    <th>Date</th>
                                     <th>Duration</th>
                                     <th>Position</th>
                                     <th>Description</th>
@@ -171,8 +170,7 @@ include('../config/authentication.php');
             </div>
 
             <!-- Modal for adding employee -->
-            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog"
-                aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -207,24 +205,26 @@ include('../config/authentication.php');
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="date">Date of Training</label>
+                                    <input type="date" class="form-control" id="training_date" name="training_date" required>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label for="training">Training Type</label>
-                                            <input type="text" class="form-control" id="training_type"
-                                                name="training_type" required>
+                                            <input type="text" class="form-control" id="training_type" name="training_type" required>
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="duration">Duration</label>
-                                            <input type="text" class="form-control" id="duration" name="duration"
-                                                required>
+                                            <input type="text" class="form-control" id="duration" name="duration" required>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <input type="text" class="form-control" id="description" name="description"
-                                        style="height: 100px; overflow-y: auto;" required>
+                                    <input type="text" class="form-control" id="description" name="description" style="height: 100px; overflow-y: auto;" required>
                                 </div>
 
 
@@ -237,8 +237,7 @@ include('../config/authentication.php');
             </div>
 
             <!-- Edit Employee Modal -->
-            <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog"
-                aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -258,6 +257,11 @@ include('../config/authentication.php');
                                 <div class="form-group">
                                     <label for="edit_training_type">Training Type</label>
                                     <input type="text" class="form-control" id="edit_training_type" name="edit_training_type" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="edit_training_date">Training Date</label>
+                                    <input type="date" class="form-control" id="edit_training_date" name="edit_training_date" required>
                                 </div>
 
                                 <div class="form-group">
@@ -291,37 +295,40 @@ include('../includes/footer.php');
 ?>
 
 <script>
-$(document).ready(function() {
-    var table = $('#event_table').DataTable({
-        "ajax": {
-            "url": "../config/fetch_trainees.php",
-            "type": "POST",
-            "dataSrc": ""
-        },
-        "columns": [{
-                "data": "ID",
-                "visible": false
+    $(document).ready(function() {
+        var table = $('#event_table').DataTable({
+            "ajax": {
+                "url": "../config/fetch_trainees.php",
+                "type": "POST",
+                "dataSrc": ""
             },
-            {
-                "data": "training_type"
-            },
-            {
-                "data": "trainee_name"
-            },
-            {
-                "data": "duration"
-            },
-            {
-                "data": "trainee_position"
-            },
-            {
-                "data": "description"
-            },
-            {
-                "data": null,
-                "render": function(data, type, row) {
-                    // Add action buttons here for edit, delete, etc.
-                    return `
+            "columns": [{
+                    "data": "ID",
+                    "visible": false
+                },
+                {
+                    "data": "training_type"
+                },
+                {
+                    "data": "trainee_name"
+                },
+                {
+                    "data": "training_date"
+                },
+                {
+                    "data": "duration"
+                },
+                {
+                    "data": "trainee_position"
+                },
+                {
+                    "data": "description"
+                },
+                {
+                    "data": null,
+                    "render": function(data, type, row) {
+                        // Add action buttons here for edit, delete, etc.
+                        return `
                     <a class="m-1" href="#" data-toggle="modal" data-target="#editEmployeeModal" data-record-id="${row.ID}">
                         <img src="../assets/img/icons/edit.svg" alt="Edit">
                     </a>
@@ -329,65 +336,66 @@ $(document).ready(function() {
                         <img src="../assets/img/icons/delete.svg" alt="Delete">
                     </a>
                 `;
+                    }
                 }
+            ]
+        });
+
+        // Handle delete button click
+        $('#event_table tbody').on('click', '.delete-button', function() {
+            var button = this;
+            var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
+
+            var confirmDelete = confirm('Are you sure you want to delete this record?');
+
+            if (confirmDelete) {
+                $.ajax({
+                    type: 'POST',
+                    url: '../config/delete_trainee.php',
+                    data: {
+                        record_id: recordId // Pass the record_id as a parameter
+                    },
+                    success: function(response) {
+                        alert(response);
+                        table.ajax.reload(); // Refresh the DataTable
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error: ' + status + ' ' + error);
+                    }
+                });
             }
-        ]
-    });
+        });
 
-    // Handle delete button click
-    $('#event_table tbody').on('click', '.delete-button', function() {
-        var button = this;
-        var recordId = $(button).data('record-id'); // Get the record ID from data-attribute
+        // handle the edit event
+        $('#event_table tbody').on('click', '[data-target="#editEmployeeModal"]', function() {
+            var button = $(this);
+            var recordId = button.data('record-id');
 
-        var confirmDelete = confirm('Are you sure you want to delete this record?');
-
-        if (confirmDelete) {
+            // Fetch trainee details by ID using AJAX
             $.ajax({
                 type: 'POST',
-                url: '../config/delete_trainee.php',
+                url: '../config/fetch_trainee.php',
                 data: {
-                    record_id: recordId // Pass the record_id as a parameter
+                    trainee_id: recordId
                 },
                 success: function(response) {
-                    alert(response);
-                    table.ajax.reload(); // Refresh the DataTable
+                    var trainee = JSON.parse(response);
+
+                    // Set the fetched trainee details in the modal form fields
+                    $('#edit_trainee_id').val(trainee.ID);
+                    $('#edit_trainee_name').val(trainee.trainee_name);
+                    $('#edit_training_type').val(trainee.training_type);
+                    $('#edit_training_date').val(trainee.training_date);
+                    $('#edit_duration').val(trainee.duration);
+                    $('#edit_description').val(trainee.description);
+                    $('#edit_trainee_position').val(trainee.trainee_position);
+
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error: ' + status + ' ' + error);
                 }
             });
-        }
-    });
-
-    // handle the edit event
-    $('#event_table tbody').on('click', '[data-target="#editEmployeeModal"]', function() {
-        var button = $(this);
-        var recordId = button.data('record-id');
-
-        // Fetch trainee details by ID using AJAX
-        $.ajax({
-            type: 'POST',
-            url: '../config/fetch_trainee.php',
-            data: {
-                trainee_id: recordId
-            },
-            success: function(response) {
-                var trainee = JSON.parse(response);
-
-                // Set the fetched trainee details in the modal form fields
-                $('#edit_trainee_id').val(trainee.ID);
-                $('#edit_trainee_name').val(trainee.trainee_name);
-                $('#edit_training_type').val(trainee.training_type);
-                $('#edit_duration').val(trainee.duration);
-                $('#edit_description').val(trainee.description);
-                $('#edit_trainee_position').val(trainee.trainee_position);
-
-            },
-            error: function(xhr, status, error) {
-                console.error('AJAX Error: ' + status + ' ' + error);
-            }
         });
-    });
 
-});
+    });
 </script>

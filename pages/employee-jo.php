@@ -248,7 +248,6 @@ include('../config/authentication.php')
                                 <div class="form-group">
                                     <label for="type">Type of Employment</label>
                                     <select type="text" class="form-control" id="employment" name="employment" required>
-                                        <option value="">--Select--</option>
                                         <option value="Job Order">Job Order</option>
                                     </select>
                                 </div>
@@ -330,11 +329,7 @@ include('../config/authentication.php')
                                 <div class="form-group">
                                     <label for="edit_employment">Type of Employment:</label>
                                     <select class="form-control" id="edit_employment" name="edit_employment" required>
-                                        <option value="">--Select--</option>
-                                        <option value="Permanent">Permanent</option>
                                         <option value="Job Order">Job Order</option>
-                                        <option value="Elective">Elective</option>
-                                        <option value="Coterminous">Coterminous</option>
                                     </select>
                                 </div>
 

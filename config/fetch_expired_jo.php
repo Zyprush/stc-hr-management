@@ -5,7 +5,7 @@ include 'dbcon.php'; // Include your database connection
 $currentDate = date('Y-m-d');
 
 // Perform a select query to fetch data from the 'employees_jo' table
-$query = "SELECT ID, name, end, office, employment, start, position FROM employees_jo WHERE end >= '$currentDate' OR end IS NULL";
+$query = "SELECT ID, name, end, office, employment, start, position FROM employees_jo WHERE end <= '$currentDate' OR end IS NULL";
 
 $result = mysqli_query($conn, $query);
 

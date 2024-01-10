@@ -205,7 +205,7 @@ $(document).ready(function() {
                 "render": function(data, type, row) {
                     // Add action buttons here for edit, delete, etc.
                     return `
-                        <a class="view-button m-1" data-record-id="${row.ID}" href="#">
+                        <a class="m-1" data-record-id="${row.ID}" href="evaluation-child.php?id=${row.ID}">
                             <img src="../assets/img/icons/eye.svg" alt="View">
                         </a>
                 `;

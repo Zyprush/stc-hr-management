@@ -2,7 +2,7 @@
 include 'dbcon.php'; // Include your database connection
 
 // Perform a select query to fetch data from the 'trainees' table
-$query = "SELECT ID, trainee_name, description, training_type, duration, trainee_position FROM trainees";
+$query = "SELECT ID, trainee_name, training_date, description, training_type, duration, trainee_position FROM trainees";
 
 $result = mysqli_query($conn, $query);
 

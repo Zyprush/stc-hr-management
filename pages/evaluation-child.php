@@ -58,15 +58,13 @@ if (isset($_GET['id'])) {
                         <a class="dropdown-item" href="#"> <i class="me-2" data-feather="user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="me-2" data-feather="settings"></i>Settings</a>
                         <hr class="m-0">
-                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img
-                                src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+                        <a class="dropdown-item logout pb-0" href="../config/logout.php"><img src="../assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
                     </div>
                 </div>
             </li>
         </ul>
         <div class="dropdown mobile-user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
-                    class="fa fa-ellipsis-v"></i></a>
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">My Profile</a>
                 <a class="dropdown-item" href="#">Settings</a>
@@ -276,34 +274,28 @@ if (isset($_GET['id'])) {
 
 
             <!-- Modal for adding employee -->
-            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog"
-                aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="addEmployeeModalLabel">Evaluate</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                                onclick="closeAddModal()">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeAddModal()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <!-- Your form for adding a new employee -->
-                            <form action="../config/add_employee_evaluation.php" method="post"
-                                enctype="multipart/form-data">
+                            <form action="../config/add_employee_evaluation.php" method="post" enctype="multipart/form-data">
 
-                                <input type="hidden" name="evaluatee_id"
-                                    value="<?php echo htmlspecialchars($_GET['id']); ?>">
+                                <input type="hidden" name="evaluatee_id" value="<?php echo htmlspecialchars($_GET['id']); ?>">
 
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" id="semester" name="semester"
-                                                placeholder="Semester">
+                                            <input type="text" class="form-control" id="semester" name="semester" placeholder="Semester">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="date" class="form-control" id="date" name="date"
-                                                placeholder="Date">
+                                            <input type="date" class="form-control" id="date" name="date" placeholder="Date">
                                         </div>
                                     </div>
                                 </div>
@@ -336,12 +328,10 @@ if (isset($_GET['id'])) {
                                             </p>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="strategic_mfo"
-                                                id="strategic_mfo">
+                                            <input type="text" class="form-control" name="strategic_mfo" id="strategic_mfo">
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="strategic_rating"
-                                                id="strategic_rating">
+                                            <input type="text" class="form-control" name="strategic_rating" id="strategic_rating">
                                         </div>
                                     </div>
                                 </div>
@@ -354,12 +344,10 @@ if (isset($_GET['id'])) {
                                             </p>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="core_function_mfo"
-                                                id="core_function_mfo">
+                                            <input type="text" class="form-control" name="core_function_mfo" id="core_function_mfo">
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="core_function_rating"
-                                                id="core_function_rating">
+                                            <input type="text" class="form-control" name="core_function_rating" id="core_function_rating">
                                         </div>
                                     </div>
                                 </div>
@@ -372,12 +360,10 @@ if (isset($_GET['id'])) {
                                             </p>
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="support_function_mfo"
-                                                id="support_function_mfo">
+                                            <input type="text" class="form-control" name="support_function_mfo" id="support_function_mfo">
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="support_function_rating"
-                                                id="support_function_rating">
+                                            <input type="text" class="form-control" name="support_function_rating" id="support_function_rating">
                                         </div>
                                     </div>
                                 </div>
@@ -393,8 +379,7 @@ if (isset($_GET['id'])) {
 
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="total_overall_rating"
-                                                id="total_overall_rating">
+                                            <input type="text" class="form-control" name="total_overall_rating" id="total_overall_rating">
                                         </div>
                                     </div>
                                 </div>
@@ -407,11 +392,9 @@ if (isset($_GET['id'])) {
                                             </p>
                                         </div>
                                         <div class="col-sm-4">
-
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="final_average_rating"
-                                                id="final_average_rating">
+                                            <input type="text" class="form-control" name="final_average_rating" id="final_average_rating" oninput="updateAdjectiveRating(this.value)">
                                         </div>
                                     </div>
                                 </div>
@@ -424,19 +407,16 @@ if (isset($_GET['id'])) {
                                             </p>
                                         </div>
                                         <div class="col-sm-4">
-
                                         </div>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="adjective_rating"
-                                                id="adjective_rating">
+                                            <input type="text" class="form-control" name="adjective_rating" id="adjective_rating" readonly>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="supportingDocument">Supporting Document</label>
-                                    <input type="file" class="form-control" id="supportingDocument"
-                                        name="supportingDocument">
+                                    <input type="file" class="form-control" id="supportingDocument" name="supportingDocument">
                                     <small class="form-text text-muted">Upload a file related to the evaluation.</small>
                                 </div>
 
@@ -457,18 +437,35 @@ include('../includes/footer.php');
 ?>
 
 <script>
-function confirmDelete(id) {
-    if (confirm("Are you sure you want to delete this evaluation?")) {
-        // If the user confirms, redirect to the delete URL or perform the delete action here
-        window.location.href = "../config/delete_evaluation.php?id=" + id;
+    function confirmDelete(id) {
+        if (confirm("Are you sure you want to delete this evaluation?")) {
+            // If the user confirms, redirect to the delete URL or perform the delete action here
+            window.location.href = "../config/delete_evaluation.php?id=" + id;
+        }
     }
-}
 
-function confirmEdit(id) {
-    window.location.href = "../pages/edit_evaluation.php?id=" + id;
-}
+    function confirmEdit(id) {
+        window.location.href = "../pages/edit_evaluation.php?id=" + id;
+    }
 
-function closeAddModal() {
-    $('#addEmployeeModal').modal('hide');
-}
+    function closeAddModal() {
+        $('#addEmployeeModal').modal('hide');
+    }
+</script>
+
+<script>
+    function updateAdjectiveRating(finalAverageRating) {
+        var adjectiveRatingInput = document.getElementById('adjective_rating');
+        if (finalAverageRating >= 4.5) {
+            adjectiveRatingInput.value = 'Outstanding';
+        } else if (finalAverageRating >= 3.5) {
+            adjectiveRatingInput.value = 'Very Satisfactory';
+        } else if (finalAverageRating >= 2.5) {
+            adjectiveRatingInput.value = 'Satisfactory';
+        } else if (finalAverageRating >= 1.5) {
+            adjectiveRatingInput.value = 'Needs Improvement';
+        } else {
+            adjectiveRatingInput.value = 'Unsatisfactory';
+        }
+    }
 </script>

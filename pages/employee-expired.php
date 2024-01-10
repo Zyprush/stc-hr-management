@@ -1,8 +1,7 @@
 <?php
 include('../config/dbcon.php');
 include('../includes/header.php');
-include('../config/authentication.php');
-//include('../config/fetch_departments_options.php');
+include('../config/authentication.php')
 ?>
 
 <div id="global-loader">
@@ -83,11 +82,12 @@ include('../config/authentication.php');
                             <span> Employee</span> </a>
                         <ul class="submenu">
                             <!-- Dropdown submenu for Employee -->
-                            <li><a href="employee.php" class="active">Permanent</a></li>
+                            <li><a href="employee.php">Permanent</a></li>
                             <li><a href="employee-jo.php">Job Order</a></li>
                             <li><a href="employee-elective.php">Elective</a></li>
                             <li><a href="employee-coter.php">Coterminous</a></li>
                             <li><a href="employee-file.php">File</a></li>
+                            <li><a href="employee-expired.php" class="active">Expired Contracts</a></li>
                         </ul>
                     </li>
                     <li class="menu">
@@ -129,38 +129,59 @@ include('../config/authentication.php');
         </div>
     </div>
 
-
     <div class="page-wrapper">
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Permanent Employee List</h4>
-                    <h6>Manage Employee</h6>
+                    <h4>Expired Contract List</h4>
+                    <h6>Manage Contract</h6>
                 </div>
                 <div class="page-btn">
                     <!--
                         <a href="#" class="btn btn-added" data-toggle="modal" data-target="#exampleModalCenter">
                             <img src="../assets/img/icons/plus.svg" alt="img" class="me-1"> Add Employee
                         </a>
+                        <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                            <img src="../assets/img/icons/plus.svg" alt="img" class="me-1">Add Employee
+                        </a>
                     -->
-                    <a href="#" class="btn btn-added" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
-                        <img src="../assets/img/icons/plus.svg" alt="img" class="me-1">Add Employee
-                    </a>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
+                    <div class="table-top">
+                        <div class="search-set">
+                        </div>
+                        <div class="wordset">
+                            <ul>
+                                <!--
+                                    <li>
+                                        <a href="../config/generate_pdf_jo.php" data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                                src="../assets/img/icons/pdf.svg" alt="img"></a>
+                                    </li>
+                                    <li>
+                                        <a href="../config/generate_excel_jo.php" data-bs-toggle="tooltip" data-bs-placement="top" title="excel">
+                                            <img src="../assets/img/icons/excel.svg" alt="img">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="../config/generate_excel_jo.php" data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img src="../assets/img/icons/printer.svg" alt="img"></a>
+                                    </li>
+                                -->
+                            </ul>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table id="event_table" class="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Item No.</th>
-                                    <th>Office</th>
                                     <th>Full Name</th>
-                                    <th>Type of Employment</th>
+                                    <th>Employment</th>
+                                    <th>Office</th>
+                                    <th>Position</th>
                                     <th>Start Date</th>
-                                    <th>Position Title</th>
+                                    <th>End Date</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -183,102 +204,76 @@ include('../config/authentication.php');
                         </div>
                         <div class="modal-body">
                             <!-- Your form for adding a new employee -->
-                            <form action="../config/add_new_employee.php" method="post">
+                            <form action="../config/add_new_employee_jo.php" method="post">
 
                                 <div class="form-group">
-                                    <label for="name">Name of Employee</label>
+                                    <label for="name">Full Name</label>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="EX. Juan A. Delacruz" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="birthday">Birthday</label>
-                                    <input class="form-control" type="date" name="birthday" id="birthday" required>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="office">Office Name</label>
+                                            <select class="form-control" id="office" name="office" required>
+                                                <option value="">--Select--</option>
+                                                <?php
+                                                // Fetch department names from the 'departments' table
+                                                $sql = "SELECT Department FROM departments";
+                                                $result = $conn->query($sql);
+
+                                                if ($result->num_rows > 0) {
+                                                    while ($row = $result->fetch_assoc()) {
+                                                        $department = $row['Department'];
+                                                        echo "<option value='" . htmlspecialchars($department, ENT_QUOTES) . "'>$department</option>";
+                                                    }
+                                                } else {
+                                                    echo "<option value=''>No departments found</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="position">Position Title</label>
+                                            <input type="text" class="form-control" id="position" name="position" required>
+                                        </div>
+                                    </div>
+
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="office">Office Name</label>
-                                    <select class="form-control" id="office" name="office" required>
-                                        <option value="">--Select--</option>
-                                        <?php
-                                        // Fetch department names from the 'departments' table
-                                        $sql = "SELECT Department FROM departments";
-                                        $result = $conn->query($sql);
-
-                                        if ($result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                $department = $row['Department'];
-                                                echo "<option value='" . htmlspecialchars($department, ENT_QUOTES) . "'>$department</option>";
-                                            }
-                                        } else {
-                                            echo "<option value=''>No departments found</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-
                                 <div class="form-group">
                                     <label for="type">Type of Employment</label>
                                     <select type="text" class="form-control" id="employment" name="employment" required>
-                                        <option value="Permanent">Permanent</option>
-                                        <option value="" hidden>--Select--</option>
-                                        <option value="Elective" hidden>Elective</option>
-                                        <option value="Coterminous" hidden> Coterminous</option>
+                                        <option value="Job Order">Job Order</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="start">Start Date</label>
-                                    <input type="date" class="form-control" id="start" name="start" required>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="start">Start Date</label>
+                                            <input type="date" class="form-control" id="start" name="start" required>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="end">end Date</label>
+                                            <input type="date" class="form-control" id="end" name="end" required>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="form-group">
                                     <div class="row">
-                                        <label for="item">Item No.</label>
                                         <div class="col-sm-6">
-                                            <label for="itemOld">Old</label>
-                                            <input type="text" class="form-control" id="oldItem" name="oldItem" placeholder="0000" required>
+                                            <label for="rate">Rate /Month</label>
+                                            <input type="text" class="form-control" id="rate" name="rate" required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <label for="itemNew">New</label>
-                                            <input type="text" class="form-control" id="newItem" name="newItem" placeholder="0000" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="position">Position Title</label>
-                                    <input type="text" class="form-control" id="position" name="position" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="current">Current Year Authorized Rate/Annum</label>
-                                        <div class="col-sm-6">
-                                            <label for="sg">SG/Step</label>
-                                            <input type="text" class="form-control" name="sg" id="sg" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="amount">Amount</label>
-                                            <input type="text" class="form-control" name="amount" id="amount" required>
+                                            <label for="funding">Funding Chargers</label>
+                                            <input type="text" class="form-control" id="funding" name="funding" required>
                                         </div>
                                     </div>
+
                                 </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="current">Budget Year Propose Rate/Annum</label>
-                                        <div class="col-sm-6">
-                                            <label for="sg">SG/Step</label>
-                                            <input type="text" class="form-control" name="sg1" id="sg1" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="amount">Amount</label>
-                                            <input type="text" class="form-control" name="amount1" id="amount1" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-
                                 <!-- Submit button for the form -->
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -298,20 +293,17 @@ include('../config/authentication.php');
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="editEmployeeForm" action="../config/edit_employee.php" method="post">
+                            <form id="editEmployeeForm" action="../config/edit_employee_jo.php" method="post">
                                 <input type="hidden" name="edit_employee_id" id="edit_employee_id">
                                 <div class="form-group">
-                                    <label for="edit_name">Name of Incumbent:</label>
-                                    <input type="text" class="form-control" id="edit_name" name="edit_name" required>
+                                    <label for="edit_name">Name:</label>
+                                    <input type="text" class="form-control" id="edit_name" name="edit_name">
                                 </div>
                                 <div class="form-group">
                                     <label for="edit_office">Office:</label>
                                     <select class="form-control" id="edit_office" name="edit_office" required>
                                         <option value="">--Select--</option>
                                         <?php
-                                        // Establish database connection (ensure $conn is defined)
-                                        include '../config/dbcon.php';
-
                                         // Fetch department names from the 'departments' table
                                         $sql = "SELECT Department FROM departments";
                                         $result = $conn->query($sql);
@@ -319,86 +311,39 @@ include('../config/authentication.php');
                                         if ($result && $result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
                                                 $department = $row['Department'];
-                                                echo "<option value='" . htmlspecialchars($department, ENT_QUOTES) . "'>$department</option>";
+                                                echo "<option value='$department'>$department</option>";
                                             }
                                         } else {
                                             echo "<option value=''>No departments found</option>";
                                         }
-
-                                        // Close database connection
-                                        $conn->close();
                                         ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="edit_employment">Type of Employment:</label>
                                     <select class="form-control" id="edit_employment" name="edit_employment" required>
-                                        <option value="Permanent">Permanent</option>
-                                        <option value="Job Order" hidden>Job Order</option>
-                                        <option value="Elective" hidden>Elective</option>
-                                        <option value="Coterminous" hidden>Coterminous</option>
+                                        <option value="Job Order">Job Order</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="edit_start_date">Start Date:</label>
-                                    <input type="date" class="form-control" id="edit_start_date" name="edit_start_date" required>
+                                    <input type="date" class="form-control" id="edit_start_date" name="edit_start_date">
                                 </div>
-
                                 <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label for="edit_old_item">Item No. (Old):</label>
-                                            <input type="text" class="form-control" id="edit_old_item" name="edit_old_item" placeholder="0000" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="edit_new_item">Item No. (New):</label>
-                                            <input type="text" class="form-control" id="edit_new_item" name="edit_new_item" placeholder="0000" required>
-                                        </div>
-                                    </div>
+                                    <label for="edit_end_date">End Date:</label>
+                                    <input type="date" class="form-control" id="edit_end_date" name="edit_end_date">
                                 </div>
-
                                 <div class="form-group">
                                     <label for="edit_position">Position Title:</label>
-                                    <input type="text" class="form-control" id="edit_position" name="edit_position" required>
+                                    <input type="text" class="form-control" id="edit_position" name="edit_position">
                                 </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="edit_sg">Current Year Authorized Rate/Annum SG:</label>
-                                        <div class="col-sm-6">
-                                            <label for="edit_sg">SG/Step</label>
-                                            <input type="text" class="form-control" id="edit_sg" name="edit_sg" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="edit_amount">Amount</label>
-                                            <input type="text" class="form-control" id="edit_amount" name="edit_amount" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="edit_sg1">Budget Year Propose Rate/Annum SG:</label>
-                                        <div class="col-sm-6">
-                                            <label for="edit_sg1">SG/Step</label>
-                                            <input type="text" class="form-control" id="edit_sg1" name="edit_sg1" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="edit_amount1">Amount</label>
-                                            <input type="text" class="form-control" id="edit_amount1" name="edit_amount1" required>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
@@ -411,7 +356,7 @@ include('../includes/footer.php');
     $(document).ready(function() {
         var table = $('#event_table').DataTable({
             "ajax": {
-                "url": "../config/fetch_employees.php",
+                "url": "../config/fetch_expired_jo.php",
                 "type": "POST",
                 "dataSrc": ""
             },
@@ -420,22 +365,22 @@ include('../includes/footer.php');
                     "visible": false
                 },
                 {
-                    "data": "newItem"
-                },
-                {
-                    "data": "office"
-                },
-                {
                     "data": "name"
                 },
                 {
                     "data": "employment"
                 },
                 {
-                    "data": "start"
+                    "data": "office"
                 },
                 {
                     "data": "position"
+                },
+                {
+                    "data": "start"
+                },
+                {
+                    "data": "end"
                 },
                 {
                     "data": null,
@@ -464,7 +409,7 @@ include('../includes/footer.php');
             if (confirmDelete) {
                 $.ajax({
                     type: 'POST',
-                    url: '../config/delete_employee.php',
+                    url: '../config/delete_employee_jo.php',
                     data: {
                         record_id: recordId // Pass the record_id as a parameter
                     },
@@ -479,7 +424,7 @@ include('../includes/footer.php');
             }
         });
 
-        // handle the edit event
+        //handle the edit event
         $('#event_table tbody').on('click', '[data-target="#editEmployeeModal"]', function() {
             var button = $(this);
             var recordId = button.data('record-id');
@@ -487,7 +432,7 @@ include('../includes/footer.php');
             // Fetch employee details by ID using AJAX
             $.ajax({
                 type: 'POST',
-                url: '../config/fetch_employee.php',
+                url: '../config/fetch_employee_jo.php',
                 data: {
                     employee_id: recordId
                 },
@@ -500,15 +445,8 @@ include('../includes/footer.php');
                     $('#edit_office').val(employee.office);
                     $('#edit_employment').val(employee.employment);
                     $('#edit_start_date').val(employee.start);
+                    $('#edit_end_date').val(employee.end); // Added line for the 'end' field
                     $('#edit_position').val(employee.position);
-                    $('#edit_old_item').val(employee
-                        .oldItem); // Added line for the 'oldItem' field
-                    $('#edit_new_item').val(employee
-                        .newItem); // Added line for the 'newItem' field
-                    $('#edit_sg').val(employee.sg);
-                    $('#edit_amount').val(employee.amount);
-                    $('#edit_sg1').val(employee.sg1);
-                    $('#edit_amount1').val(employee.amount1);
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error: ' + status + ' ' + error);

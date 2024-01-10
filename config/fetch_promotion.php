@@ -1,7 +1,7 @@
 <?php
 include 'dbcon.php'; // Include your database connection
 
-// Perform a select query to fetch data from the 'employees' table for employees with the latest 'very satisfactory' rating
+// Perform a select query to fetch data from the 'employees' table for employees with the latest 'very satisfactory' or 'excellent' rating
 $query = "SELECT e.ID, e.name, e.office, e.position, ev.adjective_rating 
           FROM employees AS e
           LEFT JOIN (
@@ -10,7 +10,7 @@ $query = "SELECT e.ID, e.name, e.office, e.position, ev.adjective_rating
               GROUP BY evaluatee_id
           ) AS latest_eval ON e.ID = latest_eval.evaluatee_id
           LEFT JOIN evaluation_table AS ev ON ev.evaluatee_id = latest_eval.evaluatee_id AND ev.date = latest_eval.latest_date
-          WHERE ev.adjective_rating = 'very satisfactory'";
+          WHERE ev.adjective_rating IN ('Very Satisfactory', 'Outstanding')";
 
 $result = mysqli_query($conn, $query);
 

@@ -269,7 +269,7 @@ $(document).ready(function() {
                 "render": function(data, type, row) {
                     // Add a data-attribute to store the record ID
                     return `
-                        <a class="view-button m-1" data-record-id="${row.ID}" href="#">
+                        <a class=" m-1" data-record-id="${row.ID}" href="department_childs.php?id=${row.ID}">
                             <img src="../assets/img/icons/eye.svg" alt="View">
                         </a>
                     `;
@@ -284,8 +284,7 @@ $(document).ready(function() {
         var button = $(this);
         var recordId = $(button).data('record-id');
 
-        // Open the PDF file using the constructed file name
-        window.open('department_childs.php?id=' + recordId);
+        window.location.href('department_childs.php?id=' + recordId);
     });
 });
 </script>

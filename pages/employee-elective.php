@@ -223,9 +223,8 @@ include('../config/authentication.php');
                                 <div class="form-group">
                                     <label for="type">Type of Employment</label>
                                     <select type="text" class="form-control" id="employment" name="employment" required>
-                                        <option value="">--Select--</option>
-                                        <option value="Permanent" hidden>Permanent</option>
                                         <option value="Elective">Elective</option>
+                                        <option value="Permanent" hidden>Permanent</option>
                                         <option value="Coterminous" hidden> Coterminous</option>
                                     </select>
                                 </div>
@@ -341,10 +340,9 @@ include('../config/authentication.php');
                                 <div class="form-group">
                                     <label for="edit_employment">Type of Employment:</label>
                                     <select class="form-control" id="edit_employment" name="edit_employment" required>
-                                        <option value="">--Select--</option>
+                                        <option value="Elective">Elective</option>
                                         <option value="Permanent" hidden>Permanent</option>
                                         <option value="Job Order" hidden>Job Order</option>
-                                        <option value="Elective">Elective</option>
                                         <option value="Coterminous" hidden>Coterminous</option>
                                     </select>
                                 </div>

@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $training_type = $_POST['training_type'];
     $duration = $_POST['duration'];
     $description = $_POST['description'];
+    $training_date = $_POST['training_date']; // Added 'training_date' variable
 
     // Fetching position based on trainee name from employees table
     $getPositionQuery = "SELECT position FROM employees WHERE name = ?";
@@ -36,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             description VARCHAR(255) NOT NULL,
             training_type VARCHAR(255) NOT NULL,
             duration VARCHAR(255) NOT NULL,
+            training_date DATE NOT NULL,  -- Change data type to DATE
             trainee_position VARCHAR(255) NOT NULL
         )";
 
@@ -48,11 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Now, perform the database insertion using prepared statements
-    $insertQuery = "INSERT INTO trainees (trainee_name, description, training_type, duration, trainee_position)
-    VALUES (?, ?, ?, ?, ?)";
+    $insertQuery = "INSERT INTO trainees (trainee_name, description, training_type, duration, training_date, trainee_position)
+    VALUES (?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conn, $insertQuery);
-    mysqli_stmt_bind_param($stmt, 'sssss', $trainee_name, $description, $training_type, $duration, $trainee_position);
+    mysqli_stmt_bind_param($stmt, 'ssssss', $trainee_name, $description, $training_type, $duration, $training_date, $trainee_position);
 
     if (mysqli_stmt_execute($stmt)) {
         // Set a session value to indicate success
