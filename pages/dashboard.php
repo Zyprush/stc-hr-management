@@ -155,6 +155,7 @@ include('../config/authentication.php');
                     </div>
                 </div>
             </li>
+
             <li class="nav-item dropdown has-arrow main-drop">
                 <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                     <span class="user-img"><img src="../assets/img/icons/users1.svg" alt="">
@@ -198,6 +199,53 @@ include('../config/authentication.php');
         <div class="content">
 
             <div class="row">
+                <a href="department.php" class="col-lg-3 col-sm-6 col-12 d-flex">
+                    <div class="dash-count" style="background-color: #377ede;">
+                        <div class="dash-counts">
+                            <h4><?php include('../config/department_count.php'); echo $departmentCount; ?></h4>
+                            <h5>Offices</h5>
+                        </div>
+                        <div class="dash-imgs">
+                            <i data-feather="briefcase"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="employee.php" class="col-lg-3 col-sm-6 col-12 d-flex">
+                    <div class="dash-count das1" style="background-color: #6859f3;">
+                        <div class="dash-counts">
+                            <h4><?php echo $permanent; ?></h4>
+                            <h5>Permanent</h5>
+                        </div>
+                        <div class="dash-imgs">
+                            <i data-feather="user-check"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="employee-jo.php" class="col-lg-3 col-sm-6 col-12 d-flex">
+                    <div class="dash-count das2" style="background-color: #e95c41;">
+                        <div class="dash-counts">
+                            <h4><?php echo $jo; ?></h4>
+                            <h5>Job Order</h5>
+                        </div>
+                        <div class="dash-imgs">
+                            <i data-feather="user-plus"></i>
+                        </div>
+                    </div>
+                </a>
+                <a href="#expired_table" class="col-lg-3 col-sm-6 col-12 d-flex">
+                    <div class="dash-count das3 bg-danger">
+                        <div class="dash-counts">
+                            <h4><?php echo $expiring; ?></h4>
+                            <h5>Expiring Contract</h5>
+                        </div>
+                        <div class="dash-imgs">
+                            <i data-feather="user-minus"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="row" hidden>
                 <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                     <a href="department.php" class="text-black">
                         <div class="card shadow">
@@ -364,7 +412,7 @@ include('../config/authentication.php');
                     <div class="card shadow">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                             <h5 class="card-title">
-                                List of Contract nearly expires
+                                List of nearly expires Contract/s
                             </h5>
                         </div>
                         <div class="card-body">

@@ -12,7 +12,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         <span> Dashboard</span> </a>
                 </li>
                 <li <?php echo ($currentPage === 'department.php' || $currentPage === 'department_childs.php') ? 'class="active"' : 'class="menu"'; ?>>
-                    <a href="department.php"><i data-feather="users"></i>
+                    <a href="department.php"><i data-feather="briefcase"></i>
                         <span> Offices</span> </a>
                 </li>
                 <li class="submenu">
@@ -32,11 +32,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     </ul>
                 </li>
                 <li <?php echo ($currentPage === 'evaluation.php' || $currentPage === 'evaluation-child.php') ? 'class="active"' : 'class="menu"'; ?>>
-                    <a href="evaluation.php"><i data-feather="users"></i>
+                    <a href="evaluation.php"><i data-feather="award"></i>
                         <span> Evaluation</span> </a>
                 </li>
                 <li <?php echo ($currentPage === 'training.php') ? 'class="active"' : 'class="menu"'; ?>>
-                    <a href="training.php"><i data-feather="users"></i>
+                    <a href="training.php"><i data-feather="trending-up"></i>
                         <span> Training</span> </a>
                 </li>
                 <li class="submenu">
