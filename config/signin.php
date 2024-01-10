@@ -43,13 +43,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (!$tableExists->num_rows) {
                 $createTableQuery = "CREATE TABLE IF NOT EXISTS login_logs (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    user_id INT NOT NULL,
-                    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    logout_time TIMESTAMP DEFAULT null,
-                    FOREIGN KEY (user_id) REFERENCES credentials(id)
-                )";
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                logout_time TIMESTAMP DEFAULT null,
+                FOREIGN KEY (user_id) REFERENCES credentials(id)
+            )";
                 $conn->query($createTableQuery);
+            }
+
+            // Count the total number of logs
+            $countLogsQuery = "SELECT COUNT(*) AS total_logs FROM login_logs";
+            $countLogsResult = $conn->query($countLogsQuery);
+
+            if (!$countLogsResult) {
+                die('Error counting total logs: ' . $conn->error);
+            }
+
+            $countLogsRow = $countLogsResult->fetch_assoc();
+            $totalLogs = $countLogsRow['total_logs'];
+
+            // Check if the total number of logs exceeds the limit (20), if yes, delete the oldest log
+            if ($totalLogs >= 20) {
+                // Delete the oldest log
+                $deleteOldestQuery = "DELETE FROM login_logs ORDER BY login_time ASC LIMIT 1";
+                $conn->query($deleteOldestQuery);
+
+                if ($conn->error) {
+                    die('Error deleting oldest log: ' . $conn->error);
+                }
             }
 
             // Insert login log into the database
