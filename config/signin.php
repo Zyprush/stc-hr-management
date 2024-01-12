@@ -9,7 +9,7 @@ ini_set('session.cookie_samesite', 'Lax'); // Set SameSite attribute to mitigate
 require_once 'dbcon.php';
 
 // Start the session
-session_start();
+//session_start();
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
