@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 12, 2024 at 12:24 PM
+-- Generation Time: Jan 12, 2024 at 12:29 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -50,6 +50,13 @@ CREATE TABLE `credentials` (
   `password` varchar(255) NOT NULL,
   `role` enum('Admin','User') NOT NULL DEFAULT 'User'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `credentials`
+--
+
+INSERT INTO `credentials` (`id`, `name`, `department`, `designation`, `email`, `password`, `role`) VALUES
+(11, 'Administrator', '', 'Administrator', 'admin', '$2y$10$TvLgXQcOaG6o04ecIz4WDu.dh/Bm.EUeab7Xm3.c0UqHWmGOEl4Sq', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -236,6 +243,13 @@ CREATE TABLE `login_logs` (
   `logout_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `login_logs`
+--
+
+INSERT INTO `login_logs` (`id`, `user_id`, `login_time`, `logout_time`) VALUES
+(2, 11, '2024-01-12 11:28:50', '2024-01-12 11:29:00');
+
 -- --------------------------------------------------------
 
 --
@@ -355,7 +369,7 @@ ALTER TABLE `calendar_event_master`
 -- AUTO_INCREMENT for table `credentials`
 --
 ALTER TABLE `credentials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -415,7 +429,7 @@ ALTER TABLE `files`
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `trainees`
