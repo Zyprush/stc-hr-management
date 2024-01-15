@@ -25,6 +25,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         <!-- Dropdown submenu for Employee -->
                         <li><a href="employee.php" <?php echo ($currentPage === 'employee.php') ? 'class="active"' : ''; ?>>Permanent</a></li>
                         <li><a href="employee-jo.php" <?php echo ($currentPage === 'employee-jo.php') ? 'class="active"' : ''; ?>>Job Order</a></li>
+                        <li><a href="employee-contract.php" <?php echo ($currentPage === 'employee-contract.php') ? 'class="active"' : ''; ?>>Contract of Service</a></li>
                         <li><a href="employee-elective.php" <?php echo ($currentPage === 'employee-elective.php') ? 'class="active"' : ''; ?>>Elective</a></li>
                         <li><a href="employee-coter.php" <?php echo ($currentPage === 'employee-coter.php') ? 'class="active"' : ''; ?>>Coterminous</a></li>
                         <li><a href="employee-file.php" <?php echo ($currentPage === 'employee-file.php' || $currentPage === 'employee-files.php') ? 'class="active"' : ''; ?>>File</a></li>
