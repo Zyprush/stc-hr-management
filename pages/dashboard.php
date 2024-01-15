@@ -202,7 +202,8 @@ include('../config/authentication.php');
                 <a href="department.php" class="col-lg-3 col-sm-6 col-12 d-flex">
                     <div class="dash-count" style="background-color: #377ede;">
                         <div class="dash-counts">
-                            <h4><?php include('../config/department_count.php'); echo $departmentCount; ?></h4>
+                            <h4><?php include('../config/department_count.php');
+                                echo $departmentCount; ?></h4>
                             <h5>Offices</h5>
                         </div>
                         <div class="dash-imgs">
@@ -576,7 +577,17 @@ include('../includes/footer.php');
     var data = Object.values(departmentCounts);
 
     // Define a fixed set of colors
-    var fixedColors = ['#FF5733', '#33FF57', '#5733FF', '#FF33A1', '#33A1FF', '#A1FF33'];
+    var fixedColors = [
+        '#FF5733', '#33FF57', '#5733FF', '#FF33A1', '#33A1FF', '#A1FF33',
+        '#FF3366', '#FF33FF', '#9933FF', '#66FF33', '#33FF99', '#3366FF',
+        '#FF6633', '#33FFCC', '#CC33FF', '#FFCC33', '#CCFF33', '#3366CC',
+        '#FF9933', '#33CCFF', '#CCFF66', '#FF66CC', '#66CCFF', '#33FF66',
+        '#FF3300', '#00FF33', '#0033FF', '#FF0099', '#9900FF', '#0099FF',
+        '#FF9900', '#00FF99', '#9900CC', '#CC0099', '#CC9900', '#0099CC',
+        '#FF6600', '#00CCFF', '#CC6600', '#FF00CC', '#CC00FF', '#00FFCC',
+        '#FF3300', '#00FF66', '#0066FF', '#FF0066', '#6600FF', '#66FF00',
+        '#FF0000', '#00FF00', '#0000FF', '#FF00FF', '#FFFF00', '#00FFFF'
+    ];
 
     var myDoughnutChart = new Chart(ctxD, {
         type: 'pie',

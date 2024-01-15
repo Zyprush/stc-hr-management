@@ -421,10 +421,16 @@ include('../includes/footer.php');
                     "visible": false
                 },
                 {
-                    "data": "name"
+                    "data": "name",
+                    "render": function(data, type, row) {
+                        return data ? data : '<span style="color: red;">Deleted User</span>';
+                    }
                 },
                 {
-                    "data": "email"
+                    "data": "email",
+                    "render": function(data, type, row) {
+                        return data ? data : '<span style="color: red;">Deleted User</span>';
+                    }
                 },
                 {
                     "data": "login_time",
