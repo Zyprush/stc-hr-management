@@ -5,7 +5,13 @@ include 'dbcon.php'; // Include your database connection
 $currentDate = date('Y-m-d');
 
 // Perform a select query to fetch data from the 'employees_jo' table
-$query = "SELECT ID, name, end, office, employment, start, position FROM employees_jo WHERE end <= '$currentDate' OR end IS NULL";
+$query1 = "SELECT ID, name, end, office, employment, start, position FROM employees_jo WHERE end <= '$currentDate' OR end IS NULL";
+
+// Perform a select query to fetch data from the 'employee_contract' table
+$query2 = "SELECT ID, name, end, office, employment, start, position FROM employee_contract WHERE end <= '$currentDate' OR end IS NULL";
+
+// Combine the results using UNION
+$query = "($query1) UNION ($query2)";
 
 $result = mysqli_query($conn, $query);
 
