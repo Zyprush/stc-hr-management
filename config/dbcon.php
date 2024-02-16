@@ -2,7 +2,7 @@
 $sname = 'localhost';
 $user = 'root';
 $pass = '';
-$dbname = 'stchrdb';
+$dbname = 'stchrbd';
 
 // Create a new mysqli object and establish the connection
 $conn = new mysqli($sname, $user, $pass, $dbname);
