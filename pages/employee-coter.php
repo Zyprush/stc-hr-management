@@ -221,12 +221,12 @@ include('../config/authentication.php');
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Item No.</th>
-                                    <th>Office</th>
                                     <th>Full Name</th>
-                                    <th>Type of Employment</th>
+                                    <th>Address</th>
                                     <th>Start Date</th>
-                                    <th>Position Title</th>
+                                    <th>End Date</th>
+                                    <th>Position</th>
+                                    <th>Salary</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -257,38 +257,8 @@ include('../config/authentication.php');
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="birthday">Birthday</label>
-                                    <input class="form-control" type="date" name="birthday" id="birthday" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="office">Office Name</label>
-                                    <select class="form-control" id="office" name="office" required>
-                                        <option value="">--Select--</option>
-                                        <?php
-                                        // Fetch department names from the 'departments' table
-                                        $sql = "SELECT Department FROM departments";
-                                        $result = $conn->query($sql);
-
-                                        if ($result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                $department = $row['Department'];
-                                                echo "<option value='" . htmlspecialchars($department, ENT_QUOTES) . "'>$department</option>";
-                                            }
-                                        } else {
-                                            echo "<option value=''>No departments found</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="type">Type of Employment</label>
-                                    <select type="text" class="form-control" id="employment" name="employment" required>
-                                        <option value="Coterminous"> Coterminous</option>
-                                        <option value="Permanent" hidden>Permanent</option>
-                                        <option value="Elective" hidden>Elective</option>
-                                    </select>
+                                    <label for="address">Address</label>
+                                    <input class="form-control" type="text" name="address" id="address" required>
                                 </div>
 
                                 <div class="form-group">
@@ -297,17 +267,8 @@ include('../config/authentication.php');
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="row">
-                                        <label for="item">Item No.</label>
-                                        <div class="col-sm-6">
-                                            <label for="itemOld">Old</label>
-                                            <input type="text" class="form-control" id="oldItem" name="oldItem" placeholder="0000" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="itemNew">New</label>
-                                            <input type="text" class="form-control" id="newItem" name="newItem" placeholder="0000" required>
-                                        </div>
-                                    </div>
+                                    <label for="end">End Date</label>
+                                    <input type="date" class="form-control" id="end" name="end" required>
                                 </div>
 
                                 <div class="form-group">
@@ -316,31 +277,8 @@ include('../config/authentication.php');
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="row">
-                                        <label for="current">Current Year Authorized Rate/Annum</label>
-                                        <div class="col-sm-6">
-                                            <label for="sg">SG/Step</label>
-                                            <input type="text" class="form-control" name="sg" id="sg" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="amount">Amount</label>
-                                            <input type="text" class="form-control" name="amount" id="amount" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="current">Budget Year Propose Rate/Annum</label>
-                                        <div class="col-sm-6">
-                                            <label for="sg">SG/Step</label>
-                                            <input type="text" class="form-control" name="sg1" id="sg1" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="amount">Amount</label>
-                                            <input type="text" class="form-control" name="amount1" id="amount1" required>
-                                        </div>
-                                    </div>
+                                    <label for="salary">Salary</label>
+                                    <input type="text" class="form-control" id="salary" name="salary" required>
                                 </div>
 
 
@@ -369,40 +307,10 @@ include('../config/authentication.php');
                                     <label for="edit_name">Name of Incumbent:</label>
                                     <input type="text" class="form-control" id="edit_name" name="edit_name" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="edit_office">Office:</label>
-                                    <select class="form-control" id="edit_office" name="edit_office" required>
-                                        <option value="">--Select--</option>
-                                        <?php
-                                        // Establish database connection (ensure $conn is defined)
-                                        include '../config/dbcon.php';
-
-                                        // Fetch department names from the 'departments' table
-                                        $sql = "SELECT Department FROM departments";
-                                        $result = $conn->query($sql);
-
-                                        if ($result && $result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                $department = $row['Department'];
-                                                echo "<option value='" . htmlspecialchars($department, ENT_QUOTES) . "'>$department</option>";
-                                            }
-                                        } else {
-                                            echo "<option value=''>No departments found</option>";
-                                        }
-
-                                        // Close database connection
-                                        $conn->close();
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit_employment">Type of Employment:</label>
-                                    <select class="form-control" id="edit_employment" name="edit_employment" required>
-                                        <option value="Elective">Elective</option>
-                                        <option value="Permanent" hidden>Permanent</option>
-                                        <option value="Job Order" hidden>Job Order</option>
-                                        <option value="Coterminous" hidden>Coterminous</option>
-                                    </select>
+                                    <label for="edit_address">Address</label>
+                                    <input type="text" class="form-control" id="edit_address" name="edit_address" required>
                                 </div>
 
                                 <div class="form-group">
@@ -411,16 +319,8 @@ include('../config/authentication.php');
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label for="edit_old_item">Item No. (Old):</label>
-                                            <input type="text" class="form-control" id="edit_old_item" name="edit_old_item" placeholder="0000" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="edit_new_item">Item No. (New):</label>
-                                            <input type="text" class="form-control" id="edit_new_item" name="edit_new_item" placeholder="0000" required>
-                                        </div>
-                                    </div>
+                                    <label for="edit_end_date">End Date:</label>
+                                    <input type="date" class="form-control" id="edit_end_date" name="edit_end_date" required>
                                 </div>
 
                                 <div class="form-group">
@@ -429,31 +329,8 @@ include('../config/authentication.php');
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="row">
-                                        <label for="edit_sg">Current Year Authorized Rate/Annum SG:</label>
-                                        <div class="col-sm-6">
-                                            <label for="edit_sg">SG/Step</label>
-                                            <input type="text" class="form-control" id="edit_sg" name="edit_sg" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="edit_amount">Amount</label>
-                                            <input type="text" class="form-control" id="edit_amount" name="edit_amount" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="edit_sg1">Budget Year Propose Rate/Annum SG:</label>
-                                        <div class="col-sm-6">
-                                            <label for="edit_sg1">SG/Step</label>
-                                            <input type="text" class="form-control" id="edit_sg1" name="edit_sg1" required>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="edit_amount1">Amount</label>
-                                            <input type="text" class="form-control" id="edit_amount1" name="edit_amount1" required>
-                                        </div>
-                                    </div>
+                                    <label for="edit_salary">Salary</label>
+                                    <input type="text" class="form-control" id="edit_salary" name="edit_salary" required>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -485,22 +362,22 @@ include('../includes/footer.php');
                     "visible": false
                 },
                 {
-                    "data": "newItem"
-                },
-                {
-                    "data": "office"
-                },
-                {
                     "data": "name"
                 },
                 {
-                    "data": "employment"
+                    "data": "address"
                 },
                 {
                     "data": "start"
                 },
                 {
+                    "data": "end"
+                },
+                {
                     "data": "position"
+                },
+                {
+                    "data": "salary"
                 },
                 {
                     "data": null,
@@ -562,18 +439,11 @@ include('../includes/footer.php');
                     // Set the fetched employee details in the modal form fields
                     $('#edit_employee_id').val(employee.ID);
                     $('#edit_name').val(employee.name);
-                    $('#edit_office').val(employee.office);
-                    $('#edit_employment').val(employee.employment);
+                    $('#edit_address').val(employee.address);
                     $('#edit_start_date').val(employee.start);
+                    $('#edit_end_date').val(employee.end);
                     $('#edit_position').val(employee.position);
-                    $('#edit_old_item').val(employee
-                        .oldItem); // Added line for the 'oldItem' field
-                    $('#edit_new_item').val(employee
-                        .newItem); // Added line for the 'newItem' field
-                    $('#edit_sg').val(employee.sg);
-                    $('#edit_amount').val(employee.amount);
-                    $('#edit_sg1').val(employee.sg1);
-                    $('#edit_amount1').val(employee.amount1);
+                    $('#edit_salary').val(employee.salary);
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error: ' + status + ' ' + error);

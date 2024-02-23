@@ -4,17 +4,11 @@ include 'dbcon.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve employee details from the POST request
     $name = $_POST['name'];
-    $birthday = $_POST['birthday'];
-    $office = $_POST['office'];
-    $employment = $_POST['employment'];
+    $address = $_POST['address'];
     $start = $_POST['start'];
-    $oldItem = $_POST['oldItem'];
-    $newItem = $_POST['newItem'];
+    $end = $_POST['end'];
     $position = $_POST['position'];
-    $sg = $_POST['sg'];
-    $amount = $_POST['amount'];
-    $sg1 = $_POST['sg1'];
-    $amount1 = $_POST['amount1'];
+    $salary = $_POST['salary'];
 
     // Validate employee details here if needed
 
@@ -32,17 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $createTableQuery = "CREATE TABLE employees_coter (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
-            birthday DATE NOT NULL,
-            oldItem VARCHAR(255) NOT NULL,
-            newItem VARCHAR(255) NOT NULL,
+            address VARCHAR(255) NOT NULL,
+            start DATE,
+            end DATE,
             position VARCHAR(255) NOT NULL,
-            sg VARCHAR(255) NOT NULL,
-            sg1 VARCHAR(255) NOT NULL,
-            amount VARCHAR(255) NOT NULL,
-            amount1 VARCHAR(255) NOT NULL,
-            office VARCHAR(255) NOT NULL,
-            employment VARCHAR(255) NOT NULL,
-            start DATE
+            salary VARCHAR(255) NOT NULL
         )";
 
         if (mysqli_query($conn, $createTableQuery)) {
@@ -54,11 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Now, perform the database insertion using prepared statements
-    $insertQuery = "INSERT INTO employees_coter (name, birthday, oldItem, newItem, position, sg, sg1, amount, amount1, office, employment, start)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $insertQuery = "INSERT INTO employees_coter (name, address, start, end, position, salary)
+    VALUES (?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conn, $insertQuery);
-    mysqli_stmt_bind_param($stmt, 'ssssssssssss', $name, $birthday, $oldItem, $newItem, $position, $sg, $sg1, $amount, $amount1, $office, $employment, $start);
+    mysqli_stmt_bind_param($stmt, 'ssssss', $name, $address, $start, $end, $position, $salary);
 
     if (mysqli_stmt_execute($stmt)) {
         // Set a session value to indicate success
@@ -93,46 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
         }
-
-        // Insert data into the 'evaluation' table
-        $insertEvaluationQuery = "INSERT INTO evaluation (itemNo, name, employment, office, semester, average)
-        VALUES (?, ?, ?, ?, 'n/a', 'n/a')";
-        $stmtEvaluation = mysqli_prepare($conn, $insertEvaluationQuery);
-        mysqli_stmt_bind_param($stmtEvaluation, 'ssss', $newItem, $name, $employment, $office);
-        mysqli_stmt_execute($stmtEvaluation);
-        mysqli_stmt_close($stmtEvaluation);
-
-        // Check and create the 'employee_files' table if it doesn't exist
-        $checkFilesTableQuery = "SHOW TABLES LIKE 'employee_files'";
-        $filesTableResult = mysqli_query($conn, $checkFilesTableQuery);
-
-        if (!$filesTableResult) {
-            echo 'Error checking employee_files table existence: ' . mysqli_error($conn);
-            exit;
-        }
-
-        if (mysqli_num_rows($filesTableResult) == 0) {
-            // The table doesn't exist, create it
-            $createFilesTableQuery = "CREATE TABLE employee_files (
-                ID INT AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(255) NOT NULL,
-                office VARCHAR(255) NOT NULL
-            )";
-
-            if (mysqli_query($conn, $createFilesTableQuery)) {
-                echo 'Table "employee_files" created successfully.';
-            } else {
-                echo 'Error creating employee_files table: ' . mysqli_error($conn);
-                exit;
-            }
-        }
-
-        // Insert data into the 'employee_files' table
-        $insertFilesQuery = "INSERT INTO employee_files (name, office) VALUES (?, ?)";
-        $stmtFiles = mysqli_prepare($conn, $insertFilesQuery);
-        mysqli_stmt_bind_param($stmtFiles, 'ss', $name, $office);
-        mysqli_stmt_execute($stmtFiles);
-        mysqli_stmt_close($stmtFiles);
 
         // Redirect to the employee.php page (or your desired destination)
         header('Location: ../pages/employee-coter.php');
