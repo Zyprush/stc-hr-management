@@ -3,7 +3,7 @@ include 'dbcon.php';
 require '../vendor/autoload.php'; // Path to autoload.php of PhpSpreadsheet
 
 // Fetch data from the 'employee_contract' table
-$query = "SELECT name, position, rate, start, end, funding, office FROM employee_contract";
+$query = "SELECT ID, name, address, start, end, position, rate FROM employee_contract";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -15,7 +15,7 @@ $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
 // Set headers for the Excel file
-$sheet->fromArray(['Name', 'Designation', 'Rate/Month', 'No. of months', 'Period of Employment', 'Funding Charges', 'Office Assignment'], NULL, 'A1');
+$sheet->fromArray(['Name', 'Address', 'Start Date', 'End Date', 'Position', 'Rate'], NULL, 'A1');
 
 // Fetch and process each row of data
 $rowCount = 2; // Start from row 2 for data
@@ -29,12 +29,11 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     $rowData = [
         $row['name'],
-        $row['position'],
-        $row['rate'],
+        $row['address'],
         $numberOfMonths,
         $periodOfEmployment,
-        $row['funding'],
-        $row['office']
+        $row['position'],
+        $row['rate']
     ];
 
     // Add data to the spreadsheet
