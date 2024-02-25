@@ -8,10 +8,12 @@ $currentDate = date('Y-m-d');
 $query1 = "SELECT ID, name, end, office, employment, start, position FROM employees_jo WHERE end <= '$currentDate' OR end IS NULL";
 
 // Perform a select query to fetch data from the 'employee_contract' table
-$query2 = "SELECT ID, name, end, office, employment, start, position FROM employee_contract WHERE end <= '$currentDate' OR end IS NULL";
+//$query2 = "SELECT * FROM employee_contract WHERE end <= '$currentDate' OR end IS NULL";
 
 // Combine the results using UNION
-$query = "($query1) UNION ($query2)";
+$query = "($query1) ";
+
+// UNION ($query2)
 
 $result = mysqli_query($conn, $query);
 

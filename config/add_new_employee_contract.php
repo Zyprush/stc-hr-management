@@ -4,13 +4,11 @@ include 'dbcon.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve employee details from the POST request
     $name = $_POST['name'];
-    $office = $_POST['office'];
-    $employment = $_POST['employment'];
+    $address = $_POST['address'];
     $start = $_POST['start'];
     $end = $_POST['end'];
     $position = $_POST['position'];
     $rate = $_POST['rate'];
-    $funding = $_POST['funding'];
 
     // Validate employee details here if needed
 
@@ -28,13 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $createTableQuery = "CREATE TABLE employee_contract (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
-            end VARCHAR(255) NOT NULL,
+            address VARCHAR(255) NOT NULL,
+            start DATE,
+            end DATE,
             position VARCHAR(255) NOT NULL,
-            office VARCHAR(255) NOT NULL,
-            employment VARCHAR(255) NOT NULL,
-            rate VARCHAR(255) NOT NULL,
-            funding VARCHAR(255) NOT NULL,
-            start DATE
+            rate VARCHAR(255) NOT NULL
         )";
 
         if (mysqli_query($conn, $createTableQuery)) {
@@ -46,13 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Now, perform the database insertion using prepared statements
-    $insertQuery = "INSERT INTO employee_contract (name, end, position, office, employment, start, rate, funding)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $insertQuery = "INSERT INTO employee_contract (name, address, start, end, position, rate)
+    VALUES (?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($conn, $insertQuery);
 
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, 'ssssssss', $name, $end, $position, $office, $employment, $start, $rate, $funding);
+        mysqli_stmt_bind_param($stmt, 'ssssss', $name, $address, $start, $end, $position, $rate);
 
         if (mysqli_stmt_execute($stmt)) {
             // Set a session value to indicate success

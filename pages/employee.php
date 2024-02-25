@@ -371,6 +371,10 @@ include('../config/authentication.php');
                                     <input type="text" class="form-control" id="edit_name" name="edit_name" required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="edit_birthday">Edit Birthday</label>
+                                    <input type="date" class="form-control" id="edit_birthday" name="edit_birthday" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="edit_office">Office:</label>
                                     <select class="form-control" id="edit_office" name="edit_office" required>
                                         <option value="">--Select--</option>
@@ -563,6 +567,7 @@ include('../includes/footer.php');
                     // Set the fetched employee details in the modal form fields
                     $('#edit_employee_id').val(employee.ID);
                     $('#edit_name').val(employee.name);
+                    $('#edit_birthday').val(employee.birthday)
                     $('#edit_office').val(employee.office);
                     $('#edit_employment').val(employee.employment);
                     $('#edit_start_date').val(employee.start);

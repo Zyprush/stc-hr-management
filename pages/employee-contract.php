@@ -244,11 +244,11 @@ include('../config/authentication.php')
                                 <tr>
                                     <th>ID</th>
                                     <th>Full Name</th>
-                                    <th>Employment</th>
-                                    <th>Office</th>
-                                    <th>Position</th>
+                                    <th>Address</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Position</th>
+                                    <th>Rate</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -279,39 +279,8 @@ include('../config/authentication.php')
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label for="office">Office Name</label>
-                                            <select class="form-control" id="office" name="office" required>
-                                                <option value="">--Select--</option>
-                                                <?php
-                                                // Fetch department names from the 'departments' table
-                                                $sql = "SELECT Department FROM departments";
-                                                $result = $conn->query($sql);
-
-                                                if ($result->num_rows > 0) {
-                                                    while ($row = $result->fetch_assoc()) {
-                                                        $department = $row['Department'];
-                                                        echo "<option value='" . htmlspecialchars($department, ENT_QUOTES) . "'>$department</option>";
-                                                    }
-                                                } else {
-                                                    echo "<option value=''>No departments found</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="position">Position Title</label>
-                                            <input type="text" class="form-control" id="position" name="position" required>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="type">Type of Employment</label>
-                                    <select type="text" class="form-control" id="employment" name="employment" required>
-                                        <option value="Contract of Service">Contract of Service</option>
-                                    </select>
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="EX. 1234 Main St" required>
                                 </div>
 
                                 <div class="form-group">
@@ -325,18 +294,17 @@ include('../config/authentication.php')
                                             <input type="date" class="form-control" id="end" name="end" required>
                                         </div>
                                     </div>
-
                                 </div>
 
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <label for="rate">Rate /Month</label>
-                                            <input type="text" class="form-control" id="rate" name="rate" required>
+                                            <label for="position">Position</label>
+                                            <input type="text" class="form-control" id="position" name="position" required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <label for="funding">Funding Chargers</label>
-                                            <input type="text" class="form-control" id="funding" name="funding" required>
+                                            <label for="rate">Rate /Month</label>
+                                            <input type="text" class="form-control" id="rate" name="rate" required>
                                         </div>
                                     </div>
 
@@ -367,32 +335,9 @@ include('../config/authentication.php')
                                     <input type="text" class="form-control" id="edit_name" name="edit_name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="edit_office">Office:</label>
-                                    <select class="form-control" id="edit_office" name="edit_office" required>
-                                        <option value="">--Select--</option>
-                                        <?php
-                                        // Fetch department names from the 'departments' table
-                                        $sql = "SELECT Department FROM departments";
-                                        $result = $conn->query($sql);
-
-                                        if ($result && $result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                $department = $row['Department'];
-                                                echo "<option value='$department'>$department</option>";
-                                            }
-                                        } else {
-                                            echo "<option value=''>No departments found</option>";
-                                        }
-                                        ?>
-                                    </select>
+                                    <label for="edit_address">Address:</label>
+                                    <input type="text" class="form-control" id="edit_address" name="edit_address">
                                 </div>
-                                <div class="form-group">
-                                    <label for="edit_employment">Type of Employment:</label>
-                                    <select class="form-control" id="edit_employment" name="edit_employment" required>
-                                        <option value="Contract of Service">Contract of Service</option>
-                                    </select>
-                                </div>
-
                                 <div class="form-group">
                                     <label for="edit_start_date">Start Date:</label>
                                     <input type="date" class="form-control" id="edit_start_date" name="edit_start_date">
@@ -404,6 +349,10 @@ include('../config/authentication.php')
                                 <div class="form-group">
                                     <label for="edit_position">Position Title:</label>
                                     <input type="text" class="form-control" id="edit_position" name="edit_position">
+                                </div>
+                                <div class="form-group">
+                                    <label for="edit_rate">Rate / Month:</label>
+                                    <input type="text" class="form-control" id="edit_rate" name="edit_rate">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Save Changes</button>
                             </form>
@@ -435,19 +384,19 @@ include('../includes/footer.php');
                     "data": "name"
                 },
                 {
-                    "data": "employment"
-                },
-                {
-                    "data": "office"
-                },
-                {
-                    "data": "position"
+                    "data": "address"
                 },
                 {
                     "data": "start"
                 },
                 {
                     "data": "end"
+                },
+                {
+                    "data": "position"
+                },
+                {
+                    "data": "rate"
                 },
                 {
                     "data": null,
@@ -509,11 +458,11 @@ include('../includes/footer.php');
                     // Set the fetched employee details in the modal form fields
                     $('#edit_employee_id').val(employee.ID);
                     $('#edit_name').val(employee.name);
-                    $('#edit_office').val(employee.office);
-                    $('#edit_employment').val(employee.employment);
+                    $('#edit_address').val(employee.address);
                     $('#edit_start_date').val(employee.start);
-                    $('#edit_end_date').val(employee.end); // Added line for the 'end' field
+                    $('#edit_end_date').val(employee.end);
                     $('#edit_position').val(employee.position);
+                    $('#edit_rate').val(employee.rate);
                 },
                 error: function(xhr, status, error) {
                     console.error('AJAX Error: ' + status + ' ' + error);

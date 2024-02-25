@@ -11,11 +11,13 @@ $sevenDaysAfter = date('Y-m-d', strtotime($today . ' + 7 days'));
 $query = "(
     SELECT ID, name, end, office, employment, start, position FROM employees_jo 
     WHERE end BETWEEN '$today' AND '$sevenDaysAfter'
-) UNION (
-    SELECT ID, name, end, office, employment, start, position FROM employee_contract 
-    WHERE end BETWEEN '$today' AND '$sevenDaysAfter'
-)";
-
+    )";
+    /**
+     
+    ) UNION (
+        SELECT * FROM employee_contract 
+        WHERE end BETWEEN '$today' AND '$sevenDaysAfter'
+ */
 $result = mysqli_query($conn, $query);
 
 if (!$result) {

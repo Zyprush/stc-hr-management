@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the employee ID and new employee details from the form
     $employeeId = $_POST['edit_employee_id'];
     $newName = $_POST['edit_name'];
+    $newBirthday = $_POST['edit_birthday'];
     $newOffice = $_POST['edit_office'];
     $newEmployment = $_POST['edit_employment'];
     $newStartDate = $_POST['edit_start_date'];
@@ -18,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newAmount1 = $_POST['edit_amount1']; // Added line for the 'edit_budget_amount' field
 
     // Prepare and execute the SQL UPDATE query using prepared statements
-    $query = "UPDATE employees SET name = ?, office = ?, employment = ?, start = STR_TO_DATE(?, '%Y-%m-%d'), oldItem = ?, newItem = ?, position = ?, sg = ?, amount = ?, sg1 = ?, amount1 = ? WHERE ID = ?";
+    $query = "UPDATE employees SET name = ?, birthday = ?, office = ?, employment = ?, start = STR_TO_DATE(?, '%Y-%m-%d'), oldItem = ?, newItem = ?, position = ?, sg = ?, amount = ?, sg1 = ?, amount1 = ? WHERE ID = ?";
     $stmt = $conn->prepare($query);
 
     if ($stmt) {
-        $stmt->bind_param("sssssssssssi", $newName, $newOffice, $newEmployment, $newStartDate, $newOldItem, $newNewItem, $newPosition, $newSg, $newAmount, $newSg1, $newAmount1, $employeeId);
+        $stmt->bind_param("ssssssssssssi", $newName, $newBirthday, $newOffice, $newEmployment, $newStartDate, $newOldItem, $newNewItem, $newPosition, $newSg, $newAmount, $newSg1, $newAmount1, $employeeId);
         $stmt->execute();
 
         // Check if the query was successful

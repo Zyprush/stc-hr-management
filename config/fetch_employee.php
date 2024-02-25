@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['employee_id'])) {
     $employeeId = $_POST['employee_id'];
 
     // Prepare and execute an SQL SELECT query to fetch employee details
-    $query = "SELECT ID, name, office, employment, start, position, sg, oldItem, newItem, amount, sg1, amount1 FROM employees WHERE ID = ?";
+    $query = "SELECT * FROM employees WHERE ID = ?";
     $stmt = $conn->prepare($query);
 
     if ($stmt) {
